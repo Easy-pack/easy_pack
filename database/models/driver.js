@@ -19,4 +19,4 @@ module.exports = (sql, Sequelize) => {
         state: Sequelize.STRING,
         photo: Sequelize.STRING,
     })
-}
+};
