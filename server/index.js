@@ -9,8 +9,8 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({
     extended: true
 }));
-const routes = require('./routes')
-app.use('/auth', routes.auth)
+const routes = require('./routes');
+app.use('/auth', routes.auth);
 
 const port = process.env.PORT || 8080;
 app.listen(port, () => {
