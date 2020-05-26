@@ -6,11 +6,17 @@ module.exports = (sql, Sequelize) => {
         adress: Sequelize.STRING,
         gender: Sequelize.STRING,
         email: {
-            type: db.STRING,
+            type: Sequelize.STRING,
             allowNull: false,
             unique: true
         },
-        cin: Sequelize.STRING,
-        rate: Sequelize.STRING,
+        cin: {
+            type: Sequelize.STRING,
+            allowNull: false,
+            unique: true
+        },
+        rate: Sequelize.INTEGER,
+        state: Sequelize.STRING,
+        photo: Sequelize.STRING,
     })
 }
