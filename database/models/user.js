@@ -1,5 +1,5 @@
 module.exports = (sql,  Sequelize) =>{
-    const user = sql.define({
+    const user = sql.define('user',{
         first_name : Sequelize.STRING,
         last_name : Sequelize.STRING,
         email : {
@@ -7,8 +7,8 @@ module.exports = (sql,  Sequelize) =>{
             allowNull : false,
             unique : true 
         },
-        phone : Sequelize.INGEGER,
-        adress : Sequelize.STRING,
+        phone : Sequelize.NUMBER,
+        address : Sequelize.STRING,
         cin : {
             type : Sequelize.STRING,
             allowNull : false,
@@ -16,5 +16,6 @@ module.exports = (sql,  Sequelize) =>{
         },
         phone : Sequelize.STRING,
         Vat_Number : Sequelize.STRING
-    })
-}
+    });
+    return user;
+};

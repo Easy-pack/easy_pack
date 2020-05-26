@@ -15,7 +15,7 @@ app.use('/auth', routes.auth);
 
 const port = process.env.PORT || 8080;
 
-database.sql.sync();
+database.sql.sync({force:true});
 
 app.listen(port, () => {
     console.log(`listening on port ${port}`);
