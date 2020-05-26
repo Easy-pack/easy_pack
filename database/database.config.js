@@ -4,4 +4,4 @@ module.exports = {
     password: '',
     dialect: 'mysql',
     host: 'localhost'
-}
+};

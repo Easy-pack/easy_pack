@@ -13,4 +13,4 @@ module.exports = (sql, Sequelize) => {
         cin: Sequelize.STRING,
         rate: Sequelize.STRING,
     })
-}
+};
