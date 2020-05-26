@@ -10,7 +10,13 @@ module.exports = (sql, Sequelize) => {
             allowNull: false,
             unique: true
         },
-        cin: Sequelize.STRING,
-        rate: Sequelize.STRING,
+        cin: {
+            type: Sequelize.STRING,
+            allowNull: false,
+            unique: true
+        },
+        rate: Sequelize.INTEGER,
+        state: Sequelize.STRING,
+        photo: Sequelize.STRING,
     })
 };
