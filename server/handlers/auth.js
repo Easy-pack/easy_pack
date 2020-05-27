@@ -1,6 +1,7 @@
 const bcrypt = require('bcryptjs')
 const db = require('../../database')
 const chalk = require('chalk');
+const jwt = require('jsonwebtoken');
 
 exports.signupDriver = async (req, res) => {
     const {
@@ -68,4 +69,66 @@ exports.signupUser = async (req, res) => {
         res.status(409).json({error : e});
     }
 
+}
+
+exports.loginUser = async (req, res) => {
+   
+    try{
+        const {email, password} = req.body;
+        const user = await db['user'].findOne({where : {email}});
+        if(!user){
+            res.status(409).json({
+                message : 'user not found'
+            })
+        } else {
+            //console.log(chalk.red('Am I here?'));
+            let validPassword = await bcrypt.compare(password, user.password);
+            if(!validPassword){
+                res.status(409).json({
+                    message : 'Wrong password'
+                });
+            } else {
+                let token = jwt.sign({id : user.id, role : 'user'}, 'process.env.SECRET');
+                res.status(201).json({
+                    message : 'Sucessfully logged in',
+                    token
+                })
+            } 
+        }
+    } 
+    catch(e){
+        res.status(409).json({
+            message: 'error'
+        })
+    }
+}
+
+exports.loginDriver = async (req, res) => {
+    try{
+        const {email, password} = req.body;
+        const driver = await db['driver'].findOne({where : {email}});
+        if(!driver){
+            res.status(409).json({
+                message : 'user not found'
+            })
+        } else {
+            let validPassword = await bcrypt.compare(password, driver.password);
+            if(!validPassword){
+                res.status(409).json({
+                    message : 'Wrong password'
+                });
+            } else {
+                let token = jwt.sign({id : driver.id, role : 'driver'}, 'process.env.SECRET');
+                res.status(201).json({
+                    message : 'Sucessfully logged in',
+                    token
+                })
+            } 
+        }
+    }
+    catch(e){
+        res.status(409).json({
+            error : 'error'
+        })
+    }
 }
