@@ -2,6 +2,7 @@ module.exports = (sql, Sequelize) => {
     const driver = sql.define({
         first_name: Sequelize.STRING,
         last_name: Sequelize.STRING,
+        password: Sequelize.STRING,
         birth_date: Sequelize.DATE,
         adress: Sequelize.STRING,
         gender: Sequelize.STRING,
