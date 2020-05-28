@@ -1,3 +1,5 @@
 module.exports = {
-    ...require('./auth')
-}
+    ...require('./auth'),
+    ...require('./transaction'),
+    ...require('./driver')
+};
