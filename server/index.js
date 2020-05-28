@@ -12,10 +12,12 @@ app.use(bodyParser.urlencoded({
 }));
 
 app.use('/auth', routes.auth);
+app.use('/userTransaction', routes.transaction);
+app.use('/driverTransaction', routes.driver);
 
 const port = process.env.PORT || 8080;
 
-database.sql.sync({force:true});
+database.sql.sync();
 
 app.listen(port, () => {
     console.log(`listening on port ${port}`);

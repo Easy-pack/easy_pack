@@ -6,11 +6,14 @@ module.exports = (sql, Sequelize) =>{
         end_time: Sequelize.TIME,
         waiting_time: Sequelize.TIME,
         package_dimension: Sequelize.INTEGER,
-        package_weight: Sequelize.INTEGER,
+        package_weight: Sequelize.FLOAT,
         package_type: Sequelize.STRING,
         address_start: Sequelize.STRING,
         address_destination: Sequelize.STRING,
-        state: Sequelize.STRING,
+        state: {
+            type : Sequelize.STRING,
+            defaultValue: 'Pending'
+        },
         price: Sequelize.INTEGER,
     });
     return transaction;
