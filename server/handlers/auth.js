@@ -27,7 +27,7 @@ exports.signUpDriver = async (req, res) => {
             photo,
         } = req.body;
         profile.password = hashedPassword;
-        let driver = await db.driver.create(profile);
+        await db.driver.create(profile);
         res.status(201).json({success: 'User created successfully'});
     } catch (e) {
         res.status(409).json({error: e});
@@ -56,8 +56,8 @@ exports.signUpUser = async (req, res) => {
             cin,
             vat_number
         } = req.body;
-       profile.password = hashedPassword;
-        const user = await db.user.create(profile);
+        profile.password = hashedPassword;
+        await db.user.create(profile);
 
         res.status(201).json({
             success: 'User created successfully'
