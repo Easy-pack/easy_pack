@@ -1,11 +1,10 @@
 const router = require('express').Router();
 const handler = require('../handlers');
 
-router.post('/signup/driver', handler.signupDriver);
-router.post('/signup/user', handler.signupUser);
+router.post('/signup/driver', handler.signUpDriver);
+router.post('/signup/user', handler.signUpUser);
 
-router.post('/login/driver', handler.loginDriver);
-router.post('/login/user', handler.loginUser);
+router.post('/login', handler.login);
 
 
 module.exports = router;

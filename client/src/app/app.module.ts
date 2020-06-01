@@ -4,11 +4,13 @@ import { NgModule } from '@angular/core';
 import { AppComponent } from './app.component';
 import { SignUpDriverComponent } from './components/auth/sign-up-driver/sign-up-driver.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { VerticalNavbarComponent } from './components/vertical-navbar/vertical-navbar.component';
 
 @NgModule({
   declarations: [
     AppComponent,
-    SignUpDriverComponent
+    SignUpDriverComponent,
+    VerticalNavbarComponent
   ],
   imports: [
     BrowserModule,
