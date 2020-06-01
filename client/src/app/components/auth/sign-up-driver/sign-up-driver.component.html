@@ -1,1 +1,76 @@
-<p>sign-up-driver works!</p>
+
+
+
+<div class="container-fluid">
+    <div class="row no-gutter">
+        <!-- The image half -->
+        <div class="col-md-7 d-none d-md-flex bg-image2">
+  
+        </div>
+
+        <!-- The content half -->
+        <div class="col-md-5 bg-dark signupbox">
+            <div class=" d-flex align-items-center py-5">
+  
+                
+                <div class="container">
+                    <div class="row">
+                        <div class="col-lg-10 col-xl-7 mx-auto">
+                            <h1 class="h1log">Sign Up</h1>
+                            <p class="text-muted mb-4">Please enter you information to login</p>
+                            <form class="form-group" #f="ngForm" (ngSubmit)="onSubmit(f.value)">
+                              <div class="form-group" ngModelGroup="user">
+                                <div class="form-group mb-3">
+                                    <input type="text" placeholder="First Name" class="form-control rounded-pill border-0 shadow-sm px-4" ngModel name="first_name" required>
+                                </div>
+                                <div class="form-group mb-3">
+                                    <input type="text" placeholder="Last Name" class="form-control rounded-pill border-0 shadow-sm px-4" ngModel name="last_name" required>
+                                </div>
+                                <div class="form-group mb-3">
+                                    <input ngModel name="email" id="inputEmail" type="email" placeholder="Email address" required email autofocus="" class="form-control rounded-pill border-0 shadow-sm px-4">
+                                </div>
+                                <div class="form-group mb-3">
+                                    <input id="inputPassword" type="password" placeholder="Password" ngModel name='password'required minlength="6" class="form-control rounded-pill border-0 shadow-sm px-4 text-primary">
+                                </div>
+                                <div class="form-group mb-3">
+                                    <div class="datepicker date input-group p-0 shadow-sm">
+                                        <input type="date"  placeholder="Birthday" class="dateclass placeholderclass form-control py-4 px-4" id="reservationDate">
+                                        <div class="input-group-append"><span class="input-group-text px-4"><i class="far fa-calendar-alt"></i></span></div>
+                                    </div>
+                                </div>
+                                <div class="form-group mb-3">
+                                    <input type="phone_number" placeholder="Phone Number" ngModel name='phone_number'required minlength="8" class="form-control rounded-pill border-0 shadow-sm px-4 text-primary">
+                                </div>
+                                <div class="form-group form-check mb-3">
+                                    <div class="row">
+                                        <div class="col-md-3">
+                                            <label for='gender'>Gender</label>
+                                        </div>
+                                        <div class="col-md">
+                                            <div class="row">
+                                                <div class="col-md">
+                                                    <input type="radio" class="form-check-input" name="gender" value="male" ngModel required>
+                                                    <label class="form-check-label" for="male">Male</label>
+                                                </div>
+                                            </div>
+                                            <div class="row">
+                                                <div class="col-md">
+                                                    <input type="radio" class="form-check-input" name="gender" value="female" ngModel>
+                                                    <label class="form-check-label" for="female">Female</label>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                              </div>
+                                <button type="submit" class="btn btn-primary btn-block text-uppercase mb-2 rounded-pill shadow-sm">Register</button>
+                            </form>
+                        </div>
+                    </div>
+                </div><!-- End -->
+  
+            </div>
+        </div><!-- End -->
+  
+    </div>
+  </div>
