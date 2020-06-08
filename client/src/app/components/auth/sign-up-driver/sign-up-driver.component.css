@@ -1,0 +1,91 @@
+
+
+.bg-image2 {
+    background-image: url('../../../../assets/images/background/driver.jpg');
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center center;
+    min-height: 100vh;
+  }
+
+.input-group {
+    border-radius: 30rem;
+  }
+  
+  input.form-control {
+    border-radius: 30rem 30rem 30rem 30rem;
+    border: none;
+  }
+  
+  .input-group-text {
+    border-radius: 30rem 30rem 30rem 30rem;
+    border: none;
+  }
+
+  .btn-register{
+    border-radius: 30rem 30rem 30rem 30rem;
+    border: none;
+    color: aliceblue;
+    background-color: #02aa86;
+  }
+
+  .form-check-label{
+      color: aliceblue;
+      font-weight: 200;
+  }
+
+  .form-check-input:checked{
+      color: #02aa86;
+  }
+
+  .gender{
+      color: aliceblue;
+      font-weight: 500;
+  }
+  
+  .datepicker td, .datepicker th {
+    width: 2.5rem;
+    height: 2.5rem;
+    font-size: 0.85rem;
+  }
+  
+  .signupbox{
+    padding-top: 100px;
+  }
+  
+  .datepicker-dropdown {
+    box-shadow: 0 5px 10px rgba(0, 0, 0, 0.1);
+  }
+  
+  
+  
+
+  
+  .dateclass.placeholderclass::before {
+    width: 100%;
+    content: attr(placeholder);
+    color: dimgray;
+  }
+  
+  .dateclass.placeholderclass:hover::before {
+    width: 0%;
+    content: "";
+  }
+
+
+.overlap-to-top {
+  margin-top: -150px; }
+
+  .h1log{
+    font-size: xx-large;
+    color: white;
+    font-weight: bold;
+  }
+
+  .custom-control-label, .signupa{
+    color: #b3b3b3;
+  }
+  
+  .custom-control-label:before{
+    background-color:#b3b3b3;
+  }

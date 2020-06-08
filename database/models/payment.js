@@ -2,7 +2,7 @@ module.exports = (sql,  Sequelize) =>{
     const payment = sql.define('payment',{
         type: Sequelize.STRING,
         amount: Sequelize.FLOAT,
-        card_no: Sequelize.INTEGER,
+        card_no: Sequelize.INTETEGER,
         payment_time: Sequelize.DATE,
 
     });
