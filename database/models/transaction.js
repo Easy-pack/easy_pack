@@ -5,7 +5,7 @@ module.exports = (sql, Sequelize) =>{
         start_time: Sequelize.TIME,
         end_time: Sequelize.TIME,
         waiting_time: Sequelize.TIME,
-        package_dimension: Sequelize.INTEGER,
+        package_dimension: Sequelize.FLOAT,
         package_weight: Sequelize.FLOAT,
         package_type: Sequelize.STRING,
         address_start: Sequelize.STRING,
@@ -14,7 +14,7 @@ module.exports = (sql, Sequelize) =>{
             type : Sequelize.STRING,
             defaultValue: 'Pending'
         },
-        price: Sequelize.INTEGER,
+        price: Sequelize.FLOAT,
     });
     return transaction;
 };
