@@ -1,2 +1,2 @@
 # easy_pack
-Deliverary
+Deliverary (yehlkek zamzoum)
