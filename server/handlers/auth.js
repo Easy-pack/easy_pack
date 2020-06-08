@@ -20,7 +20,7 @@ exports.signUpDriver = async (req, res) => {
             birth_date,
             address,
             gender,
-            email: req.body.email,
+            email,
             cin,
             rate,
             state,
