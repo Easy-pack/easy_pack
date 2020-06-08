@@ -8,30 +8,31 @@ import { HttpClient } from '@angular/common/http';
 export class SignUpDriverComponent implements OnInit {
 
   constructor(private httpClient: HttpClient) { }
-
-  ngOnInit(): void {
-  }
   user = {
     first_name : '',
     last_name : '',
     email : '',
     password : '',
     gender : ''
+  };
+
+  ngOnInit(): void {
   }
-  onSubmit(data:any) :void { 
-    let user = data.user; 
+  onSubmit(data: any): void {
+    const user = data.user;
     fetch('http://localhost:8200/auth/signup', {
       method : 'POST',
       headers : {
-        'content-type':'application/json',
+        'content-type': 'application/json',
       },
-      body : JSON.stringify(user) 
+      body : JSON.stringify(user)
     })
-    .then(res => {return res.json()})
+    .then(res => res.json())
+      // tslint:disable-next-line:no-shadowed-variable
     .then(data => {
-      window.location.href = `http://localhost:4200/login`
+      window.location.href = `http://localhost:4200/login`;
     })
-    .catch(err =>{console.log(err)})
-  
+    .catch(err => {console.log(err); });
+
   }
 }
