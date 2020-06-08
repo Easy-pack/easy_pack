@@ -14,6 +14,7 @@ app.use(bodyParser.urlencoded({
 app.use('/auth', routes.auth);
 app.use('/userTransaction', routes.transaction);
 app.use('/driverTransaction', routes.driver);
+app.use('/user', routes.user)
 
 const port = process.env.PORT || 8080;
 

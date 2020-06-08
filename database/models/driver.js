@@ -19,7 +19,7 @@ module.exports = (sql, Sequelize) => {
         },
         rate: Sequelize.FLOAT,
         state: Sequelize.STRING,
-        photo: Sequelize.STRING,
+        photo: Sequelize.BLOB,
     });
     return driver;
 };
