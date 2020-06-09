@@ -5,6 +5,7 @@ import { HttpClient } from '@angular/common/http';
   templateUrl: './sign-up-driver.component.html',
   styleUrls: ['./sign-up-driver.component.css']
 })
+
 export class SignUpDriverComponent implements OnInit {
 
   constructor(private httpClient: HttpClient) { }
@@ -19,6 +20,7 @@ export class SignUpDriverComponent implements OnInit {
   ngOnInit(): void {
   }
   onSubmit(data: any): void {
+    console.log(data)
     const user = data.user;
     fetch('http://localhost:8200/auth/signup', {
       method : 'POST',

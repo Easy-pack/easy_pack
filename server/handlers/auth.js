@@ -1,8 +1,10 @@
 const bcrypt = require('bcryptjs');
 const db = require('../../database');
 const jwt = require('jsonwebtoken');
+const chalk = require('chalk');
 
 exports.signUpDriver = async (req, res) => {
+    console.log(chalk.blue('I am here'))
     try {
         const {
             email
