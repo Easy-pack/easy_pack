@@ -17,8 +17,14 @@ module.exports = (sql, Sequelize) => {
             allowNull: false,
             unique: true
         },
-        rate: Sequelize.FLOAT,
-        state: Sequelize.STRING,
+        rate: {
+            type : Sequelize.FLOAT,
+            defaultValue: 5.0
+        },
+        state:{
+            type :  Sequelize.STRING,
+            defaultValue: "not available"
+        },
         photo: Sequelize.BLOB,
     });
     return driver;

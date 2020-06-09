@@ -1,1 +1,55 @@
-<p>signup-user works!</p>
+
+<app-navbar></app-navbar>
+
+<div class="container-fluid">
+    <div class="row no-gutter">
+        <!-- The image half -->
+        <div class="col-md-7 d-none d-md-flex bg-image2">
+
+        </div>
+
+        <!-- The content half -->
+        <div class="col-md-5 bg-dark signupbox">
+            <div class=" d-flex align-items-center py-5">
+
+
+                <div class="container">
+                    <div class="row">
+                        <div class="col-lg-10 col-xl-7 mx-auto">
+                            <h1 class="h1log">Sign Up</h1>
+                            <p class="text-muted mb-4">Please enter you information to login</p>
+                            <form class="form-group" (ngSubmit)="onSubmit()"  [formGroup] ="newUser" >
+                              <div class="form-group" Group="user">
+                                <div class="form-group mb-3">
+                                    <input type="text" placeholder="First Name" formControlName = "first_name" class="form-control rounded-pill border-0 shadow-sm px-4"  name="first_name" required>
+                                </div>
+                                <div class="form-group mb-3">
+                                    <input type="text" placeholder="Last Name" formControlName = "last_name" class="form-control rounded-pill border-0 shadow-sm px-4"  name="last_name" required>
+                                </div>
+                                <div class="form-group mb-3">
+                                    <input  name="email" id="inputEmail" formControlName = "email" type="email" placeholder="Email address" required email autofocus="" class="form-control rounded-pill border-0 shadow-sm px-4">
+                                </div>
+                                <div class="form-group mb-3">
+                                    <input id="inputPassword" type="password" formControlName = "password" placeholder="Password"  name='password'required minlength="6" class="form-control rounded-pill border-0 shadow-sm px-4 text-primary">
+                                </div>
+                                <div class="form-group mb-3">
+                                    <input type="phone_number" formControlName = "phone" placeholder="Phone Number"  name='phone_number'required minlength="8" class="form-control rounded-pill border-0 shadow-sm px-4 text-primary">
+                                </div>
+                                <div class="form-group mb-3">
+                                    <input type="text" placeholder="National Identity Number" formControlName = "cin" class="form-control rounded-pill border-0 shadow-sm px-4"  name="cin" required>
+                                </div>
+                                <div class="form-group mb-3">
+                                    <input type="text" placeholder="Vat Number" formControlName = "vat_number" class="form-control rounded-pill border-0 shadow-sm px-4"  name="cin" required>
+                                </div>
+                              </div>
+                                <button type="submit" class="btn btn-register btn-block text-uppercase mb-2 rounded-pill shadow-sm">Register</button>
+                            </form>
+                        </div>
+                    </div>
+                </div><!-- End -->
+
+            </div>
+        </div><!-- End -->
+
+    </div>
+  </div>

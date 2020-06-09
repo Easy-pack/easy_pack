@@ -4,6 +4,7 @@ import { FormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 import { BrowserModule } from '@angular/platform-browser';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import { ReactiveFormsModule } from '@angular/forms'
 
 import { AppComponent } from './app.component';
 import { AppRoutingModule } from './app.routing';
@@ -14,7 +15,6 @@ import { AboutComponent } from './components/about/about.component';
 import { HowItWorksComponent } from './components/how-it-works/how-it-works.component';
 import { TeamComponent } from './components/team/team.component';
 import { FooterComponent } from './components/footer/footer.component';
-import { LoginDriverComponent } from './components/auth/login-driver/login-driver.component';
 import { LoginComponent } from './components/auth/login/login-user.component';
 import { SignupUserComponent } from './components/auth/signup-user/signup-user.component';
 import { HomeComponent } from './components/home/home.component';
@@ -27,6 +27,7 @@ import { HomeComponent } from './components/home/home.component';
     HttpClientModule,
     NgbModule,
     AppRoutingModule,
+    ReactiveFormsModule
   ],
   declarations: [
     AppComponent,
@@ -39,7 +40,6 @@ import { HomeComponent } from './components/home/home.component';
     TeamComponent,
     HomeComponent,
     FooterComponent,
-    LoginDriverComponent,
     LoginComponent,
     SignupUserComponent
   ],
