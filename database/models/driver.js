@@ -5,7 +5,7 @@ module.exports = (sql, Sequelize) => {
         password: Sequelize.STRING,
 
         birth_date: Sequelize.DATE,
-        address: Sequelize.STRING,
+        adress: Sequelize.STRING,
         gender: Sequelize.STRING,
         email: {
             type: Sequelize.STRING,

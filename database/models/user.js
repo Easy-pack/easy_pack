@@ -7,7 +7,7 @@ module.exports = (sql, Sequelize) => {
             allowNull: false,
             unique: true
         },
-        phone: Sequelize.INT,
+        phone: Sequelize.INTEGER,
         address: Sequelize.STRING,
         cin: {
             type: Sequelize.STRING,
