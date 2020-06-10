@@ -10,7 +10,7 @@ import { Router } from '@angular/router';
   styleUrls: ['./user-navbar.component.css']
 })
 export class UserNavbarComponent implements OnInit {
-
+  private name : string = "Amir Ben Youssef"
   public focus;
   public listTitles: any[];
   public location: Location;
