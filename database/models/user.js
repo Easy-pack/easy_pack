@@ -14,8 +14,9 @@ module.exports = (sql, Sequelize) => {
             allowNull: false,
             unique: true
         },
+        password : Sequelize.STRING,
         photo: Sequelize.BLOB,
-        Vat_Number: Sequelize.STRING
+        vat_number: Sequelize.STRING
     });
     return user;
 };

@@ -1,10 +1,10 @@
-/* You can add global styles to this file, and also import other style files */
 /* Base */
 body {
   line-height: 1.7;
   color: #4d4d4d;
   font-weight: 300;
-  font-size: 1rem; }
+  font-size: 1rem;
+ }
 
 ::-moz-selection {
   background: #000;
@@ -102,10 +102,7 @@ h1, h2, h3, h4, h5,
   margin-right: 20px;
 
 }
-.fa-check{
-  color: #EF476F;
-  margin-right: 10px;
-}
+
 .btn_deliver{
   background-color: #02aa86;
   border-radius: 15px;
@@ -135,117 +132,9 @@ h1, h2, h3, h4, h5,
   color: white;
 }
 
-.login{
-  min-height: 100vh;
-}
-.bg-image1 {
-  background-image: url('../../../assets/img/background/red.jpg');
-  background-size: cover;
-  background-repeat: no-repeat;
-  background-position: center center;
-  min-height: 100vh;
-}
 
-.bg-image2 {
-  background-image: url('../../../assets/img/background/driver.jpg');
-  background-size: cover;
-  background-repeat: no-repeat;
-  background-position: center center;
-  min-height: 100vh;
-}
-.input-group {
-  border-radius: 30rem;
-}
 
-input.form-control {
-  border-radius: 30rem 0 0 30rem;
-  border: none;
-}
 
-.input-group-text {
-  border-radius: 0 30rem 30rem 0;
-  border: none;
-}
-
-.datepicker td, .datepicker th {
-  width: 2.5rem;
-  height: 2.5rem;
-  font-size: 0.85rem;
-}
-
-.signupbox{
-  padding-top: 100px;
-}
-
-.datepicker-dropdown {
-  box-shadow: 0 5px 10px rgba(0, 0, 0, 0.1);
-}
-
-.btn-sign{
-  background-color: #EF476F;
-  color: white;
-}
-
-.btn-sign:hover{
-  background-color: rgb(196, 54, 82);
-  color: #FFFCF9
-}
-
-.datepicker td, .datepicker th {
-  width: 2.5rem;
-  height: 2.5rem;
-  font-size: 0.85rem;
-}
-
-.dateclass {
-  width: 100%;
-}
-
-.dateclass.placeholderclass::before {
-  width: 100%;
-  content: attr(placeholder);
-  color: dimgray;
-}
-
-.dateclass.placeholderclass:hover::before {
-  width: 0%;
-  content: "";
-}
-
-.site-section {
-  padding: 2.5em 0; }
-@media (min-width: 768px) {
-  .site-section {
-    padding: 5em 0; } }
-.site-section.site-section-sm {
-  padding: 4em 0; }
-
-.site-section-heading {
-  position: relative;
-  font-size: 2.5rem; }
-@media (min-width: 768px) {
-  .site-section-heading {
-    font-size: 4rem; } }
-.site-section-heading:after {
-  content: "";
-  left: 0%;
-  bottom: 0;
-  position: absolute;
-  width: 100px;
-  height: 1px;
-  background: #02aa86; }
-.site-section-heading.text-center:after {
-  content: "";
-  -webkit-transform: translateX(-50%);
-  -ms-transform: translateX(-50%);
-  transform: translateX(-50%);
-  content: "";
-  left: 50%;
-  bottom: 0;
-  position: absolute;
-  width: 100px;
-  height: 1px;
-  background: #02aa86; }
 
 .border-top {
   border-top: 1px solid #edf0f5 !important; }
@@ -406,22 +295,8 @@ input.form-control {
 .site-navbar .navbar-nav .nav-item > li > a:hover {
   color: #02aa86; }
 
-.h1log{
-  font-size: xx-large;
-  color: white;
-  font-weight: bold;
-}
-.custom-control-label, .signupa{
-  color: #b3b3b3;
-}
 
-.custom-control-label:before{
-  background-color:#b3b3b3;
-}
-.custom-checkbox .custom-control-input:checked~.custom-control-label::before{
-  background-color:#EF476F;
-  border: #EF476F 1px solid;
-}
+
 
 /* Blocks */
 .site-blocks-cover {
@@ -1380,4 +1255,3 @@ input.form-control {
 .post-meta a {
   color: #fff;
   border-bottom: 1px solid rgba(255, 255, 255, 0.5); }
-

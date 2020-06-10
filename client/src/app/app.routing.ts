@@ -1,9 +1,9 @@
 import { NgModule } from "@angular/core";
 import { Routes, RouterModule } from "@angular/router";
-import { SignUpDriverComponent } from "./components/auth/sign-up-driver/sign-up-driver.component";
-import { SignupUserComponent } from "./components/auth/signup-user/signup-user.component";
-import { LoginComponent } from "./components/auth/login/login-user.component";
-import { HomeComponent } from "./components/home/home.component";
+import { SignUpDriverComponent } from "./Components/auth/sign-up-driver/sign-up-driver.component";
+import { SignupUserComponent } from "./Components/auth/signup-user/signup-user.component";
+import { LoginComponent } from "./Components/auth/login/login-user.component";
+import { HomeComponent } from "./Components/home/home.component";
 
 const routes: Routes = [
   { path: "", component: HomeComponent },
