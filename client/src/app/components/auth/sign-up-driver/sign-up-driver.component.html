@@ -1,5 +1,5 @@
 
-
+<app-navbar></app-navbar>
 
 <div class="container-fluid">
     <div class="row no-gutter">
@@ -11,51 +11,65 @@
         <!-- The content half -->
         <div class="col-md-5 bg-dark signupbox">
             <div class=" d-flex align-items-center py-5">
-
-
                 <div class="container">
                     <div class="row">
                         <div class="col-lg-10 col-xl-7 mx-auto">
                             <h1 class="h1log">Sign Up</h1>
                             <p class="text-muted mb-4">Please enter you information to login</p>
-                            <form class="form-group" #f="ngForm" (ngSubmit)="onSubmit(f.value)">
-                              <div class="form-group" ngModelGroup="user">
+                            <form class="form-group" (ngSubmit)="onSubmit()"  [formGroup] ="newDriver"  enctype="multipart/form-data">
+                              <div class="form-group" Group="user">
                                 <div class="form-group mb-3">
-                                    <input type="text" placeholder="First Name" class="form-control rounded-pill border-0 shadow-sm px-4" ngModel name="first_name" required>
+                                    <input type="text" placeholder="First Name" formControlName = "first_name" class="form-control rounded-pill border-0 shadow-sm px-4"  name="first_name" required>
                                 </div>
                                 <div class="form-group mb-3">
-                                    <input type="text" placeholder="Last Name" class="form-control rounded-pill border-0 shadow-sm px-4" ngModel name="last_name" required>
+                                    <input type="text" placeholder="Last Name" formControlName = "last_name" class="form-control rounded-pill border-0 shadow-sm px-4"  name="last_name" required>
                                 </div>
                                 <div class="form-group mb-3">
-                                    <input ngModel name="email" id="inputEmail" type="email" placeholder="Email address" required email autofocus="" class="form-control rounded-pill border-0 shadow-sm px-4">
+                                    <input  name="email" id="inputEmail" formControlName = "email" type="email" placeholder="Email address" required email autofocus="" class="form-control rounded-pill border-0 shadow-sm px-4">
                                 </div>
                                 <div class="form-group mb-3">
-                                    <input id="inputPassword" type="password" placeholder="Password" ngModel name='password'required minlength="6" class="form-control rounded-pill border-0 shadow-sm px-4 text-primary">
+                                    <input id="inputPassword" type="password" formControlName = "password" placeholder="Password"  name='password'required minlength="6" class="form-control rounded-pill border-0 shadow-sm px-4 text-primary">
+                                </div>
+                                <div class="form-group mb-3">
+                                    <input type="phone_number" formControlName = "phone" placeholder="Phone Number"  name='phone_number'required minlength="8" class="form-control rounded-pill border-0 shadow-sm px-4 text-primary">
                                 </div>
                                 <div class="form-group mb-3">
                                     <div class="datepicker date input-group p-0 shadow-sm">
-                                        <input type="date"  placeholder="Birthday" class="dateclass placeholderclass form-control py-4 px-4" id="reservationDate">
+                                        <input type="date" formControlName = "birth_date" placeholder="Birthday" class="dateclass placeholderclass form-control py-4 px-4" id="reservationDate">
                                         <div class="input-group-append"><span class="input-group-text px-4"><i class="far fa-calendar-alt"></i></span></div>
                                     </div>
                                 </div>
                                 <div class="form-group mb-3">
-                                    <input type="phone_number" placeholder="Phone Number" ngModel name='phone_number'required minlength="8" class="form-control rounded-pill border-0 shadow-sm px-4 text-primary">
+                                    <input type="text" placeholder="Adress" formControlName = "address" class="form-control rounded-pill border-0 shadow-sm px-4"  name="address" required>
+                                </div>
+                                <div class="form-group mb-3">
+                                    <input type="text" placeholder="National Identity Number" formControlName = "cin" class="form-control rounded-pill border-0 shadow-sm px-4"  name="cin" required>
                                 </div>
                                 <div class="form-group form-check mb-3">
                                     <div class="row">
-                                        <div class="col-md-3">
+                                        <div class="col-md-6 gender">
+                                            <label for='uploadImg'>Upload image</label>
+                                        </div>
+                                        <div class="col-md">
+                                            <input type="file" name="image" (change)="onChange($event)"/>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="form-group form-check mb-3">
+                                    <div class="row">
+                                        <div class="col-md-6 gender">
                                             <label for='gender'>Gender</label>
                                         </div>
                                         <div class="col-md" id="gender">
                                             <div class="row">
                                                 <div class="col-md">
-                                                    <input type="radio" class="form-check-input" name="gender" id="male" value="male" ngModel required>
+                                                    <input type="radio"  class="form-check-input" name="gender" id="male" value="male"  required>
                                                     <label class="form-check-label" for="male">Male</label>
                                                 </div>
                                             </div>
                                             <div class="row">
                                                 <div class="col-md">
-                                                    <input type="radio" class="form-check-input" id="female" name="gender" value="female" ngModel>
+                                                    <input type="radio" class="form-check-input" id="female" name="gender" value="female" >
                                                     <label class="form-check-label" for="female">Female</label>
                                                 </div>
                                             </div>
@@ -63,7 +77,7 @@
                                     </div>
                                 </div>
                               </div>
-                                <button type="submit" class="btn btn-primary btn-block text-uppercase mb-2 rounded-pill shadow-sm">Register</button>
+                                <button type="submit" class="btn btn-register btn-block text-uppercase mb-2 rounded-pill shadow-sm">Register</button>
                             </form>
                         </div>
                     </div>

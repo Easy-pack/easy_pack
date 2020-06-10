@@ -1,40 +1,59 @@
 import { Component, OnInit } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
+import { FormBuilder, FormGroup, FormControl } from '@angular/forms';
+import { AuthService } from '../../../services/auth.service';
+import { Router } from '@angular/router';
+import { NgForm } from '@angular/forms';
+import { FileUploader } from 'ng2-file-upload';
+//import { read } from 'fs';
+// import { format } from 'path';
 @Component({
   selector: 'app-sign-up-driver',
   templateUrl: './sign-up-driver.component.html',
-  styleUrls: ['./sign-up-driver.component.css']
+  styleUrls: ['./sign-up-driver.component.css'],
 })
 
 export class SignUpDriverComponent implements OnInit {
+  avatar;
 
-  constructor(private httpClient: HttpClient) { }
-  user = {
-    first_name : '',
-    last_name : '',
-    email : '',
-    password : '',
-    gender : ''
-  };
+  newDriver= new FormGroup({
+    first_name: new FormControl(''),
+    last_name: new FormControl(''),
+    password: new FormControl(''),
+    email: new FormControl(''),
+    birth_date: new FormControl(''),
+    address: new FormControl(''),
+    phone: new FormControl(''),
+    cin: new FormControl('')
+  });
+  
+  uploadForm: FormGroup;
 
-  ngOnInit(): void {
+  constructor(
+    private http: HttpClient,
+    private router: Router,
+    private authService: AuthService
+  ) {}
+
+  onChange(event){
+    if (event.target.files && event.target.files.length > 0) {
+      const file = event.target.files[0];
+      this.avatar = file;
+    }
   }
-  onSubmit(data: any): void {
-    console.log(data)
-    const user = data.user;
-    fetch('http://localhost:8200/auth/signup', {
-      method : 'POST',
-      headers : {
-        'content-type': 'application/json',
-      },
-      body : JSON.stringify(user)
-    })
-    .then(res => res.json())
-      // tslint:disable-next-line:no-shadowed-variable
-    .then(data => {
-      window.location.href = `http://localhost:4200/login`;
-    })
-    .catch(err => {console.log(err); });
 
+  onSubmit(): void {
+    const formData = new FormData();
+    let driver = this.newDriver.value;
+    formData.append('avatar', this.avatar);
+    for(let key in driver){
+      formData.append(key, driver[key])
+    }
+    this.authService.registerDriver(formData).subscribe((res: any) => {
+      this.router.navigate(['/login']);
+    });
+  }
+  
+  ngOnInit(): void {
   }
 }
