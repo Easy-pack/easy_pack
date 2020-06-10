@@ -1,5 +1,5 @@
-module.exports = (sql,  Sequelize) =>{
-    const payment = sql.define('payment',{
+module.exports = (sql, Sequelize) => {
+    const payment = sql.define('payment', {
         type: Sequelize.STRING,
         amount: Sequelize.FLOAT,
         card_no: Sequelize.INTEGER,
@@ -8,4 +8,3 @@ module.exports = (sql,  Sequelize) =>{
     });
     return payment;
 };
-
