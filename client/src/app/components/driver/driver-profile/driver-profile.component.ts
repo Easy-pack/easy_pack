@@ -1,4 +1,4 @@
-import { Component, OnInit } from "@angular/core";
+import { Component, OnInit, Inject } from "@angular/core";
 import { DriverInterface } from "../../../interfaces/driver-interface";
 import { DriverProfileService } from "../../../services/driver-profile.service";
 import { HttpClient } from "@angular/common/http";
@@ -31,6 +31,9 @@ export class DriverProfileComponent implements OnInit {
   createdAt: string;
   stateColor: string;
 
+  animal: string;
+  name: string;
+
   driverForm = new FormGroup({
     first_name: new FormControl(""),
     last_name: new FormControl(""),
@@ -51,7 +54,7 @@ export class DriverProfileComponent implements OnInit {
     private http: HttpClient,
     private formBuilder: FormBuilder,
     private driverService: DriverProfileService,
-    private matDialog: MatDialog
+    public matDialog: MatDialog
   ) {}
 
   openDialog() {
