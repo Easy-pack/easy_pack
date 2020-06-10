@@ -2,7 +2,6 @@ import { Component, OnInit } from "@angular/core";
 import { DriverInterface } from "../../../interfaces/driver-interface";
 import { DriverProfileService } from "../../../services/driver-profile.service";
 import { HttpClient } from "@angular/common/http";
-
 import {
   FormControl,
   FormGroup,
@@ -13,6 +12,8 @@ import {
 import * as bcrypt from "bcryptjs";
 import * as moment from "moment";
 import { from } from "rxjs";
+import { MatDialog, MatDialogConfig } from "@angular/material/dialog";
+import { DialogPasswordConfirmationComponent } from "../dialog-password-confirmation/dialog-password-confirmation.component";
 
 @Component({
   selector: "app-driver-profile",
@@ -27,7 +28,7 @@ export class DriverProfileComponent implements OnInit {
   disableEdit: boolean = true;
   passwordInputValue: string = "";
   createdAt: string;
-  stateCOlor: string;
+  stateColor: string;
 
   driverForm = new FormGroup({
     first_name: new FormControl(""),
@@ -41,11 +42,21 @@ export class DriverProfileComponent implements OnInit {
     phone: new FormControl(""),
     newPassword: new FormControl(""),
     confirmNewPassword: new FormControl(""),
-    // cin: String,
-    // rate: Number,
     state: new FormControl(""),
     photo: new FormControl(""),
   });
+
+  constructor(
+    private http: HttpClient,
+    private formBuilder: FormBuilder,
+    private driverService: DriverProfileService,
+    private matDialog: MatDialog
+  ) {}
+
+  openDialog() {
+    const dialogConfig = new MatDialogConfig();
+    this.matDialog.open(DialogPasswordConfirmationComponent, dialogConfig);
+  }
 
   get verifyPassword() {
     return this.driverForm.controls;
@@ -53,27 +64,22 @@ export class DriverProfileComponent implements OnInit {
   allowEdit() {
     this.disableEdit = false;
   }
-  constructor(
-    private http: HttpClient,
-    private formBuilder: FormBuilder,
-    private driverService: DriverProfileService
-  ) {}
 
   getDriver() {
     this.driverService.fetchData(this.id).subscribe((driverData) => {
-      console.log("fetchedDATA", driverData);
+      console.log("fetchedDATA2", driverData);
       this.data = driverData["driver"];
-      console.log("driver VALUE", this.data);
+      console.log("this.DATAIN", this.data);
       (<FormGroup>this.driverForm).patchValue(this.data);
       //this.driverForm.setValue({ value: this.data });
       this.rate = Array(this.data.rate);
       if (this.data.state === "available") {
-        this.stateCOlor = "green";
+        this.stateColor = "green";
       } else {
-        this.stateCOlor = "red";
+        this.stateColor = "red";
       }
       this.createdAt = moment(this.data.createdAt).format('"MMM Do YY"');
-      console.log("this.driverForm.value", this.driverForm.value);
+      console.log("this.driverForm.valueUpdated ", this.driverForm.value);
     });
   }
 
@@ -106,16 +112,16 @@ export class DriverProfileComponent implements OnInit {
 
   changeState() {
     if (this.data.state === "available") {
-      this.stateCOlor = "red";
+      this.stateColor = "red";
       this.data.state = "absent";
     } else if (this.data.state === "absent") {
       this.data.state = "available";
-      this.stateCOlor = "green";
+      this.stateColor = "green";
       console.log(this.data.state);
     }
   }
 
-  updateDriver(formDriver, e) {
+  updateDriver() {
     // this.submitted = true;
     // if (this.driverForm.value.currentPassword == null) {
     //   alert("Please enter your password");
@@ -129,20 +135,24 @@ export class DriverProfileComponent implements OnInit {
     //       formDriver.id = 1;
     //       formDriver.state = this.data.state;
     //       console.log("state", formDriver.state);
-    e.preventDefault();
-    this.driverService.postData(this.id, formDriver).subscribe((res: any) => {
-      console.log("res", res);
-      console.log("formDriver", this.id, this.data);
-      // document.getElementById("fullName").innerHTML =
-      //   this.driverForm.value.first_name +
-      //   " " +
-      //   this.driverForm.value.last_name;
-      this.passwordInputValue = null;
-      this.disableEdit = true;
+    // e.preventDefault();
+    console.log(this.driverForm.value, "inputs");
+    this.driverService
+      .postData(this.id, this.driverForm.value)
+      .subscribe((res: any) => {
+        console.log("res", res);
+        // console.log("formDriver", this.id, this.data);
+        // document.getElementById("fullName").innerHTML =
+        //   this.driverForm.value.first_name +
+        //   " " +
+        //   this.driverForm.value.last_name;
+        this.passwordInputValue = null;
+        this.disableEdit = true;
 
-      console.log("state2", formDriver.state);
-      this.getDriver();
-    });
+        console.log("state2", this.driverForm.value.state);
+        this.allowEdit();
+        this.getDriver();
+      });
   }
   //   } else {
   //     alert("Please check your password and try again");
@@ -154,13 +164,14 @@ export class DriverProfileComponent implements OnInit {
     console.log(e.target.value);
     this.data.gender = e.target.value;
   }
+
   ngOnInit(): void {
     this.id = 1;
     console.log("driverID", this.id);
     this.getDriver();
 
     this.driverForm = this.formBuilder.group({
-      first_name: ["", [Validators.required]],
+      first_name: ["NNN", [Validators.required]],
       last_name: [""],
       password: [""],
       currentPassword: [""],
@@ -171,8 +182,6 @@ export class DriverProfileComponent implements OnInit {
       phone: [""],
       newPassword: [""],
       confirmNewPassword: [""],
-      // cin: String,
-      // rate: Number,
       state: [""],
       photo: [""],
     });
