@@ -11,6 +11,7 @@ import { Router } from '@angular/router';
   styleUrls: ['./signup-user.component.css']
 })
 export class SignupUserComponent implements OnInit {
+  avatar;
   newUser= new FormGroup({
     first_name: new FormControl(''),
     last_name: new FormControl(''),
@@ -23,6 +24,13 @@ export class SignupUserComponent implements OnInit {
   });
   uploadForm: FormGroup;
   
+  onChange(event){
+    if(event.target.files && event.target.files.length > 0){
+      const file = event.target.files[0];
+      this.avatar = file;
+    }
+  }
+
   constructor(
     private http: HttpClient,
     private router: Router,
@@ -30,10 +38,14 @@ export class SignupUserComponent implements OnInit {
   ) {}
 
   onSubmit(): void {
-    console.log('NewUser', this.newUser.value);
-    this.authService.registerUser(this.newUser.value).subscribe((res: any) => {
+    const user = this.newUser.value;
+    const formData = new FormData();
+    for(let key in user){
+      formData.append(key, user[key]);
+    }
+    formData.append('avatar', this.avatar);
+    this.authService.registerUser(formData).subscribe((res: any) => {
       this.router.navigate(['/login']);
-      console.log(res)
     });
   }
   

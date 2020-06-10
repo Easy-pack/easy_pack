@@ -3,7 +3,6 @@ module.exports = (sql, Sequelize) => {
         first_name: Sequelize.STRING,
         last_name: Sequelize.STRING,
         password: Sequelize.STRING,
-
         birth_date: Sequelize.DATE,
         adress: Sequelize.STRING,
         gender: Sequelize.STRING,
@@ -27,7 +26,7 @@ module.exports = (sql, Sequelize) => {
             type :  Sequelize.STRING,
             defaultValue: "not available"
         },
-        photo: Sequelize.BLOB,
+        photo: Sequelize.STRING,
     });
     return driver;
 };
