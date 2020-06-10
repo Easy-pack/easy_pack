@@ -22,4 +22,7 @@ export class UserAddTransactionComponent implements OnInit {
   ngOnInit(): void {
   }
 
+  onSubmit(){
+    console.log('transaction' ,this.newTransaction)
+  }
 }
