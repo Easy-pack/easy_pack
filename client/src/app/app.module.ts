@@ -1,4 +1,3 @@
-
 import { BrowserAnimationsModule } from "@angular/platform-browser/animations";
 import { NgModule } from "@angular/core";
 import { FormsModule, ReactiveFormsModule } from "@angular/forms";
@@ -15,11 +14,11 @@ import { AboutComponent } from "./Components/about/about.component";
 import { HowItWorksComponent } from "./Components/how-it-works/how-it-works.component";
 import { TeamComponent } from "./Components/team/team.component";
 import { FooterComponent } from "./Components/footer/footer.component";
+
 import { LoginComponent } from "./Components/auth/login/login-user.component";
 import { SignupUserComponent } from "./Components/auth/signup-user/signup-user.component";
 import { HomeComponent } from "./Components/home/home.component";
-import { DialogPasswordConfirmationComponent } from './Components/driver/dialog-password-confirmation/dialog-password-confirmation.component';
-
+import { DialogPasswordConfirmationComponent } from "./Components/driver/dialog-password-confirmation/dialog-password-confirmation.component";
 
 @NgModule({
   imports: [
@@ -30,7 +29,6 @@ import { DialogPasswordConfirmationComponent } from './Components/driver/dialog-
     NgbModule,
     AppRoutingModule,
     ReactiveFormsModule,
-
   ],
   declarations: [
     AppComponent,

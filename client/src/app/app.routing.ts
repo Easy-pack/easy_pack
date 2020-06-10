@@ -1,4 +1,3 @@
-
 import { NgModule } from "@angular/core";
 import { Routes, RouterModule } from "@angular/router";
 import { SignUpDriverComponent } from "./Components/auth/sign-up-driver/sign-up-driver.component";
@@ -14,7 +13,7 @@ const routes: Routes = [
   {
     path: "user",
     loadChildren: () =>
-      import("./Components/user/user.module").then((m) => m.UserModule),
+      import("./modules/user/user.module").then((m) => m.UserModule),
   },
 
   {
