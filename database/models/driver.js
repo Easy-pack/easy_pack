@@ -5,20 +5,28 @@ module.exports = (sql, Sequelize) => {
         password: Sequelize.STRING,
         phone: Sequelize.INTEGER,
         birth_date: Sequelize.DATE,
-        address: Sequelize.STRING,
+        adress: Sequelize.STRING,
         gender: Sequelize.STRING,
+        state: Sequelize.STRING,
         email: {
             type: Sequelize.STRING,
             allowNull: false,
             unique: true
         },
+        phone: Sequelize.STRING,
         cin: {
             type: Sequelize.STRING,
             allowNull: false,
             unique: true
         },
-        rate: Sequelize.FLOAT,
-        state: Sequelize.STRING,
+        rate: {
+            type : Sequelize.FLOAT,
+            defaultValue: 5.0
+        },
+        state:{
+            type :  Sequelize.STRING,
+            defaultValue: "not available"
+        },
         photo: Sequelize.BLOB,
     });
     return driver;
