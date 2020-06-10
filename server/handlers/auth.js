@@ -4,22 +4,27 @@ const jwt = require('jsonwebtoken');
 const chalk = require('chalk');
 
 exports.signUpDriver = async (req, res) => {
+    let body = req.body;
+    let profile = {};
+    for(let key in body){
+        profile[key] = body[key];
+    }
+    profile.photo = req.file.destination;
+
     try {
         const {
             email
-        } = req.body;
+        } = profile;
         const driverEmail = await db.driver.findOne({where: {email}});
         const userEmail = await db.user.findOne({where: {email}});
 
         if (userEmail || driverEmail) {
+            console.log(chalk.red('I am here'))
             return res.status(409).json("user exist")
         }
-        const hashedPassword = await bcrypt.hash(req.body.password, 10);
-
-        const profile = {...req.body}
+        const hashedPassword = await bcrypt.hash(profile.password, 10);
         profile.password = hashedPassword
         await db.driver.create(profile);
-        
         res.status(201).json({success: 'User created successfully'});
         
     } catch (e) {
@@ -28,11 +33,19 @@ exports.signUpDriver = async (req, res) => {
 };
 
 exports.signUpUser = async (req, res) => {
+    let body = req.body;
+    let profile = {};
+    console.log(chalk.greenBright('continues'));
+    for(let key in body){
+        profile[key] = body[key];
+        console.log(key + ' ' +body[key]+'\n');
+    }
+    profile.photo = req.file.destination;
     
     try {
         const {
             email
-        } = req.body;
+        } = profile;
         const driverEmail = await db.driver.findOne({where: {email}});
         const userEmail = await db.user.findOne({where: {email}});
 
@@ -41,9 +54,8 @@ exports.signUpUser = async (req, res) => {
         }
         const hashedPassword = await bcrypt.hash(req.body.password, 10);
         
-        const profile = {...req.body}
-        console.log('heeeeeere', profile)
         profile.password = hashedPassword
+        
         await db.user.create(profile);
         res.status(201).json({
             success: 'User created successfully'
@@ -53,7 +65,6 @@ exports.signUpUser = async (req, res) => {
             error: e
         });
     }
-
 };
 
 exports.login = async (req, res) => {

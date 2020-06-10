@@ -15,7 +15,7 @@ module.exports = (sql, Sequelize) => {
             unique: true
         },
         password : Sequelize.STRING,
-        photo: Sequelize.BLOB,
+        photo: Sequelize.STRING,
         vat_number: Sequelize.STRING
     });
     return user;
