@@ -2,7 +2,6 @@ import { Injectable } from '@angular/core';
 import {
   HttpClient,
   HttpHeaders,
-  HttpErrorResponse,
 } from '@angular/common/http';
 import { Observable, throwError } from 'rxjs';
 import { Router } from '@angular/router';
@@ -14,8 +13,14 @@ import { Router } from '@angular/router';
 export class TransactionService {
   headers = new HttpHeaders().set('Content-Type', 'application/json');
 
-  constructor(private httpClient: HttpClient, public router: Router) { }
+  constructor(private http: HttpClient, public router: Router) { }
 
-  post transaction
+  postTransaction( formTransaction) {
+    console.log("DATA TO POST", formTransaction);
+    return this.http.post<any>(
+      `http://localhost:8080/userTransaction`,
+      formTransaction
+    );
+  }
 
 }
