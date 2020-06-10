@@ -23,39 +23,53 @@
               <h1>Send Package</h1>
             </div>
             <form role="form">
-              <div class="form-group">
-                <div class="input-group input-group-alternative mb-3">
-                  <div class="input-group-prepend">
-                    <span class="input-group-text"><i class="ni ni-hat-3"></i></span>
-                  </div>
-                  <input class="form-control" placeholder="Name" type="text">
+              <div class="row form-group">
+                <div class="col-7">
+                  <h4>Package Dimensions: </h4>
+                </div>
+                <div class="col-5">
+                  <select name="size" class="custom-select mb-3">
+                    <option selected>Size</option>
+                    <option value="s" >S (35x25x3 cm)</option>
+                    <option value="m">M (50x50x35 cm)</option>
+                    <option value="l">L (80x50x35 cm)</option>
+                    <option value="xl">XL (120x60x60 cm)</option>
+
+                  </select>
+                </div>
+              </div>
+              <div class="row form-group">
+                <div class="col-7">
+                  <h4>Package Weight in kg: </h4>
+                </div>
+                <div class="col-5">
+                  <select name="size" class="custom-select mb-3">
+                    <option selected>Weight</option>
+                    <option value="s" >Under 1kg</option>
+                    <option value="m">1-2 kg</option>
+                    <option value="l">2-5 kg</option>
+                    <option value="xl">5-10 kg</option>
+                    <option value="xl">10-15 kg</option>
+                    <option value="xl">15+ kg</option>
+
+                  </select>
                 </div>
               </div>
               <div class="form-group">
                 <div class="input-group input-group-alternative mb-3">
-                  <div class="input-group-prepend">
-                    <span class="input-group-text"><i class="ni ni-email-83"></i></span>
-                  </div>
-                  <input class="form-control" placeholder="Email" type="email">
+                  <input class="form-control" placeholder="Comments concerning the Package" type="email">
                 </div>
               </div>
               <div class="form-group">
+                <label>From:</label>
                 <div class="input-group input-group-alternative">
-                  <div class="input-group-prepend">
-                    <span class="input-group-text"><i class="ni ni-lock-circle-open"></i></span>
-                  </div>
-                  <input class="form-control" placeholder="Password" type="password">
+                  <input class="form-control" placeholder="Address" type="password">
                 </div>
               </div>
-              <div class="text-muted font-italic"><small>password strength: <span class="text-success font-weight-700">strong</span></small></div>
-              <div class="row my-4">
-                <div class="col-12">
-                  <div class="custom-control custom-control-alternative custom-checkbox">
-                    <input class="custom-control-input" id="customCheckRegister" type="checkbox">
-                    <label class="custom-control-label" for="customCheckRegister">
-                      <span class="text-muted">I agree with the <a href="#!">Privacy Policy</a></span>
-                    </label>
-                  </div>
+              <div class="form-group">
+                <label>to:</label>
+                <div class="input-group input-group-alternative">
+                  <input class="form-control" placeholder="Address" type="password">
                 </div>
               </div>
               <div class="text-center">
