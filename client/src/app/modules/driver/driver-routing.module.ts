@@ -16,7 +16,7 @@ const routes: Routes = [
       { path: "history", component: DriverHistoryComponent },
       { path: "board", component: DriverBoardComponent },
       { path: "announcement", component: AnnouncementComponent },
-      { path: "", redirectTo: "board", pathMatch: "full" },
+      { path: " ", redirectTo: "board", pathMatch: "full" },
       { path: "**", redirectTo: "board" },
     ],
   },
