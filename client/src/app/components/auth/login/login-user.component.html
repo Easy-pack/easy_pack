@@ -1,4 +1,4 @@
-
+<app-navbar></app-navbar>
 
 <div class="container-fluid">
     <div class="row no-gutter">
@@ -12,19 +12,18 @@
         <div class="col-md-5 bg-dark login">
             <div class="login d-flex align-items-center py-5">
   
-                
                 <div class="container">
                     <div class="row">
                         <div class="col-lg-10 col-xl-7 mx-auto">
                             <h1 class="h1log">Login</h1>
                             <p class="text-muted mb-4">Please enter you information to login</p>
-                            <form class="form-group" #f="ngForm" (ngSubmit)="onSubmit(f)">
-                              <div class="form-group" ngModelGroup="user">
+                            <form class="form-group" [formGroup] = "user" (ngSubmit)="onSubmit()">
+                              <div class="form-group">
                                 <div class="form-group mb-3">
-                                    <input ngModel name="email" id="inputEmail" type="email" placeholder="Email address" required email autofocus="" class="form-control rounded-pill border-0 shadow-sm px-4">
+                                    <input formControlName = "email" name="email" id="inputEmail" type="email" placeholder="Email address" required email autofocus="" class="form-control rounded-pill border-0 shadow-sm px-4">
                                 </div>
                                 <div class="form-group mb-3">
-                                    <input id="inputPassword" type="password" placeholder="Password" ngModel name='password'required minlength="6" class="form-control rounded-pill border-0 shadow-sm px-4 text-primary">
+                                    <input formControlName = "password" id="inputPassword" type="password" placeholder="Password" ngModel name='password'required minlength="6" class="form-control rounded-pill border-0 shadow-sm px-4 text-primary">
                                 </div>
                                 <div class="custom-control custom-checkbox mb-3">
                                     <input id="customCheck1" type="checkbox" checked class="custom-control-input">

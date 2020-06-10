@@ -13,7 +13,7 @@ const routes: Routes = [
       {path : 'profile', component: UserProfileComponent},
       {path : 'board', component: UserBoardComponent},
       {path: 'history', component: UserHistoryComponent},
-      {path: 'addTransaction', component: UserAddTransactionComponent},
+      {path: 'addtransaction', component: UserAddTransactionComponent},
       {path: '', redirectTo: 'board', pathMatch: 'full'},
       {path: '**', redirectTo: 'board'}
     ]

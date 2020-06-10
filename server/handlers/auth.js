@@ -1,6 +1,7 @@
 const bcrypt = require('bcryptjs');
 const db = require('../../database');
 const jwt = require('jsonwebtoken');
+const chalk = require('chalk');
 
 exports.signUpDriver = async (req, res) => {
     try {
@@ -13,29 +14,21 @@ exports.signUpDriver = async (req, res) => {
         if (userEmail || driverEmail) {
             return res.status(409).json("user exist")
         }
-        const hashedPassword = bcrypt.hashSync(req.body.password, 10);
-        let profile = {
-            first_name,
-            last_name,
-            birth_date,
-            address,
-            gender,
-            email: req.body.email,
-            cin,
-            rate,
-            state,
-            photo,
-        } = req.body;
-        profile.password = hashedPassword;
+        const hashedPassword = await bcrypt.hash(req.body.password, 10);
+
+        const profile = {...req.body}
+        profile.password = hashedPassword
         await db.driver.create(profile);
+        
         res.status(201).json({success: 'User created successfully'});
+        
     } catch (e) {
-        res.status(409).json({error: e});
+        res.status(404).json({error: e});
     }
 };
 
 exports.signUpUser = async (req, res) => {
-
+    
     try {
         const {
             email
@@ -46,19 +39,12 @@ exports.signUpUser = async (req, res) => {
         if (userEmail || driverEmail) {
             return res.status(409).json("user exist")
         }
-        const hashedPassword = bcrypt.hashSync(req.body.password, 10);
-        let profile = {
-            first_name,
-            last_name,
-            email : req.body.email,
-            address,
-            phone,
-            cin,
-            vat_number
-        } = req.body;
-        profile.password = hashedPassword;
+        const hashedPassword = await bcrypt.hash(req.body.password, 10);
+        
+        const profile = {...req.body}
+        console.log('heeeeeere', profile)
+        profile.password = hashedPassword
         await db.user.create(profile);
-
         res.status(201).json({
             success: 'User created successfully'
         });
@@ -79,10 +65,12 @@ exports.login = async (req, res) => {
             password
         } = req.body;
         let user = await db.user.findOne({where: {email}});
+        
         if (!user) {
             user = await db.driver.findOne({where: {email}});
             (!user)? res.status(409).json({message: 'user not found'}) : role = "driver"
         }
+
         if(user) {
             let validPassword = await bcrypt.compare(password, user.password);
             if (!validPassword) {
@@ -95,6 +83,8 @@ exports.login = async (req, res) => {
                 }, 'process.env.SECRET');
                 res.status(201).json({
                     message: 'Sucessfully logged in',
+                    id: user.id,
+                    role,
                     token
                 })
             }
