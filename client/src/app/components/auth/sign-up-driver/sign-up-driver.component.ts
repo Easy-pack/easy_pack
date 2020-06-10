@@ -1,9 +1,8 @@
 import { Component, OnInit } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
 import { FormBuilder, FormGroup, FormControl } from '@angular/forms';
 import { AuthService } from '../../../services/auth.service';
 import { Router } from '@angular/router';
-import { NgForm } from '@angular/forms';
+
 // import { format } from 'path';
 @Component({
   selector: 'app-sign-up-driver',
@@ -21,10 +20,9 @@ export class SignUpDriverComponent implements OnInit {
     phone: new FormControl(''),
     cin: new FormControl(''),
   });
-  uploadForm: FormGroup;
+
   
   constructor(
-    private http: HttpClient,
     private router: Router,
     private authService: AuthService
   ) {}
