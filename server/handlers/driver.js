@@ -60,7 +60,7 @@ exports.updateDriver = async (req, res, next) => {
                 id: req.params.id
             }
         })
-        driver.update({
+        await driver.update({
             first_name: req.body.first_name,
             last_name: req.body.last_name,
             password: req.body.password,

@@ -7,11 +7,13 @@ module.exports = (sql, Sequelize) => {
         birth_date: Sequelize.DATE,
         adress: Sequelize.STRING,
         gender: Sequelize.STRING,
+        state: Sequelize.STRING,
         email: {
             type: Sequelize.STRING,
             allowNull: false,
             unique: true
         },
+        phone: Sequelize.STRING,
         cin: {
             type: Sequelize.STRING,
             allowNull: false,

@@ -18,6 +18,7 @@ import { LoginDriverComponent } from "./Components/auth/login-driver/login-drive
 import { LoginComponent } from "./Components/auth/login/login-user.component";
 import { SignupUserComponent } from "./Components/auth/signup-user/signup-user.component";
 import { HomeComponent } from "./Components/home/home.component";
+import { DialogPasswordConfirmationComponent } from './components/driver/dialog-password-confirmation/dialog-password-confirmation.component';
 
 @NgModule({
   imports: [
@@ -27,7 +28,6 @@ import { HomeComponent } from "./Components/home/home.component";
     HttpClientModule,
     NgbModule,
     AppRoutingModule,
-    FormsModule,
     ReactiveFormsModule,
   ],
   declarations: [
@@ -44,6 +44,7 @@ import { HomeComponent } from "./Components/home/home.component";
     LoginDriverComponent,
     LoginComponent,
     SignupUserComponent,
+    DialogPasswordConfirmationComponent,
   ],
   providers: [],
   bootstrap: [AppComponent],

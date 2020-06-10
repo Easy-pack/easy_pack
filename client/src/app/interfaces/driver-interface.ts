@@ -6,8 +6,8 @@ export interface DriverInterface {
   adress: string;
   gender: string;
   email: string;
-  phone: string;
-  cin: string;
+  phone: number;
+  //cin: string;
   rate: number;
   state: string;
   photo: string;
