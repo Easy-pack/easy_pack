@@ -18,6 +18,8 @@ import { LoginDriverComponent } from './components/auth/login-driver/login-drive
 import { LoginComponent } from './components/auth/login/login-user.component';
 import { SignupUserComponent } from './components/auth/signup-user/signup-user.component';
 import { HomeComponent } from './components/home/home.component';
+import {AvailabilityDirective} from './directives/availability/availability.directive';
+
 
 @NgModule({
   imports: [
@@ -41,10 +43,11 @@ import { HomeComponent } from './components/home/home.component';
     FooterComponent,
     LoginDriverComponent,
     LoginComponent,
-    SignupUserComponent
+    SignupUserComponent,
+    AvailabilityDirective,
   ],
   providers: [],
-  bootstrap: [AppComponent]
+  bootstrap: [AppComponent],
 })
 
 export class AppModule { }

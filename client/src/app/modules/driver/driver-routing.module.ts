@@ -2,10 +2,10 @@ import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 
 import { DriverComponent } from './driver.component';
-import {DriverBoardComponent} from './driver-board/driver-board.component';
-import {DriverProfileComponent} from './driver-profile/driver-profile.component';
-import {DriverHistoryComponent} from './driver-history/driver-history.component';
-import {AnnouncementComponent} from './announcement/announcement.component';
+import {DriverBoardComponent} from '../../Components/driver/driver-board/driver-board.component';
+import {DriverProfileComponent} from '../../Components/driver/driver-profile/driver-profile.component';
+import {DriverHistoryComponent} from '../../Components/driver/driver-history/driver-history.component';
+import {AnnouncementComponent} from '../../Components/driver/announcement/announcement.component';
 
 const routes: Routes = [
   { path: '', component: DriverComponent,

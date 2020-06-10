@@ -2,10 +2,10 @@ import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 
 import { UserComponent } from './user.component';
-import {UserProfileComponent} from './user-profile/user-profile.component';
-import {UserBoardComponent} from './user-board/user-board.component';
-import {UserHistoryComponent} from './user-history/user-history.component';
-import {UserAddTransactionComponent} from './user-add-transaction/user-add-transaction.component';
+import {UserProfileComponent} from '../../Components/user/user-profile/user-profile.component';
+import {UserBoardComponent} from '../../Components/user/user-board/user-board.component';
+import {UserHistoryComponent} from '../../Components/user/user-history/user-history.component';
+import {UserAddTransactionComponent} from '../../Components/user/user-add-transaction/user-add-transaction.component';
 
 const routes: Routes = [
   {path: '', component: UserComponent,

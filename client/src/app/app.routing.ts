@@ -11,9 +11,9 @@ const routes: Routes = [
   {path : 'login', component: LoginComponent},
   {path : 'signup/user', component: SignupUserComponent},
   // @ts-ignore
-  {path: 'user', loadChildren: () => import('./components/user/user.module').then(m => m.UserModule)},
+  {path: 'user', loadChildren: () => import('./modules/user/user.module').then(m => m.UserModule)},
   // @ts-ignore
-  {path: 'driver', loadChildren: () => import('./components/driver/driver.module').then(m => m.DriverModule)},
+  {path: 'driver', loadChildren: () => import('./modules/driver/driver.module').then(m => m.DriverModule)},
   {path: '**', redirectTo: ''}
 ];
 
