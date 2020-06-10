@@ -1,27 +1,27 @@
-import { NgModule } from "@angular/core";
-import { Routes, RouterModule } from "@angular/router";
-import { SignUpDriverComponent } from "./Components/auth/sign-up-driver/sign-up-driver.component";
-import { SignupUserComponent } from "./Components/auth/signup-user/signup-user.component";
-import { LoginComponent } from "./Components/auth/login/login-user.component";
-import { HomeComponent } from "./Components/home/home.component";
+import { NgModule } from '@angular/core';
+import { Routes, RouterModule } from '@angular/router';
+import { SignUpDriverComponent } from './Components/auth/sign-up-driver/sign-up-driver.component';
+import { SignupUserComponent } from './Components/auth/signup-user/signup-user.component';
+import { LoginComponent } from './Components/auth/login/login-user.component';
+import { HomeComponent } from './Components/home/home.component';
 
 const routes: Routes = [
-  { path: "", component: HomeComponent },
-  { path: "signup/driver", component: SignUpDriverComponent },
-  { path: "login", component: LoginComponent },
-  { path: "signup/user", component: SignupUserComponent },
+  { path: '', component: HomeComponent },
+  { path: 'signup/driver', component: SignUpDriverComponent },
+  { path: 'login', component: LoginComponent },
+  { path: 'signup/user', component: SignupUserComponent },
   {
-    path: "user",
+    path: 'user',
     loadChildren: () =>
-      import("./modules/user/user.module").then((m) => m.UserModule),
+      import('./modules/user/user.module').then((m) => m.UserModule),
   },
 
   {
-    path: "driver",
+    path: 'driver',
     loadChildren: () =>
-      import("./modules/driver/driver.module").then((m) => m.DriverModule),
+      import('./modules/driver/driver.module').then((m) => m.DriverModule),
   },
-  { path: "**", redirectTo: "" },
+  { path: '**', redirectTo: '' },
 ];
 
 @NgModule({
