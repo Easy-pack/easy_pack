@@ -1,7 +1,9 @@
+import { AuthService } from './../../../services/auth.service';
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, FormControl } from '@angular/forms';
 import { Router } from '@angular/router';
 import {TransactionService} from '../../../services/transaction.service'
+
 
 @Component({
   selector: 'app-user-add-transaction',
@@ -19,14 +21,16 @@ export class UserAddTransactionComponent implements OnInit {
     request_time: new FormControl(''),
   });
   
-  constructor(private transactionService:TransactionService) { }
+  constructor(private transactionService:TransactionService,
+              private authService : AuthService) { }
 
   ngOnInit(): void {
   }
 
   onSubmit(){
-    console.log('results: ', this.newTransaction.value)
-    this.transactionService.postTransaction(this.newTransaction.value).subscribe(res =>{
+    const transaction = this.newTransaction.value;
+    transaction.userId = this.authService.getId();
+    this.transactionService.postTransaction(transaction).subscribe(res =>{
       console.log("Transaction added")
     })
   }

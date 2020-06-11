@@ -1,7 +1,6 @@
 import { ReactiveFormsModule } from '@angular/forms';
 import { NgModule } from "@angular/core";
 import { CommonModule } from "@angular/common";
-
 import { UserRoutingModule } from "./user-routing.module";
 import { UserComponent } from "./user.component";
 import { UserNavbarComponent } from "../../Components/user/user-navbar/user-navbar.component";
