@@ -1,3 +1,4 @@
+import { ReactiveFormsModule } from '@angular/forms';
 import { NgModule } from "@angular/core";
 import { CommonModule } from "@angular/common";
 
@@ -8,6 +9,7 @@ import { UserSidebarComponent } from "../../Components/user/user-sidebar/user-si
 import { UserBoardComponent } from "../../Components/user/user-board/user-board.component";
 import { NgbModule } from "@ng-bootstrap/ng-bootstrap";
 import { UserProfileComponent } from "../../Components/user/user-profile/user-profile.component";
+import {UserAddTransactionComponent} from "../../Components/user/user-add-transaction/user-add-transaction.component"
 
 @NgModule({
   declarations: [
@@ -16,7 +18,8 @@ import { UserProfileComponent } from "../../Components/user/user-profile/user-pr
     UserNavbarComponent,
     UserBoardComponent,
     UserProfileComponent,
+    UserAddTransactionComponent,
   ],
-  imports: [CommonModule, UserRoutingModule, NgbModule],
+  imports: [CommonModule, UserRoutingModule, NgbModule, ReactiveFormsModule],
 })
 export class UserModule {}

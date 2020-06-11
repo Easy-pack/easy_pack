@@ -19,12 +19,15 @@ export class UserAddTransactionComponent implements OnInit {
     request_time: new FormControl(''),
   });
   
-  constructor() { }
+  constructor(private transactionService:TransactionService) { }
 
   ngOnInit(): void {
   }
 
   onSubmit(){
-    console.log('transaction' ,this.newTransaction)
+    console.log('results: ', this.newTransaction.value)
+    this.transactionService.postTransaction(this.newTransaction.value).subscribe(res =>{
+      console.log("Transaction added")
+    })
   }
 }
