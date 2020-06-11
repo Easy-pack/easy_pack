@@ -1,7 +1,7 @@
 module.exports = {
     database_name: 'easypack',
     username: 'root',
-    password: '',
+    password: 'Nouha',
     dialect: 'mysql',
     host: 'localhost'
 };

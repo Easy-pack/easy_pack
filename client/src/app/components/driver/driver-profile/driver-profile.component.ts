@@ -1,7 +1,6 @@
 import { Component, OnInit } from "@angular/core";
 import { DriverInterface } from "../../../interfaces/driver-interface";
 import { DriverProfileService } from "../../../services/driver-profile.service";
-import { HttpClient } from "@angular/common/http";
 
 import {
   FormControl,
@@ -13,9 +12,14 @@ import {
 import * as bcrypt from "bcryptjs";
 import * as moment from "moment";
 import { from } from "rxjs";
-import { MatDialog, MatDialogConfig } from "@angular/material/dialog";
-import { DialogPasswordConfirmationComponent } from "../dialog-password-confirmation/dialog-password-confirmation.component";
+import {
+  MatDialog,
+  MatDialogConfig,
+  MatDialogRef,
+  MAT_DIALOG_DATA,
+} from "@angular/material/dialog";
 
+import { NgbModal, ModalDismissReasons } from "@ng-bootstrap/ng-bootstrap";
 @Component({
   selector: "app-driver-profile",
   templateUrl: "./driver-profile.component.html",
@@ -30,6 +34,7 @@ export class DriverProfileComponent implements OnInit {
   passwordInputValue: string = "";
   createdAt: string;
   stateColor: string;
+  closeResult: string;
 
   driverForm = new FormGroup({
     first_name: new FormControl(""),
@@ -48,15 +53,32 @@ export class DriverProfileComponent implements OnInit {
   });
 
   constructor(
-    private http: HttpClient,
     private formBuilder: FormBuilder,
     private driverService: DriverProfileService,
-    private matDialog: MatDialog
+    public matDialog: MatDialog,
+    private modalService: NgbModal
   ) {}
+  open(content) {
+    this.modalService
+      .open(content, { ariaLabelledBy: "modal-basic-title" })
+      .result.then(
+        (result) => {
+          this.closeResult = `Closed with: ${result}`;
+        },
+        (reason) => {
+          this.closeResult = `Dismissed ${this.getDismissReason(reason)}`;
+        }
+      );
+  }
 
-  openDialog() {
-    const dialogConfig = new MatDialogConfig();
-    this.matDialog.open(DialogPasswordConfirmationComponent, dialogConfig);
+  private getDismissReason(reason: any): string {
+    if (reason === ModalDismissReasons.ESC) {
+      return "by pressing ESC";
+    } else if (reason === ModalDismissReasons.BACKDROP_CLICK) {
+      return "by clicking on a backdrop";
+    } else {
+      return `with: ${reason}`;
+    }
   }
 
   get verifyPassword() {
@@ -151,7 +173,6 @@ export class DriverProfileComponent implements OnInit {
         this.disableEdit = true;
 
         console.log("state2", this.driverForm.value.state);
-        this.allowEdit();
         this.getDriver();
       });
   }
