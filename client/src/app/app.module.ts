@@ -20,7 +20,6 @@ import { FooterComponent } from "./Components/footer/footer.component";
 import { LoginComponent } from "./Components/auth/login/login-user.component";
 import { SignupUserComponent } from "./Components/auth/signup-user/signup-user.component";
 import { HomeComponent } from "./Components/home/home.component";
-import { DialogPasswordConfirmationComponent } from "./Components/driver/dialog-password-confirmation/dialog-password-confirmation.component";
 
 @NgModule({
   imports: [
@@ -45,7 +44,6 @@ import { DialogPasswordConfirmationComponent } from "./Components/driver/dialog-
     FooterComponent,
     LoginComponent,
     SignupUserComponent,
-    DialogPasswordConfirmationComponent,
   ],
   providers: [],
   bootstrap: [AppComponent],
