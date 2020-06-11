@@ -9,7 +9,7 @@ import { UserBoardComponent } from "../../Components/user/user-board/user-board.
 import { NgbModule } from "@ng-bootstrap/ng-bootstrap";
 import { UserProfileComponent } from "../../Components/user/user-profile/user-profile.component";
 import {UserAddTransactionComponent} from "../../Components/user/user-add-transaction/user-add-transaction.component"
-
+import {UserHistoryComponent} from "../../Components/user/user-history/user-history.component"
 @NgModule({
   declarations: [
     UserComponent,
@@ -18,6 +18,7 @@ import {UserAddTransactionComponent} from "../../Components/user/user-add-transa
     UserBoardComponent,
     UserProfileComponent,
     UserAddTransactionComponent,
+    UserHistoryComponent
   ],
   imports: [CommonModule, UserRoutingModule, NgbModule, ReactiveFormsModule],
 })

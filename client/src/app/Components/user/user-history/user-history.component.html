@@ -27,30 +27,32 @@
               </tr>
             </thead>
             <tbody >
-                <tr *ngFor="let xx of transactions">
+                <tr *ngFor="let tr of transactions">
                   <th scope="row">
                     <div class="media align-items-center">
                       <div class="media-body">
-                        <span class="mb-0 text-sm" *ngIf="xx.driverId; else noDriver">{{xx.id}}</span>
-                        <span class="mb-0 text-sm" #noDriver>No Driver</span>
+                        <span class="mb-0 text-sm" *ngIf="tr.driverId; else noDriver">{{tr.id}}</span>
+                        <ng-template #noDriver>
+                          <span class="mb-0 text-sm" >No Driver</span>
+                        </ng-template>
                       </div>
                     </div>
                   </th>
                   <td>
-                    <span class="mb-0 text-sm">{{xx.address_start}}</span>
+                    <span class="mb-0 text-sm">{{tr.address_start}}</span>
                   </td>
                   <td>
                     <div class="media-body">
-                      <span class="mb-0 text-sm">{{xx.address_destination}}</span>
+                      <span class="mb-0 text-sm">{{tr.address_destination}}</span>
                     </div>
                   </td>
                   <td>
-                    <span class="mb-0 text-sm">31/01/2019</span>
+                    <span class="mb-0 text-sm">{{tr.request_date | date}} , {{ tr.request_time}}</span>
                   </td>
                   <td>
                     <div class="d-flex align-items-center">
                       <span class="badge badge-dot mr-4">
-                        <i class="bg-warning"></i>{{xx.state}}
+                        <i class="bg-warning"></i>{{tr.state}}
                       </span>
                     </div>
                   </td>
