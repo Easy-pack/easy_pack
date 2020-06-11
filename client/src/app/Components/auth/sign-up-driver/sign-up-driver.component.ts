@@ -1,10 +1,3 @@
-<<<<<<< HEAD:client/src/app/Components/auth/sign-up-driver/sign-up-driver.component.ts
-import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup, FormControl } from '@angular/forms';
-import { AuthService } from '../../../services/auth.service';
-import { Router } from '@angular/router';
-
-=======
 import { Component, OnInit } from "@angular/core";
 import { HttpClient } from "@angular/common/http";
 import { FormBuilder, FormGroup, FormControl } from "@angular/forms";
@@ -12,7 +5,6 @@ import { AuthService } from "../../../services/auth.service";
 import { Router } from "@angular/router";
 import { NgForm } from "@angular/forms";
 //import { read } from 'fs';
->>>>>>> 257013c984316976803a8e3846d041d30b0f2266:client/src/app/components/auth/sign-up-driver/sign-up-driver.component.ts
 // import { format } from 'path';
 @Component({
   selector: "app-sign-up-driver",
@@ -33,12 +25,7 @@ export class SignUpDriverComponent implements OnInit {
     cin: new FormControl(""),
   });
 
-<<<<<<< HEAD:client/src/app/Components/auth/sign-up-driver/sign-up-driver.component.ts
   
-=======
-  uploadForm: FormGroup;
-
->>>>>>> 257013c984316976803a8e3846d041d30b0f2266:client/src/app/components/auth/sign-up-driver/sign-up-driver.component.ts
   constructor(
     private router: Router,
     private authService: AuthService
