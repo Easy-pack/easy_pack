@@ -25,10 +25,8 @@ export class SignUpDriverComponent implements OnInit {
     cin: new FormControl(""),
   });
 
-  uploadForm: FormGroup;
-
+  
   constructor(
-    private http: HttpClient,
     private router: Router,
     private authService: AuthService
   ) {}
