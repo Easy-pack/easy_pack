@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { HistoryTransactionService } from '../../../services/history-transaction.service';
 
 @Component({
   selector: 'app-user-history',
@@ -6,10 +7,15 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./user-history.component.css']
 })
 export class UserHistoryComponent implements OnInit {
-
-  constructor() { }
+  transactions;
+  
+  constructor(private historyTransactionService : HistoryTransactionService) { }
 
   ngOnInit(): void {
+    this.historyTransactionService.fetchData().subscribe((response)=>{
+      this.transactions = response;
+      console.log(this.transactions);
+    })
   }
 
 }

@@ -87,3 +87,16 @@ exports.updateDriver = async (req, res, next) => {
         });
     }
 };
+
+
+module.exports.getDriverTransactions = async (req, res, next) => {
+    try {
+        const {id} = req.params;
+        const transactions = await db.transaction.findAll({where : {driverId : id} });
+        res.status(200).json(transactions)
+    }
+    catch (e) {
+        console.log(e);
+        next(e)
+    }
+};
