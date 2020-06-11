@@ -39,7 +39,7 @@ exports.signUpUser = async (req, res) => {
         profile[key] = body[key];
         console.log(key + ' ' +body[key]+'\n');
     }
-    profile.photo = req.file.destination;
+    //profile.photo = req.file.destination;
     
     try {
         const {
