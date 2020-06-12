@@ -39,7 +39,7 @@ export class SignupUserComponent implements OnInit {
 
   onSubmit(): void {
     console.log(this.newUser.value);
-    console.log(this.avatar);
+    //console.log(this.avatar);
     const user = this.newUser.value;
     const formData = new FormData();
     for(let key in user){

@@ -7,5 +7,8 @@ router.route('/tr/:id')
     .get(handler.getUserTransactions)
     .put(handler.cancel);
 
+router.route('/tr')
+    .get(handler.getAllTransactions)
+
 
 module.exports = router;

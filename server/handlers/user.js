@@ -13,6 +13,7 @@ module.exports.getInfo = async (req, res, next) =>{
         next(e)
     }
 };
+
 module.exports.updatePassword = async (req, res, next) => {
     try {
         const id = req.params.id;

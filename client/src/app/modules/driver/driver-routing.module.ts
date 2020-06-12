@@ -1,6 +1,5 @@
 import { NgModule } from "@angular/core";
 import { Routes, RouterModule } from "@angular/router";
-
 import { DriverComponent } from "./driver.component";
 import { DriverBoardComponent } from "../../Components/driver/driver-board/driver-board.component";
 import { DriverProfileComponent } from "../../Components/driver/driver-profile/driver-profile.component";
@@ -16,7 +15,7 @@ const routes: Routes = [
       { path: "history", component: DriverHistoryComponent },
       { path: "board", component: DriverBoardComponent },
       { path: "announcement", component: AnnouncementComponent },
-      { path: " ", redirectTo: "board", pathMatch: "full" },
+      { path: "", redirectTo: "board", pathMatch: "full" },
       { path: "**", redirectTo: "board" },
     ],
   },

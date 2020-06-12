@@ -39,6 +39,18 @@ module.exports.getUserTransactions = async (req, res, next) => {
     }
 };
 
+// all transactions
+module.exports.getAllTransactions = async (req, res, next) => {
+    try {
+        const transactions = await db.transaction.findAll({where : {driverId : null} });
+        res.status(200).json(transactions)
+    }
+    catch (e) {
+        console.log(e);
+        next(e)
+    }
+};
+
 
 module.exports.cancel = async (req, res, next) =>{
     try {
