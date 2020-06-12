@@ -8,7 +8,12 @@ import { HistoryDriver } from "../../../interfaces/history-driver";
   styleUrls: ["./driver-history.component.css"],
 })
 export class DriverHistoryComponent implements OnInit {
-  constructor() {}
+  history;
+  constructor(private historyTransactionService : HistoryTransactionService) {}
 
-  ngOnInit(): void {}
+  ngOnInit(): void {
+    this.historyTransactionService.fetchData().subscribe(response =>{
+      this.history = response;
+    })
+  }
 }

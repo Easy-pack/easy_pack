@@ -9,7 +9,7 @@ exports.signUpDriver = async (req, res) => {
     for(let key in body){
         profile[key] = body[key];
     }
-    profile.photo = req.file.destination;
+    //profile.photo = req.file.destination;
 
     try {
         const {
@@ -36,7 +36,7 @@ exports.signUpUser = async (req, res) => {
     let body = req.body;
     let profile = {};
     for(let key in body){
-        profile[key] = body[key];
+       profile[key] = body[key];
         console.log(key + ' ' +body[key]+'\n');
     }
     //profile.photo = req.file.destination;
@@ -54,9 +54,7 @@ exports.signUpUser = async (req, res) => {
         const hashedPassword = await bcrypt.hash(req.body.password, 10);
         
         profile.password = hashedPassword
-        console.log(chalk.gray('continue'));
         await db.user.create(profile);
-        console.log(chalk.gray('here'));
         res.status(201).json({
             success: 'User created successfully'
         });

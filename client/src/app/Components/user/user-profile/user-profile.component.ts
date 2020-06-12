@@ -82,12 +82,11 @@ export class UserProfileComponent implements OnInit {
   }
 
   getUser() {
-    this.UserService.fetchData(this.id).subscribe((UserData) => {
+    this.UserService.fetchData(1).subscribe((UserData) => {
       
       this.data = UserData;
       
       (<FormGroup>this.UserForm).patchValue(this.data);
-      //this.UserForm.setValue({ value: this.data });
       this.rate = Array(this.data.rate);
       this.createdAt = moment(this.data.createdAt).format('"MMM Do YY"');
       console.log(UserData);
@@ -99,7 +98,6 @@ export class UserProfileComponent implements OnInit {
       !this.UserForm.value.newPassword &&
       !this.UserForm.value.confirmNewPassword
     ) {
-      //alert(' empty passwords values');
       return true;
     } else {
       if (
@@ -123,42 +121,14 @@ export class UserProfileComponent implements OnInit {
 
 
   updateUser() {
-    // this.submitted = true;
-    // if (this.UserForm.value.currentPassword == null) {
-    //   alert("Please enter your password");
-    // } else {
-    //   let comparePasswords = bcrypt.compareSync(
-    //     this.UserForm.value.currentPassword,
-    //     this.data.password
-    //   );
-    //   if (comparePasswords) {
-    //     if (this.checkNewPassword()) {
-    //       formUser.id = 1;
-    //       formUser.state = this.data.state;
-    //       console.log("state", formUser.state);
-    // e.preventDefault();
-    console.log(this.UserForm.value, "inputs");
     this.UserService
       .postData(this.id, this.UserForm.value)
       .subscribe((res: any) => {
-        
-        // console.log("formUser", this.id, this.data);
-        // document.getElementById("fullName").innerHTML =
-        //   this.UserForm.value.first_name +
-        //   " " +
-        //   this.UserForm.value.last_name;
         this.passwordInputValue = null;
         this.disableEdit = true;
-
-        
         this.getUser();
       });
   }
-  //   } else {
-  //     alert("Please check your password and try again");
-  //   //   }
-  //   }
-  // }
 
   updateGender(e) {
     console.log(e.target.value);
