@@ -8,6 +8,7 @@ import { UserSidebarComponent } from "../../Components/user/user-sidebar/user-si
 import { UserBoardComponent } from "../../Components/user/user-board/user-board.component";
 import { NgbModule } from "@ng-bootstrap/ng-bootstrap";
 import { UserProfileComponent } from "../../Components/user/user-profile/user-profile.component";
+import { UserHistoryComponent } from "../../Components/user/user-history/user-history.component";
 
 @NgModule({
   declarations: [
@@ -16,6 +17,7 @@ import { UserProfileComponent } from "../../Components/user/user-profile/user-pr
     UserNavbarComponent,
     UserBoardComponent,
     UserProfileComponent,
+    UserHistoryComponent,
   ],
   imports: [CommonModule, UserRoutingModule, NgbModule],
 })

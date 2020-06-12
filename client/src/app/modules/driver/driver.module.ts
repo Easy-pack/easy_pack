@@ -10,6 +10,7 @@ import { DriverBoardComponent } from "../../Components/driver/driver-board/drive
 import { NgbModule } from "@ng-bootstrap/ng-bootstrap";
 import { FormsModule, ReactiveFormsModule } from "@angular/forms";
 import { DriverProfileComponent } from "../../Components/driver/driver-profile/driver-profile.component";
+import { DriverHistoryComponent } from "../../Components/driver/driver-history/driver-history.component";
 
 @NgModule({
   declarations: [
@@ -18,6 +19,7 @@ import { DriverProfileComponent } from "../../Components/driver/driver-profile/d
     DriverSidebarComponent,
     DriverBoardComponent,
     DriverProfileComponent,
+    DriverHistoryComponent,
   ],
   imports: [
     CommonModule,

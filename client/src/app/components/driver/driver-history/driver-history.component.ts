@@ -8,6 +8,7 @@ import { HistoryDriver } from "../../../interfaces/history-driver";
   styleUrls: ["./driver-history.component.css"],
 })
 export class DriverHistoryComponent implements OnInit {
+  data = [1, 1, 1, 1];
   constructor() {}
 
   ngOnInit(): void {}

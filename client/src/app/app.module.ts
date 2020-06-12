@@ -18,6 +18,7 @@ import { FooterComponent } from "./Components/footer/footer.component";
 import { LoginComponent } from "./Components/auth/login/login-user.component";
 import { SignupUserComponent } from "./Components/auth/signup-user/signup-user.component";
 import { HomeComponent } from "./Components/home/home.component";
+import { MapComponent } from './components/user/map/map.component';
 
 @NgModule({
   imports: [
@@ -42,6 +43,7 @@ import { HomeComponent } from "./Components/home/home.component";
     FooterComponent,
     LoginComponent,
     SignupUserComponent,
+    MapComponent,
   ],
   providers: [],
   bootstrap: [AppComponent],

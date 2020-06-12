@@ -207,8 +207,8 @@ export class DriverProfileComponent implements OnInit {
       state: [""],
       photo: [""],
     });
-    this.driverForm.valueChanges.subscribe((newVal) =>
-      console.log("newval", newVal)
-    );
+    // this.driverForm.valueChanges.subscribe((newVal) =>
+    //   console.log("newval", newVal)
+    // );
   }
 }
