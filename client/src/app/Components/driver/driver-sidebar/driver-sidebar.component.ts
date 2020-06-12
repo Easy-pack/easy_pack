@@ -16,7 +16,7 @@ export const ROUTES: RouteInfo[] = [
   },
   {
     path: "profile",
-    title: "User profile",
+    title: "Driver profile",
     icon: "ni-single-02 text-yellow",
     class: "",
   },
