@@ -5,9 +5,9 @@ module.exports = (sql, Sequelize) =>{
         start_time: Sequelize.TIME,
         end_time: Sequelize.TIME,
         waiting_time: Sequelize.TIME,
-        package_dimension: Sequelize.FLOAT,
-        package_weight: Sequelize.FLOAT,
-        package_type: Sequelize.STRING,
+        package_dimension: Sequelize.STRING,
+        package_weight: Sequelize.INTEGER,
+        package_comments: Sequelize.STRING,
         address_start: Sequelize.STRING,
         address_destination: Sequelize.STRING,
         state: {

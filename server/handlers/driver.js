@@ -1,13 +1,15 @@
 const db = require('../../database/index');
 const bcrypt = require("bcryptjs");
+const chalk = require('chalk');
 
 module.exports.acceptTransaction = async (req, res, next) => {
+    console.log(chalk.blue('Request is here'));
     try {
         const {
             id
         } = req.params;
-        const transId = req.body.id;
-        const vehicle_Id = req.body.vehicle_Id;
+        const transId = req.body.transactionId;
+        //const vehicle_Id = req.body.vehicle_Id;
 
         const transaction = await db.transaction.findOne({
             where: {
@@ -16,7 +18,7 @@ module.exports.acceptTransaction = async (req, res, next) => {
         });
         transaction.update({
             driverId: id,
-            vehicleId: vehicle_Id,
+            //vehicleId: vehicle_Id,
             state: "In Progress"
         });
         res.status(202).json(transaction)
@@ -85,5 +87,18 @@ exports.updateDriver = async (req, res, next) => {
         res.status(404).json({
             errorrr: e,
         });
+    }
+};
+
+
+module.exports.getDriverTransactions = async (req, res, next) => {
+    try {
+        const {id} = req.params;
+        const transactions = await db.transaction.findAll({where : {driverId : id} });
+        res.status(200).json(transactions)
+    }
+    catch (e) {
+        console.log(e);
+        next(e)
     }
 };

@@ -4,6 +4,7 @@ const handler = require('../handlers');
 router.post('/post', handler.postTransaction);
 
 router.route('/tr/:id')
+    .get(handler.getDriverTransactions)
     .post(handler.acceptTransaction)
     .put(handler.cancel);
 

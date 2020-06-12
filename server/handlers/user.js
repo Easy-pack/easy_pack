@@ -13,6 +13,7 @@ module.exports.getInfo = async (req, res, next) =>{
         next(e)
     }
 };
+
 module.exports.updatePassword = async (req, res, next) => {
     try {
         const id = req.params.id;
@@ -35,6 +36,7 @@ module.exports.updatePassword = async (req, res, next) => {
 
 module.exports.updateInfo = async (req, res, next) =>{
     try {
+        console.log(req.body)
         let newInfo = {
             first_name,
             last_name,
@@ -52,6 +54,7 @@ module.exports.updateInfo = async (req, res, next) =>{
         user.update(
             newInfo
         );
+        console.log(newInfo)
         res.status(202).json(newInfo)
 
     }

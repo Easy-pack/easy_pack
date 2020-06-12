@@ -1,3 +1,5 @@
+const chalk = require('chalk');
+
 const db = require('../../database/index');
 
 module.exports.postTransaction = async (req,res,next)=>{
@@ -13,6 +15,9 @@ module.exports.postTransaction = async (req,res,next)=>{
             userId
         } = req.body;
 
+        for(let key in trans){
+            console.log(chalk.blue(key + ' '+ trans[key]));
+        }
         const transaction = await db.transaction.create(trans);
         res.status(201).json(transaction);
     }
@@ -25,16 +30,20 @@ module.exports.postTransaction = async (req,res,next)=>{
 module.exports.getUserTransactions = async (req, res, next) => {
     try {
         const {id} = req.params;
-        const role = req.body.role;
-        if(role === 'user'){
-            const transactions = await db.transaction.findAll({where : {userId : id} });
-            res.status(200).json(transactions)
-        }
-        if(role === 'driver'){
-            const transactions = await db.transaction.findAll({where : {driverId : id} });
-            res.status(200).json(transactions)
-        }
+        const transactions = await db.transaction.findAll({where : {userId : id} });
+        res.status(200).json(transactions)
+    }
+    catch (e) {
+        console.log(e);
+        next(e)
+    }
+};
 
+// all transactions
+module.exports.getAllTransactions = async (req, res, next) => {
+    try {
+        const transactions = await db.transaction.findAll({where : {driverId : null} });
+        res.status(200).json(transactions)
     }
     catch (e) {
         console.log(e);
