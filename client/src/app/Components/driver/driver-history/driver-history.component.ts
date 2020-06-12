@@ -12,7 +12,7 @@ export class DriverHistoryComponent implements OnInit {
   constructor(private historyTransactionService : HistoryTransactionService) {}
 
   ngOnInit(): void {
-    this.historyTransactionService.fetchData().subscribe(response =>{
+    this.historyTransactionService.fetchDriverData().subscribe(response =>{
       this.history = response;
     })
   }

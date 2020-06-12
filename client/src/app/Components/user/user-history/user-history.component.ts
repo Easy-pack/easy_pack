@@ -12,7 +12,7 @@ export class UserHistoryComponent implements OnInit {
   constructor(private historyTransactionService : HistoryTransactionService) { }
 
   ngOnInit(): void {
-    this.historyTransactionService.fetchData().subscribe((response)=>{
+    this.historyTransactionService.fetchUserData().subscribe((response)=>{
       this.transactions = response;
       console.log(this.transactions);
     })

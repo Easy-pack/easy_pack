@@ -1,5 +1,5 @@
 import { Component, OnInit } from "@angular/core";
-import { DriverInterface } from "../../../interfaces/driver-interface";
+import { User } from "../../../interfaces/user";
 import { DriverProfileService } from "../../../services/driver-profile.service";
 
 import {
@@ -12,22 +12,18 @@ import {
 import * as bcrypt from "bcryptjs";
 import * as moment from "moment";
 import { from } from "rxjs";
-import {
-  MatDialog,
-  MatDialogConfig,
-  MatDialogRef,
-  MAT_DIALOG_DATA,
-} from "@angular/material/dialog";
-
 import { NgbModal, ModalDismissReasons } from "@ng-bootstrap/ng-bootstrap";
+
+
 @Component({
   selector: "app-driver-profile",
   templateUrl: "./driver-profile.component.html",
   styleUrls: ["./driver-profile.component.css"],
 })
+
 export class DriverProfileComponent implements OnInit {
   id: number;
-  data: DriverInterface;
+  data
   rate: any;
   submitted: boolean = false;
   disableEdit: boolean = true;
@@ -36,7 +32,7 @@ export class DriverProfileComponent implements OnInit {
   stateColor: string;
   closeResult: string;
 
-  driverForm = new FormGroup({
+  UserForm = new FormGroup({
     first_name: new FormControl(""),
     last_name: new FormControl(""),
     password: new FormControl(""),
@@ -48,14 +44,13 @@ export class DriverProfileComponent implements OnInit {
     phone: new FormControl(""),
     newPassword: new FormControl(""),
     confirmNewPassword: new FormControl(""),
-    state: new FormControl(""),
+
     photo: new FormControl(""),
   });
 
   constructor(
     private formBuilder: FormBuilder,
-    private driverService: DriverProfileService,
-    public matDialog: MatDialog,
+    private DriverProfileService: DriverProfileService,
     private modalService: NgbModal
   ) {}
   open(content) {
@@ -82,48 +77,41 @@ export class DriverProfileComponent implements OnInit {
   }
 
   get verifyPassword() {
-    return this.driverForm.controls;
+    return this.UserForm.controls;
   }
   allowEdit() {
     this.disableEdit = false;
   }
 
-  getDriver() {
-    this.driverService.fetchData(this.id).subscribe((driverData) => {
-      console.log("fetchedDATA2", driverData);
-      this.data = driverData["driver"];
-      console.log("this.DATAIN", this.data);
-      (<FormGroup>this.driverForm).patchValue(this.data);
-      //this.driverForm.setValue({ value: this.data });
+  getUser() {
+    this.DriverProfileService.fetchData().subscribe((UserData) => {
+      
+      this.data = UserData;
+      
+      (<FormGroup>this.UserForm).patchValue(this.data);
       this.rate = Array(this.data.rate);
-      if (this.data.state === "available") {
-        this.stateColor = "green";
-      } else {
-        this.stateColor = "red";
-      }
       this.createdAt = moment(this.data.createdAt).format('"MMM Do YY"');
-      console.log("this.driverForm.valueUpdated ", this.driverForm.value);
+      console.log(UserData);
     });
   }
 
   checkNewPassword() {
     if (
-      !this.driverForm.value.newPassword &&
-      !this.driverForm.value.confirmNewPassword
+      !this.UserForm.value.newPassword &&
+      !this.UserForm.value.confirmNewPassword
     ) {
-      //alert(' empty passwords values');
       return true;
     } else {
       if (
-        this.driverForm.value.newPassword ===
-        this.driverForm.value.confirmNewPassword
+        this.UserForm.value.newPassword ===
+        this.UserForm.value.confirmNewPassword
       ) {
         alert("correct new password ");
         let hashNewPassword = bcrypt.hashSync(
-          this.driverForm.value.newPassword,
+          this.UserForm.value.newPassword,
           10
         );
-        this.driverForm.value.password = hashNewPassword;
+        this.UserForm.value.password = hashNewPassword;
         return true;
       } else {
         alert("not matching password");
@@ -133,54 +121,16 @@ export class DriverProfileComponent implements OnInit {
     return false;
   }
 
-  changeState() {
-    if (this.data.state === "available") {
-      this.stateColor = "red";
-      this.data.state = "absent";
-    } else if (this.data.state === "absent") {
-      this.data.state = "available";
-      this.stateColor = "green";
-      console.log(this.data.state);
-    }
-  }
 
-  updateDriver() {
-    // this.submitted = true;
-    // if (this.driverForm.value.currentPassword == null) {
-    //   alert("Please enter your password");
-    // } else {
-    //   let comparePasswords = bcrypt.compareSync(
-    //     this.driverForm.value.currentPassword,
-    //     this.data.password
-    //   );
-    //   if (comparePasswords) {
-    //     if (this.checkNewPassword()) {
-    //       formDriver.id = 1;
-    //       formDriver.state = this.data.state;
-    //       console.log("state", formDriver.state);
-    // e.preventDefault();
-    console.log(this.driverForm.value, "inputs");
-    this.driverService
-      .postData(this.id, this.driverForm.value)
+  updateUser() {
+    this.DriverProfileService
+      .postData(this.id, this.UserForm.value)
       .subscribe((res: any) => {
-        console.log("res", res);
-        // console.log("formDriver", this.id, this.data);
-        // document.getElementById("fullName").innerHTML =
-        //   this.driverForm.value.first_name +
-        //   " " +
-        //   this.driverForm.value.last_name;
         this.passwordInputValue = null;
         this.disableEdit = true;
-
-        console.log("state2", this.driverForm.value.state);
-        this.getDriver();
+        this.getUser();
       });
   }
-  //   } else {
-  //     alert("Please check your password and try again");
-  //   //   }
-  //   }
-  // }
 
   updateGender(e) {
     console.log(e.target.value);
@@ -188,12 +138,11 @@ export class DriverProfileComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.id = 1;
-    console.log("driverID", this.id);
-    this.getDriver();
+    this.id = 2;
+    this.getUser();
 
-    this.driverForm = this.formBuilder.group({
-      first_name: ["NNN", [Validators.required]],
+    this.UserForm = this.formBuilder.group({
+      first_name: ["", [Validators.required]],
       last_name: [""],
       password: [""],
       currentPassword: [""],
@@ -204,11 +153,8 @@ export class DriverProfileComponent implements OnInit {
       phone: [""],
       newPassword: [""],
       confirmNewPassword: [""],
-      state: [""],
       photo: [""],
     });
-    this.driverForm.valueChanges.subscribe((newVal) =>
-      console.log("newval", newVal)
-    );
+
   }
 }
