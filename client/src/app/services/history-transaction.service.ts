@@ -11,14 +11,14 @@ export class HistoryTransactionService {
   id = window.localStorage.getItem('id');
 
   fetchDriverData() {
-    return this.http.get(`http://localhost:8080/driver/tr/${this.id}`);
+    return this.http.get(`http://localhost:8080/driverTransaction/tr/${this.id}`);
   }
 
   fetchUserData() {
-    return this.http.get(`http://localhost:8080/user/tr/${this.id}`);
+    return this.http.get(`http://localhost:8080/userTransaction/tr/${this.id}`);
   }
 
   fetchAllTrasactions(){
-    return this.http.get(`http://localhost:8080/user/tr/`);
+    return this.http.get(`http://localhost:8080/userTransaction/tr/`);
   }
 }
