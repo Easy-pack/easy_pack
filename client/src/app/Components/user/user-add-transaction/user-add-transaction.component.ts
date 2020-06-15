@@ -2,8 +2,8 @@ import { AuthService } from './../../../services/auth.service';
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, FormControl } from '@angular/forms';
 import { Router } from '@angular/router';
-import {TransactionService} from '../../../services/transaction.service'
-
+import { TransactionService } from '../../../services/transaction.service'
+import { SocketIoService } from '../../../services/socket-io.service';
 
 @Component({
   selector: 'app-user-add-transaction',
@@ -21,17 +21,26 @@ export class UserAddTransactionComponent implements OnInit {
     request_time: new FormControl(''),
   });
   
+  socket;
+
   constructor(private transactionService:TransactionService,
-              private authService : AuthService) { }
+              private authService : AuthService,
+              private socketIoService : SocketIoService) { 
+                this.socket = socketIoService;              
+              }
 
   ngOnInit(): void {
+    this.socket = this.socketIoService.setupSocketConnection().on('notification', (data)=>{
+      alert('Hello from transaction')
+    });
   }
 
   onSubmit(){
     const transaction = this.newTransaction.value;
     transaction.userId = this.authService.getId();
-    this.transactionService.postTransaction(transaction).subscribe(res =>{
+    /*this.transactionService.postTransaction(transaction).subscribe(res =>{
       console.log("Transaction added")
-    })
+    })*/
+    this.socketIoService.emmitTransaction(transaction);
   }
 }

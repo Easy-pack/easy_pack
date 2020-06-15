@@ -7,7 +7,7 @@ const PATH = path.join(__dirname, '../../database/uploads/');
 
 let storage = multer.diskStorage({
     destination : function(req, file, cb){
-        cb(null, PATH);
+        cb(null, path.join(PATH));
     },
     filename : function(req, file, cb){
         cb(null, `${Date.now()}${file.originalname}`);

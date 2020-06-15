@@ -20,6 +20,9 @@ import { FooterComponent } from "./Components/footer/footer.component";
 import { LoginComponent } from "./Components/auth/login/login-user.component";
 import { SignupUserComponent } from "./Components/auth/signup-user/signup-user.component";
 import { HomeComponent } from "./Components/home/home.component";
+import { SocketIoService } from "./services/socket-io.service";
+ 
+import { from } from "rxjs";
 
 @NgModule({
   imports: [
@@ -43,9 +46,9 @@ import { HomeComponent } from "./Components/home/home.component";
     HomeComponent,
     FooterComponent,
     LoginComponent,
-    SignupUserComponent,
+    SignupUserComponent
   ],
-  providers: [],
+  providers: [SocketIoService],
   bootstrap: [AppComponent],
 })
 export class AppModule {}

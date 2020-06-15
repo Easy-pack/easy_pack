@@ -3,6 +3,7 @@ const db = require('../../database');
 const jwt = require('jsonwebtoken');
 const chalk = require('chalk');
 const createError = require('http-errors')
+const path = require('path');
 
 exports.signUpDriver = async (req, res) => {
 
@@ -11,7 +12,7 @@ exports.signUpDriver = async (req, res) => {
     for(let key in body){
         profile[key] = body[key];
     }
-    //profile.photo = req.file.destination;
+    profile.photo = path.join(req.file.destination, req.file.filename);
 
     try {
         if (!req.body.password) throw createError(404, `missing password`);
@@ -42,8 +43,8 @@ exports.signUpUser = async (req, res) => {
     for(let key in body){
        profile[key] = body[key];
     }
-    //profile.photo = req.file.destination;
-    console.log(profile)
+    profile.photo = path.join(req.file.destination, req.file.filename);
+    
     try {
         if (!req.body.password) throw createError(404, `missing password`);
         if (!req.body.email) throw createError(404, `missing email`);
