@@ -2,8 +2,10 @@ const bcrypt = require('bcryptjs');
 const db = require('../../database');
 const jwt = require('jsonwebtoken');
 const chalk = require('chalk');
+const createError = require('http-errors')
 
 exports.signUpDriver = async (req, res) => {
+
     let body = req.body;
     let profile = {};
     for(let key in body){
@@ -12,6 +14,7 @@ exports.signUpDriver = async (req, res) => {
     //profile.photo = req.file.destination;
 
     try {
+        if (!req.body.password) throw createError(404, `missing password`);
         const {
             email
         } = profile;
@@ -20,15 +23,16 @@ exports.signUpDriver = async (req, res) => {
 
         if (userEmail || driverEmail) {
             console.log(chalk.red('I am here'))
-            return res.status(409).json("user exist")
+            throw createError(403, `email '${email}' already exist`)
         }
         const hashedPassword = await bcrypt.hash(profile.password, 10);
         profile.password = hashedPassword
-        await db.driver.create(profile);
-        res.status(201).json({success: 'User created successfully'});
+        const driver = await db.driver.create(profile);
+        if(!driver) throw createError(400, `driver not created`)
+        else res.status(201).json({success: 'driver created successfully'});
         
     } catch (e) {
-        res.status(404).json({error: e});
+        res.status(e.status).json({error: e.message});
     }
 };
 
@@ -42,6 +46,7 @@ exports.signUpUser = async (req, res) => {
     //profile.photo = req.file.destination;
     
     try {
+        if (!req.body.password) throw createError(404, `missing password`);
         const {
             email
         } = profile;
@@ -49,25 +54,28 @@ exports.signUpUser = async (req, res) => {
         const userEmail = await db.user.findOne({where: {email}});
 
         if (userEmail || driverEmail) {
-            return res.status(409).json("user exist")
+            throw createError(403, `email '${email}' already exist`)
         }
         const hashedPassword = await bcrypt.hash(req.body.password, 10);
         
         profile.password = hashedPassword
-        await db.user.create(profile);
-        res.status(201).json({
+        const user = await db.user.create(profile);
+
+        if(!user) throw createError(400, `user not created`)
+        else res.status(201).json({
             success: 'User created successfully'
         });
     } catch (e) {
-        res.status(409).json({
-            error: e
-        });
+        res.status(e.status).json({error: e.message});
     }
 };
 
 exports.login = async (req, res) => {
 
     try {
+        if (!req.body.password) throw createError(404, `missing password`);
+        if (!req.body.email) throw createError(404, `missing email`);
+        
         let role ="user";
         const {
             email,
@@ -77,13 +85,13 @@ exports.login = async (req, res) => {
         
         if (!user) {
             user = await db.driver.findOne({where: {email}});
-            (!user)? res.status(409).json({message: 'user not found'}) : role = "driver"
+            if (!user) throw createError(404, `User not registered`); else role = "driver"
         }
 
         if(user) {
             let validPassword = await bcrypt.compare(password, user.password);
             if (!validPassword) {
-                res.status(409).json({message: 'Wrong password'});
+                throw createError(401, `wrong Password`);
             }
             else {
                 let token = jwt.sign({
@@ -99,8 +107,6 @@ exports.login = async (req, res) => {
             }
         }
     } catch (e) {
-        res.status(409).json({
-            message: 'error'
-        })
+        res.status(e.status).json({error: e.message});
     }
 };

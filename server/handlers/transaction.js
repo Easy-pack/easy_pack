@@ -1,4 +1,5 @@
 const chalk = require('chalk');
+const createError = require('http-errors')
 
 const db = require('../../database/index');
 
@@ -19,11 +20,13 @@ module.exports.postTransaction = async (req,res,next)=>{
             console.log(chalk.blue(key + ' '+ trans[key]));
         }
         const transaction = await db.transaction.create(trans);
+
+        if(!transaction) throw createError(404, `transaction not created`);
+
         res.status(201).json(transaction);
     }
     catch (e) {
-        console.log(e);
-        next(e)
+        res.status(e.status).json({error: e.message});
     }
 };
 
@@ -31,11 +34,13 @@ module.exports.getUserTransactions = async (req, res, next) => {
     try {
         const {id} = req.params;
         const transactions = await db.transaction.findAll({where : {userId : id} });
+
+        if(!transactions) throw createError(404, `transactions not found`)
+
         res.status(200).json(transactions)
     }
     catch (e) {
-        console.log(e);
-        next(e)
+        res.status(e.status).json({error: e.message});
     }
 };
 
@@ -43,11 +48,11 @@ module.exports.getUserTransactions = async (req, res, next) => {
 module.exports.getAllTransactions = async (req, res, next) => {
     try {
         const transactions = await db.transaction.findAll({where : {driverId : null} });
+        if(!transactions) throw createError(404, `transactions not found`);
         res.status(200).json(transactions)
     }
     catch (e) {
-        console.log(e);
-        next(e)
+        res.status(e.status).json({error: e.message});
     }
 };
 
@@ -59,6 +64,7 @@ module.exports.cancel = async (req, res, next) =>{
         const role = req.body.role;
         if(role === 'user'){
             const transaction = await db.transaction.findOne({where : {userId : id, id : transId} });
+            if(!transaction) throw createError(404, `transaction not found`)
             transaction.update({
                 state: 'Canceled'
             });
@@ -70,8 +76,7 @@ module.exports.cancel = async (req, res, next) =>{
 
     }
     catch (e) {
-        console.log(e);
-        next(e)
+        res.status(e.status).json({error: e.message});
     }
 };
 
