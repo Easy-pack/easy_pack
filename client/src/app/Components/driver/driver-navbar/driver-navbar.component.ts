@@ -2,7 +2,7 @@ import { Component, OnInit, ElementRef } from '@angular/core';
 import { ROUTES } from '../driver-sidebar/driver-sidebar.component';
 import { Location, LocationStrategy, PathLocationStrategy } from '@angular/common';
 import { Router } from '@angular/router';
-
+import { AuthService } from './../../../services/auth.service';
 @Component({
   selector: 'app-driver-navbar',
   templateUrl: './driver-navbar.component.html',
@@ -13,7 +13,7 @@ export class DriverNavbarComponent implements OnInit {
   public focus;
   public listTitles: any[];
   public location: Location;
-  constructor(location: Location,  private element: ElementRef, private router: Router) {
+  constructor(location: Location,  private element: ElementRef, private router: Router, public authService: AuthService) {
     this.location = location;
   }
 
@@ -32,5 +32,9 @@ export class DriverNavbarComponent implements OnInit {
         }
     }
     return 'Dashboard';
+  }
+
+  logout(){
+    this.authService.logout()
   }
 }

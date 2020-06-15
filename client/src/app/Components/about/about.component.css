@@ -62,3 +62,7 @@
     -ms-transform: translateX(0%);
     transform: translateX(0%); }
   
+    p {
+      margin: 2rem;
+      padding-top: 1.5em;
+    }
