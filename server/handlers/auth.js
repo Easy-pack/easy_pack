@@ -2,6 +2,7 @@ const bcrypt = require('bcryptjs');
 const db = require('../../database');
 const jwt = require('jsonwebtoken');
 const chalk = require('chalk');
+const path = require('path');
 
 exports.signUpDriver = async (req, res) => {
     let body = req.body;
@@ -9,7 +10,7 @@ exports.signUpDriver = async (req, res) => {
     for(let key in body){
         profile[key] = body[key];
     }
-    //profile.photo = req.file.destination;
+    profile.photo = req.file.destination;
 
     try {
         const {
@@ -39,7 +40,10 @@ exports.signUpUser = async (req, res) => {
        profile[key] = body[key];
         console.log(key + ' ' +body[key]+'\n');
     }
-    //profile.photo = req.file.destination;
+    for(let key in req.file){
+        console.log(chalk.blue(key) + " " + chalk.green(req.file[key])+"\n");
+    }
+    profile.photo = path.join(req.file.destination, req.file.filename);
     
     try {
         const {
