@@ -16,6 +16,7 @@ export class UserHistoryComponent implements OnInit {
       this.transactions = response;
       console.log(this.transactions);
     })
+
   }
 
 }

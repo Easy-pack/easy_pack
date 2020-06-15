@@ -4,6 +4,7 @@ const bodyParser = require('body-parser');
 const app = express();
 const routes = require('./routes');
 const database = require('../database/index');
+const chalk = require('chalk');
 
 app.use(cors());
 app.use(bodyParser.json());
@@ -19,8 +20,21 @@ app.use('/driver', routes.driver)
 
 const port = process.env.PORT || 8080;
 
-database.sql.sync();
+database.sql.sync({force : true});
 
-app.listen(port, () => {
+const server = app.listen(port, () => {
     console.log(`listening on port ${port}`);
 });
+
+// SOCKET IO
+
+const io = require('socket.io').listen(server);
+
+io.on('connection', (socket) =>{
+    socket.on('newTransaction', (data) =>{
+        // console.log(chalk.blue('socket is here'));
+        // console.log(data);
+        socket.broadcast.emit('notification', data);
+    });
+});
+
