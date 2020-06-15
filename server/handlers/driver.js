@@ -1,6 +1,9 @@
 const db = require('../../database/index');
+
 const bcrypt = require("bcryptjs");
 const chalk = require('chalk');
+const createError = require('http-errors')
+
 
 module.exports.acceptTransaction = async (req, res, next) => {
     console.log(chalk.blue('Request is here'));
@@ -16,15 +19,19 @@ module.exports.acceptTransaction = async (req, res, next) => {
                 id: transId
             }
         });
+
+        if (!transaction) throw createError(404, `transaction not found`);
+
         transaction.update({
             driverId: id,
             //vehicleId: vehicle_Id,
             state: "In Progress"
         });
+
         res.status(202).json(transaction)
 
     } catch (e) {
-
+        res.status(e.status).json({error: e.message});
     }
 }
 
@@ -40,15 +47,14 @@ exports.getDriver = async (req, res, next) => {
             },
         });
         if (!driver) {
-            res.status(404).json("Driver doesn't exist");
+            throw createError(404, `Driver doesn't exist`);
         } else {
             res.status(200).json({
                 driver,
             });
         }
     } catch (e) {
-        res.status(400);
-        next(e);
+        res.status(e.status).json({error: e.message});
     }
 };
 
@@ -56,12 +62,14 @@ exports.updateDriver = async (req, res, next) => {
     console.log("body driver0 ", req.body);
     try {
         console.log(req.body)
-        const hashedPassword = bcrypt.hashSync(req.body.password, 10);
         let driver = await db.driver.findOne({
             where: {
                 id: req.params.id
             }
         })
+
+        if (!driver) throw createError(404, `driver not found`);
+
         await driver.update({
             first_name: req.body.first_name,
             last_name: req.body.last_name,
@@ -84,9 +92,7 @@ exports.updateDriver = async (req, res, next) => {
         });
     } catch (e) {
         //console.log(e)
-        res.status(404).json({
-            errorrr: e,
-        });
+        res.status(e.status).json({error: e.message});
     }
 };
 
@@ -95,10 +101,12 @@ module.exports.getDriverTransactions = async (req, res, next) => {
     try {
         const {id} = req.params;
         const transactions = await db.transaction.findAll({where : {driverId : id} });
+
+        if (!transactions) throw createError(404, `transaction not found`);
+        
         res.status(200).json(transactions)
     }
     catch (e) {
-        console.log(e);
-        next(e)
+        res.status(e.status).json({error: e.message});
     }
 };
