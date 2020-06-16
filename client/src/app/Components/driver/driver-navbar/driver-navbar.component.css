@@ -5,6 +5,7 @@
 .fa-bell:hover{
     color: yellow;
     font-weight: bold;
+    cursor: pointer;
 }
 
 .badge{
@@ -18,4 +19,8 @@
 
 .badge:hover{
     background-color: aliceblue;
+}
+
+.nav-item{
+    cursor: pointer;
 }

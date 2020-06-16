@@ -22,7 +22,7 @@ import { NgbModal, ModalDismissReasons } from "@ng-bootstrap/ng-bootstrap";
 })
 
 export class DriverProfileComponent implements OnInit {
-  id: number;
+  id;
   data
   rate: any;
   submitted: boolean = false;
@@ -138,7 +138,7 @@ export class DriverProfileComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.id = 2;
+    this.id = window.localStorage.getItem('id')
     this.getUser();
 
     this.UserForm = this.formBuilder.group({

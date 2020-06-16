@@ -110,3 +110,49 @@ module.exports.getDriverTransactions = async (req, res, next) => {
         res.status(e.status).json({error: e.message});
     }
 };
+
+module.exports.getDriverVehicles = async (req, res, next) => {
+    try {
+        const {id} = req.params;
+        const vehicles = await db.vehicle.findAll({where : {driverId : id} });
+
+        if (!vehicles) throw createError(404, `vehicles not found`);
+
+        res.status(200).json(vehicles)
+    }
+    catch (e) {
+        res.status(e.status).json({error: e.message});
+    }
+}
+
+
+
+
+module.exports.addVehicle = async (req,res,next)=>{
+    try{
+        const {id} = req.params;
+        console.log(id)
+        const vehicles = {
+            type,
+            reg_number,
+            license_plate,
+            color,
+            make,
+            model
+        } = req.body;
+
+        for(let key in vehicles){
+            console.log(chalk.blue(key + ' '+ vehicles[key]));
+        }
+        vehicles.driverId = id
+
+        const vehicle = await db.vehicle.create(vehicles);
+
+        if(!vehicle) throw createError(404, `vehicle not created`);
+
+        res.status(201).json(vehicle);
+    }
+    catch (e) {
+        res.status(e.status).json({error: e.message});
+    }
+};

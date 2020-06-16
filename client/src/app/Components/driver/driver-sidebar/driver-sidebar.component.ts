@@ -23,15 +23,21 @@ export const ROUTES: RouteInfo[] = [
   {
     path: "history",
     title: "History",
-    icon: "ni-cart text-warning",
+    icon: "ni-books text-warning",
     class: "",
   },
   {
     path: "announcement",
     title: "Announcement",
-    icon: "ni-delivery-fast text-success",
+    icon: "ni-notification-70 text-success",
     class: "",
   },
+  {
+    path: "vehicle",
+    title: "Vehicles",
+    icon: "ni-delivery-fast trans",
+    class: "",
+  }
 ];
 
 @Component({

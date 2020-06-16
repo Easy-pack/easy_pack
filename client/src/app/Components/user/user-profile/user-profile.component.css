@@ -3,8 +3,35 @@
 }
 
 .btn-edit-save{
-    background-color: #11b995;
-    color: aliceblue !important;
+    background-image: linear-gradient(120deg, #02aa86 45%, #2dc5a4 100%);
+    color: white !important;
     font-weight: 1200;
     border-radius: 15px;
   }
+
+  .btn-edit-save:hover{
+    color: white !important;
+    font-weight: 1200;
+    border-radius: 15px;
+    border: white 3px solid;
+  }
+
+  .btn-pass{
+    background-image: linear-gradient(120deg, #02aa86 45%, #2dc5a4 100%);
+    color: white;
+  }
+
+  .btn-photo{
+    background-image:  linear-gradient(120deg, rgba(239,71,111,1) 45%,rgba(248,134,106,1) 100%);
+    color: white;
+  }
+
+.veh{
+    text-decoration: none;
+    color:rgba(239,71,111,1) !important;
+}
+.veh:hover{
+    text-decoration: none;
+    color:rgb(255, 31, 84) !important;
+    font-size: large;
+}

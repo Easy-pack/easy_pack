@@ -11,4 +11,8 @@ router.route('/tr/:id')
 router.get('/:id', handler.getDriver);
 router.post('/:id', handler.updateDriver);
 
+router.route('/vehicle/:id')
+    .get(handler.getDriverVehicles)
+    .post(handler.addVehicle)
+
 module.exports = router;
