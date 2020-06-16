@@ -31,16 +31,16 @@ export class UserAddTransactionComponent implements OnInit {
 
   ngOnInit(): void {
     this.socket = this.socketIoService.setupSocketConnection().on('notification', (data)=>{
-      alert('Hello from transaction')
+      console.log('notification')
     });
   }
 
   onSubmit(){
     const transaction = this.newTransaction.value;
     transaction.userId = this.authService.getId();
-    /*this.transactionService.postTransaction(transaction).subscribe(res =>{
+    this.transactionService.postTransaction(transaction).subscribe(res =>{
       console.log("Transaction added")
-    })*/
+    })
     this.socketIoService.emmitTransaction(transaction);
   }
 }

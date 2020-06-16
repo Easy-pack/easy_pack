@@ -10,12 +10,14 @@ import { Router } from '@angular/router';
   templateUrl: './user-navbar.component.html',
   styleUrls: ['./user-navbar.component.css']
 })
+
 export class UserNavbarComponent implements OnInit {
   private name : string = "Amir Ben Youssef"
   public focus;
   public listTitles: any[];
-  public location: Location;
-  constructor(location: Location,  private element: ElementRef, private router: Router, public authService: AuthService) {
+
+
+  constructor(public location: Location,  private element: ElementRef, private router: Router, public authService: AuthService) {
     this.location = location;
   }
 

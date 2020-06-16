@@ -15,11 +15,12 @@ import { SocketIoService } from '../../../services/socket-io.service';
 export class DriverNavbarComponent implements OnInit {
   public focus;
   public listTitles: any[];
-  public location: Location;
-
+  public notification = 0;
+  public nbrNotf = Array(this.notification+1).fill(1);
   public socket;
-
-  constructor(location: Location,  
+  private name : string = "Amir Ben Youssef";
+  
+  constructor(public location: Location,  
               private element: ElementRef, 
               private router: Router,
               public authService: AuthService,
@@ -30,8 +31,8 @@ export class DriverNavbarComponent implements OnInit {
     this.listTitles = ROUTES.filter(listTitle => listTitle);
     
     this.socket = this.socketIoService.setupSocketConnection().on('notification', (data)=>{
-      console.log(data)
-      alert('Hello from driver')
+      this.notification += 1;
+      console.log (this.notification);
     });
   } 
 
@@ -51,5 +52,9 @@ export class DriverNavbarComponent implements OnInit {
 
   logout(){
     this.authService.logout()
+  }
+
+  deletNotf(){
+    this.notification = 0;
   }
 }

@@ -1,13 +1,33 @@
 <nav class="navbar navbar-top navbar-expand-md navbar-dark" id="navbar-main">
     <div class="container-fluid">
       <!-- Brand -->
-      <a class="h4 mb-0 text-white text-uppercase d-none d-lg-inline-block" routerLinkActive="active" [routerLink]="['/dashboard']">{{getTitle()}}</a>
+      <a class="h4 mb-0 text-white text-uppercase d-none d-lg-inline-block" routerLinkActive="active" [routerLink]="['/board']">{{getTitle()}}</a>
       
      
       <!-- User -->
       <ul class="navbar-nav align-items-center d-none d-md-flex">
-        <li><i class="far fa-bell fa-2x ml-auto mr-1"></i><span class="badge badge-pill ">0</span></li>
         <li class="nav-item" ngbDropdown placement="bottom-right">
+          <a class="nav-link pr-0" role="button" ngbDropdownToggle>
+            <div class="media align-items-center">
+              <li *ngIf="notification === 0; else elseBlock"><i class="far fa-bell fa-2x ml-auto mr-1"></i></li>
+              <ng-template #elseBlock><li><i class="far fa-bell fa-2x ml-auto mr-1"></i><span class="badge badge-pill ">{{notification}}</span></li></ng-template>
+            </div>
+          </a>
+          <div class="dropdown-menu-arrow dropdown-menu-right" ngbDropdownMenu>
+            <div class=" dropdown-header noti-title">
+              <h6 class="text-overflow m-0">Notification ( {{notification}} )</h6>
+            </div>
+            <div *ngFor ="let nbr of nbrNotf">
+              <div *ngIf="notification !== 0">
+                <a routerLinkActive="active" [routerLink]="['/driver/announcement']" class="dropdown-item" (click)="deletNotf()">
+                  <i class="fas fa-cube"></i>
+                  <span>You have a new delivery available</span>
+                </a>
+              </div>
+            <div class="dropdown-divider"></div>
+          </div>
+          </div>
+        </li><li class="nav-item" ngbDropdown placement="bottom-right">
           <a class="nav-link pr-0" role="button" ngbDropdownToggle>
             <div class="media align-items-center">
               <span class="avatar avatar-sm rounded-circle">

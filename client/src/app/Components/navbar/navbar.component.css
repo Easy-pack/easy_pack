@@ -1657,3 +1657,6 @@ transition: .3s all ease-in-out; }
   color: #fff;
   border-bottom: 1px solid rgba(255, 255, 255, 0.5); }
 
+.logo{
+  padding-right: 30px;
+}
