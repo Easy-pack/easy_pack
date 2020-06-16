@@ -24,6 +24,7 @@ import { SocketIoService } from "./services/socket-io.service";
  
 import { from } from "rxjs";
 
+
 @NgModule({
   imports: [
     BrowserAnimationsModule,
@@ -46,7 +47,8 @@ import { from } from "rxjs";
     HomeComponent,
     FooterComponent,
     LoginComponent,
-    SignupUserComponent
+    SignupUserComponent,
+
   ],
   providers: [SocketIoService],
   bootstrap: [AppComponent],

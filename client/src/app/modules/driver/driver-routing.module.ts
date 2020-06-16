@@ -5,6 +5,8 @@ import { DriverBoardComponent } from "../../Components/driver/driver-board/drive
 import { DriverProfileComponent } from "../../Components/driver/driver-profile/driver-profile.component";
 import { DriverHistoryComponent } from "../../Components/driver/driver-history/driver-history.component";
 import { AnnouncementComponent } from "../../Components/driver/announcement/announcement.component";
+import { VehiclesComponent } from '../../Components/driver/vehicles/vehicles.component';
+
 
 const routes: Routes = [
   {
@@ -15,6 +17,7 @@ const routes: Routes = [
       { path: "history", component: DriverHistoryComponent },
       { path: "board", component: DriverBoardComponent },
       { path: "announcement", component: AnnouncementComponent },
+      { path: "vehicle", component: VehiclesComponent },
       { path: "", redirectTo: "board", pathMatch: "full" },
       { path: "**", redirectTo: "board" },
     ],

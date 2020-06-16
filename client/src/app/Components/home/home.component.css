@@ -96,6 +96,7 @@ h1, h2, h3, h4, h5,
   box-shadow: none !important; }
 
 .btn_send{
+  text-decoration: none;
   background-color: #EF476F;
   border-radius: 15px;
   margin-left: 20px;
