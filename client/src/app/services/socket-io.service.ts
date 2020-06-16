@@ -17,4 +17,8 @@ export class SocketIoService {
   emmitTransaction(data){
     this.socket.emit('newTransaction', data);
   }
+
+  doneTransaction(data){
+    this.socket.emit('doneTransaction', data);
+  }
 }

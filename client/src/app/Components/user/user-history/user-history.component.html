@@ -8,11 +8,24 @@
 <!-- Page content -->
 <div class="container-fluid mt--7">
   <!-- Table -->
+  
+  <!-- filter to update later -->
+
   <div class="row">
     <div class="col">
       <div class="card shadow">
         <div class="card-header border-0">
           <h3 class="mb-0">Transactions</h3>
+        </div>
+        <div>
+          <label for="status">Filter</label>
+          <select name="status" (change)="filter($event)">
+            <option value="all">All</option>
+            <option value="Pending">Pending</option>
+            <option value="In Progress">Active</option>
+            <option value="completed">Completed</option>
+            <option value="canceled">Canceled</option>
+          </select>
         </div>
         <div class="table-responsive">
           <table class="table align-items-center table-flush">
@@ -26,7 +39,7 @@
                 <th scope="col">Price</th>
               </tr>
             </thead>
-            <tbody >
+            <tbody>
                 <tr *ngFor="let tr of transactions">
                   <th scope="row">
                     <div class="media align-items-center">

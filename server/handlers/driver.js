@@ -2,11 +2,12 @@ const db = require('../../database/index');
 
 const bcrypt = require("bcryptjs");
 const chalk = require('chalk');
-const createError = require('http-errors')
+const createError = require('http-errors');
+const driver = require('../../database/models/driver');
+
 
 
 module.exports.acceptTransaction = async (req, res, next) => {
-    console.log(chalk.blue('Request is here'));
     try {
         const {
             id
@@ -20,13 +21,25 @@ module.exports.acceptTransaction = async (req, res, next) => {
             }
         });
 
+        const driver = await db.driver.findOne({
+            where :{
+                id
+            }
+        })
+
         if (!transaction) throw createError(404, `transaction not found`);
 
-        transaction.update({
+        await transaction.update({
             driverId: id,
             //vehicleId: vehicle_Id,
-            state: "In Progress"
+            state: "In Progress",
+            //  update date
+            // start_time : Date.now()
         });
+
+        await driver.update({
+            state : 'not available'
+        })
 
         res.status(202).json(transaction)
 
@@ -34,6 +47,43 @@ module.exports.acceptTransaction = async (req, res, next) => {
         res.status(e.status).json({error: e.message});
     }
 }
+
+module.exports.doneTransaction = async (req, res, next)=>{
+    const {driverId, transactionId} = req.body;
+    try{
+        const driver = await db.driver.findOne({
+            where : {
+                id : driverId
+            }
+        })
+
+        const transaction = await db.transaction.findOne({
+            where : {
+                id : transactionId
+            }
+        })
+
+        await driver.update({
+            state : 'available'
+        });
+
+        await transaction.update({
+          state : 'completed',
+          //end_time : ''
+          // date update
+        })
+
+        res.status(202).json({
+            message : 'transaction done'
+        })
+    } catch(error){
+        res.status(500).json({
+            error : 'error : '+ error
+        })
+    }
+}
+
+
 
 
 exports.getDriver = async (req, res, next) => {
