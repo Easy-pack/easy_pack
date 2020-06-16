@@ -10,6 +10,12 @@ input:read-only {
   display: inline-block;
 }
 
+.btn-edit-save{
+  background-color: #EF476F;
+  color: aliceblue !important;
+  border-radius: 15px;
+}
+
 .cdk-overlay-container {
   z-index: 9999 !important;
 }

@@ -17,10 +17,10 @@
           Hello {{ data.first_name }}
         </h1>
         <div id="availabilityState" [style.background-color]="stateColor"></div>
-        <a class="btn btn-info" [hidden]="!disableEdit" (click)="allowEdit()"
+        <a class="btn btn-edit-save" [hidden]="!disableEdit" (click)="allowEdit()"
           >Edit profile</a
         >
-        <a class="btn btn-info" [hidden]="disableEdit" (click)="open(mymodal)"
+        <a class="btn btn-edit-save" [hidden]="disableEdit" (click)="open(mymodal)"
           >Save Changes</a
         >
       </div>
