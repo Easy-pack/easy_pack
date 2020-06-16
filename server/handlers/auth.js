@@ -13,7 +13,7 @@ exports.signUpDriver = async (req, res) => {
         profile[key] = body[key];
     }
     profile.photo = path.join(req.file.destination, req.file.filename);
-
+    console.log(chalk.blue(profile.photo));
     try {
         if (!req.body.password) throw createError(404, `missing password`);
         const {

@@ -12,6 +12,16 @@ export class DriverHistoryComponent implements OnInit {
   history;
   socket;
 
+  filter(event){
+    console.log(event.target.value);
+    this.historyTransactionService.fetchUserData().subscribe((response)=>{
+      this.history = response;
+      if(event.target.value !== 'all'){
+        this.history = this.history.filter(element => element.state === event.target.value);
+      }
+    });
+  }
+
   constructor(private historyTransactionService : HistoryTransactionService,
               private socketIoService : SocketIoService) {
               }
@@ -20,5 +30,18 @@ export class DriverHistoryComponent implements OnInit {
     this.historyTransactionService.fetchDriverData().subscribe(response =>{
       this.history = response;
     });
+  }
+
+  doneTransaction(transaction){
+    let data = {
+      driverId : transaction.driverId,
+      transactionId : transaction.id
+    }
+
+    this.historyTransactionService.doneTransaction(data).subscribe(response =>{
+
+    })
+
+    this.socketIoService.doneTransaction(data);
   }
 }

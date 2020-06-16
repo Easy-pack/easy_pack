@@ -3,6 +3,7 @@ import { Component, OnInit } from '@angular/core';
 import { HistoryTransactionService } from '../../../services/history-transaction.service';
 import { NgbModal, ModalDismissReasons } from "@ng-bootstrap/ng-bootstrap";
 import { SocketIoService } from '../../../services/socket-io.service';
+import { DriverProfileService } from "../../../services/driver-profile.service";
  
 @Component({
   selector: 'app-announcement',
@@ -15,11 +16,13 @@ export class AnnouncementComponent implements OnInit {
   closeResult: string;
   index;
   socket;
+  driver;
 
   constructor(private historyTransactionService : HistoryTransactionService,
     private transactionService : TransactionService,    
     private modalService: NgbModal,
-    public socketIoService : SocketIoService) { }
+    private socketIoService : SocketIoService,
+    private driverProfileService : DriverProfileService) { }
 
   ngOnInit(): void {
     this.socket = this.socketIoService.setupSocketConnection().on('notification', (data)=>{
@@ -60,7 +63,17 @@ export class AnnouncementComponent implements OnInit {
 
   confirmDelivrery(){
     let idTransaction = this.transaction.id;
-    this.transactionService.acceptTransaction(idTransaction).subscribe(response => {
-    });
+    this.driverProfileService.fetchData().subscribe(response =>{
+      this.driver = response;
+      this.driver = this.driver.driver;
+      if(this.driver.state === "available"){
+        this.transactionService.acceptTransaction(idTransaction).subscribe(response => {
+         
+        })
+      } else{
+        alert('You are already delivrering');
+      }
+    })
+    
   }
 }

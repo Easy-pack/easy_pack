@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { HistoryTransactionService } from '../../../services/history-transaction.service';
+import { SocketIoService } from '../../../services/socket-io.service';
 
 @Component({
   selector: 'app-user-history',
@@ -9,14 +10,32 @@ import { HistoryTransactionService } from '../../../services/history-transaction
 export class UserHistoryComponent implements OnInit {
   transactions;
   
-  constructor(private historyTransactionService : HistoryTransactionService) { }
+  constructor(private historyTransactionService : HistoryTransactionService,
+              private socketIoService : SocketIoService) { }
 
-  ngOnInit(): void {
+  getTransactions(){
     this.historyTransactionService.fetchUserData().subscribe((response)=>{
       this.transactions = response;
       console.log(this.transactions);
+    });
+  }
+  
+  ngOnInit(): void {
+    this.getTransactions();
+    this.socketIoService.setupSocketConnection().on('userNotification', (data)=>{
+      alert('new fetch');
+      this.getTransactions();
     })
+  }
 
+  filter(event){
+    console.log(event.target.value);
+    this.historyTransactionService.fetchUserData().subscribe((response)=>{
+      this.transactions = response;
+      if(event.target.value !== 'all'){
+        this.transactions = this.transactions.filter(element => element.state === event.target.value);
+      }
+    });
   }
 
 }
