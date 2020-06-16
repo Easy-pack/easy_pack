@@ -1,14 +1,15 @@
 
 
-<header class="site-navbar py-3  site-navbar-target" role="banner" id="site-navbar">
+<header class="site-navbar py-3  site-navbar-target " role="banner" id="site-navbar">
 
-<nav class="navbar navbar-toggleable-md navbar-expand-lg navbar-dark bg-transparent">
-  <a class="navbar-brand text-white h2 mb-0" href="#">Easy-Pack</a>
+<nav class="navbar navbar-toggleable-md navbar-expand-lg navbar-dark bg-transparent sticky-top" (scroll)="onWindowScroll($event);" role="navigation">
+  
+  <img class="navbar-brand mb-0 logo" src="../../../assets/images/logo/logo easypack blanc.png" alt="">
   <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
     <span class="navbar-toggler-icon"></span>
   </button>
 
-  <div class="collapse navbar-collapse" id="navbarSupportedContent">
+  <div class="collapse navbar-collapse site-menu mx-auto d-none d-lg-block" id="navbarSupportedContent">
     <ul class="navbar-nav mr-auto">
       <li class="nav-item">
         <a class="nav-link" href="#section-home">Home</a>

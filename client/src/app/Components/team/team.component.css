@@ -1204,7 +1204,7 @@ input.form-control {
   font-size: 1rem !important; }
 
 .text-muted {
-  color: #ccc !important;
+  color: rgb(114, 110, 110) !important;
   font-size: 12px;
   text-transform: uppercase; }
 
@@ -1246,7 +1246,7 @@ input.form-control {
 .ul-social-circle li i {
   width: 30px;
   height: 30px;
-  background: #777;
+  background: #02aa86;
   font-size: 13px;
   text-align: center;
   line-height: 30px;
@@ -1258,7 +1258,7 @@ input.form-control {
   -o-transition: .3s all ease;
   transition: .3s all ease; }
 .ul-social-circle li a:hover i {
-  background: #2b2b2b;
+  background: #EF476F;
   color: #fff; }
 
 .custom-pagination a, .custom-pagination span {

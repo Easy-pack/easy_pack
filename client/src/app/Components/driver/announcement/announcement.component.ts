@@ -25,6 +25,7 @@ export class AnnouncementComponent implements OnInit {
     this.socket = this.socketIoService.setupSocketConnection().on('notification', (data)=>{
       this.getAnnouncement();
     });
+    this.getAnnouncement()
   }
 
   getAnnouncement(){
@@ -60,8 +61,6 @@ export class AnnouncementComponent implements OnInit {
   confirmDelivrery(){
     let idTransaction = this.transaction.id;
     this.transactionService.acceptTransaction(idTransaction).subscribe(response => {
-      console.log('hi');
-      console.log(response);
     });
   }
 }

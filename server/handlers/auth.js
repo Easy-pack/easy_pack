@@ -42,33 +42,39 @@ exports.signUpUser = async (req, res) => {
     let profile = {};
     for(let key in body){
        profile[key] = body[key];
-        console.log(key + ' ' +body[key]+'\n');
     }
     profile.photo = path.join(req.file.destination, req.file.filename);
     
     try {
         if (!req.body.password) throw createError(404, `missing password`);
+        if (!req.body.email) throw createError(404, `missing email`);
+        console.log('email')
         const {
             email
         } = profile;
         const driverEmail = await db.driver.findOne({where: {email}});
         const userEmail = await db.user.findOne({where: {email}});
-
         if (userEmail || driverEmail) {
             throw createError(403, `email '${email}' already exist`)
         }
+
         const hashedPassword = await bcrypt.hash(req.body.password, 10);
+    
+        profile.password = hashedPassword;
         
-        profile.password = hashedPassword
         const user = await db.user.create(profile);
 
         if(!user) throw createError(400, `user not created`)
         else res.status(201).json({
             success: 'User created successfully'
         });
+        
     } catch (e) {
-        res.status(e.status).json({error: e.message});
-    }
+        if (e && e.status && e.message)
+            res.status(e.status).json({error: e.message});
+        res.status(500).json({error: e});
+
+    }   
 };
 
 exports.login = async (req, res) => {
