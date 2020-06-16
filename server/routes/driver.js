@@ -3,6 +3,8 @@ const handler = require('../handlers');
 
 router.post('/post', handler.postTransaction);
 
+router.post('/donetransaction', handler.doneTransaction);
+
 router.route('/tr/:id')
     .get(handler.getDriverTransactions)
     .post(handler.acceptTransaction)

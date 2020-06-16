@@ -50,7 +50,7 @@ export class DriverProfileComponent implements OnInit {
 
   constructor(
     private formBuilder: FormBuilder,
-    private DriverProfileService: DriverProfileService,
+    private driverProfileService: DriverProfileService,
     private modalService: NgbModal
   ) {}
   open(content) {
@@ -84,10 +84,10 @@ export class DriverProfileComponent implements OnInit {
   }
 
   getUser() {
-    this.DriverProfileService.fetchData().subscribe((UserData) => {
-      
+    this.driverProfileService.fetchData().subscribe((UserData) => {
       this.data = UserData;
-      
+      this.data = this.data.driver;
+      console.log(this.data);
       (<FormGroup>this.UserForm).patchValue(this.data);
       this.rate = Array(this.data.rate);
       this.createdAt = moment(this.data.createdAt).format('"MMM Do YY"');
@@ -123,7 +123,7 @@ export class DriverProfileComponent implements OnInit {
 
 
   updateUser() {
-    this.DriverProfileService
+    this.driverProfileService
       .postData(this.id, this.UserForm.value)
       .subscribe((res: any) => {
         this.passwordInputValue = null;
@@ -138,7 +138,6 @@ export class DriverProfileComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.id = 2;
     this.getUser();
 
     this.UserForm = this.formBuilder.group({

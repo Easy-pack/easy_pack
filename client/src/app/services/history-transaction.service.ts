@@ -21,4 +21,8 @@ export class HistoryTransactionService {
   fetchAllTrasactions(){
     return this.http.get(`http://localhost:8080/userTransaction/tr/`);
   }
+
+  doneTransaction(data){
+    return this.http.post<any>(`http://localhost:8080/driverTransaction/donetransaction`, data);
+  }
 }

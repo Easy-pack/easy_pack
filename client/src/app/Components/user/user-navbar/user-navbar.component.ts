@@ -3,6 +3,7 @@ import { Component, OnInit, ElementRef } from '@angular/core';
 import { ROUTES } from '../user-sidebar/user-sidebar.component';
 import { Location, LocationStrategy, PathLocationStrategy } from '@angular/common';
 import { Router } from '@angular/router';
+import { SocketIoService } from '../../../services/socket-io.service';
 
 
 @Component({
@@ -17,12 +18,19 @@ export class UserNavbarComponent implements OnInit {
   public listTitles: any[];
 
 
-  constructor(public location: Location,  private element: ElementRef, private router: Router, public authService: AuthService) {
+  constructor(public location: Location,  
+              private element: ElementRef, 
+              private router: Router, 
+              public authService: AuthService,
+              private socketIoService : SocketIoService) {
     this.location = location;
   }
 
   ngOnInit() {
     this.listTitles = ROUTES.filter(listTitle => listTitle);
+    this.socketIoService.setupSocketConnection().on('userNotification', (data)=>{
+      alert('transaction done');
+    })
   }
   getTitle(){
     var titlee = this.location.prepareExternalUrl(this.location.path());

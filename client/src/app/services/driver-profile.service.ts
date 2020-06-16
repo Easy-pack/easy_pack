@@ -14,7 +14,6 @@ export class DriverProfileService {
   }
 
   postData(id, formDriver) {
-    console.log("DATA TO POST", formDriver);
     return this.http.post<any>(
       `http://localhost:8080/driver/${id}`,
       formDriver

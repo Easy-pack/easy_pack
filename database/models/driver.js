@@ -24,7 +24,7 @@ module.exports = (sql, Sequelize) => {
         },
         state:{
             type :  Sequelize.STRING,
-            defaultValue: "not available"
+            defaultValue: "available"
         },
         photo: Sequelize.STRING,
     });

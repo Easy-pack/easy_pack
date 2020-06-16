@@ -36,5 +36,9 @@ io.on('connection', (socket) =>{
         // console.log(data);
         socket.broadcast.emit('notification', data);
     });
+
+    socket.on('doneTransaction', (data)=>{
+        socket.broadcast.emit('userNotification', data);
+    });
 });
 
