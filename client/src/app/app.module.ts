@@ -6,7 +6,6 @@ import { HttpClientModule } from "@angular/common/http";
 import { BrowserModule } from "@angular/platform-browser";
 import { NgbModule } from "@ng-bootstrap/ng-bootstrap";
 
-
 import { AppComponent } from "./app.component";
 import { AppRoutingModule } from "./app.routing";
 import { SignUpDriverComponent } from "./Components/auth/sign-up-driver/sign-up-driver.component";
@@ -20,7 +19,7 @@ import { FooterComponent } from "./Components/footer/footer.component";
 import { LoginComponent } from "./Components/auth/login/login-user.component";
 import { SignupUserComponent } from "./Components/auth/signup-user/signup-user.component";
 import { HomeComponent } from "./Components/home/home.component";
-import { MapComponent } from './components/user/map/map.component';
+//import { MapComponent } from './components/user/map/map.component';
 
 @NgModule({
   imports: [
@@ -45,7 +44,7 @@ import { MapComponent } from './components/user/map/map.component';
     FooterComponent,
     LoginComponent,
     SignupUserComponent,
-    MapComponent,
+    // MapComponent,
   ],
   providers: [],
   bootstrap: [AppComponent],

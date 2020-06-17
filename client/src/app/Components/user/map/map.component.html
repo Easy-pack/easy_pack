@@ -1,1 +1,113 @@
-<p>map works!</p>
+<div class=container>
+  <div class="row">
+    <div class="col">
+      <div class=container>
+        <div class="row">
+          <div class="col">
+            <label>Departure:</label>
+            <div class="input-group input-group-alternative">
+              <input class="form-control" placeholder="Address" type="text" name="adress_start"
+                value="ali douagi El menzah">
+            </div>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col">
+            <div class="input-group mb-3">
+              <select class="custom-select" id="inputGroupSelect02">
+                <option selected>Choose...</option>
+                <option value="1">Ariana</option>
+                <option value="2">Béja</option>
+                <option value="3">Bizerte</option>
+                <option value="3">Gabes</option>
+                <option value="3">Gafsa</option>
+                <option value="3">Jendouba</option>
+                <option value="3">Kairouan</option>
+                <option value="3">Kasserine</option>
+                <option value="3">Kebili</option>
+                <option value="3" selected="selected">Tunis</option>
+              </select>
+            </div>
+
+          </div>
+          <div class="col">
+            <div class="input-group input-group-alternative">
+              <input class="form-control" placeholder="Zip Code" type="text" name="zip_start" value="1002">
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+    <div class="col">
+      <div class=container>
+        <div class="row">
+          <div class="col">
+            <label>Destination:</label>
+            <div class="input-group input-group-alternative">
+              <input class="form-control" placeholder="Address" type="text" name="adress_start">
+            </div>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col">
+            <div class="input-group mb-3">
+              <select class="custom-select" id="inputGroupSelect02">
+                <option selected>Choose...</option>
+                <option value="1">Ariana</option>
+                <option value="2">Béja</option>
+                <option value="3">Bizerte</option>
+                <option value="3">Gabes</option>
+                <option value="3">Gafsa</option>
+                <option value="3">Jendouba</option>
+                <option value="3">Kairouan</option>
+                <option value="3">Kasserine</option>
+                <option value="3">Kebili</option>
+                <option value="3">Tunis</option>
+              </select>
+              <!-- <div class="input-group-append">
+              <label class="input-group-text" for="inputGroupSelect02">Options</label>
+            </div> -->
+            </div>
+
+          </div>
+          <!-- <button class="btn btn-lg btn-outline-primary" (click)="updateMap()">Update Addresses</button> -->
+          <div class="col">
+            <div class="input-group input-group-alternative">
+              <input class="form-control" placeholder="Zip Code" type="text" name="zip_start">
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<div class=container>
+  <div class="row">
+
+
+
+    <agm-map [latitude]="location.latitude" [longitude]="location.longitude" [mapTypeId]="location.mapType"
+      [zoom]="location.zoom" (mapClick)="addMarker($event.coords.lat, $event.coords.lng)">
+      <agm-marker *ngFor="let marker of location.markers ;let i = index" [latitude]="marker.lat"
+        [longitude]="marker.lng" (markerClick)="selectMarker($event)" [markerDraggable]="true" marker
+        (dragEnd)="markerDragEnd($event.coords, $event,i)" title="from" animation="DROP" openInfoWindow="true"
+        [iconUrl]="
+    {
+    url:marker.iconUrl,
+    scaledSize: {
+    width: 40,
+    height: 70
+    }
+    }">
+        <agm-info-window [isOpen]="true">{{marker.adress}}</agm-info-window>
+      </agm-marker>
+    </agm-map>
+    <div>
+      <p>
+        <!-- Selected Marker is: Longitude {{ selectedMarker.lat }} Latitude
+    {{ selectedMarker.lng }} -->
+      </p>
+    </div>
+  </div>
+</div>

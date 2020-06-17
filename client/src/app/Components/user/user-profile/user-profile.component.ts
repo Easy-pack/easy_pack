@@ -15,13 +15,13 @@ import { from } from "rxjs";
 import { NgbModal, ModalDismissReasons } from "@ng-bootstrap/ng-bootstrap";
 
 @Component({
-  selector: 'app-user-profile',
-  templateUrl: './user-profile.component.html',
-  styleUrls: ['./user-profile.component.css']
+  selector: "app-user-profile",
+  templateUrl: "./user-profile.component.html",
+  styleUrls: ["./user-profile.component.css"],
 })
 export class UserProfileComponent implements OnInit {
   id: number;
-  data
+  data;
   rate: any;
   submitted: boolean = false;
   disableEdit: boolean = true;
@@ -37,6 +37,8 @@ export class UserProfileComponent implements OnInit {
     currentPassword: new FormControl(""),
     birth_date: new FormControl(""),
     adress: new FormControl(""),
+    city: new FormControl(""),
+    zip: new FormControl(""),
     gender: new FormControl(""),
     email: new FormControl(""),
     phone: new FormControl(""),
@@ -83,9 +85,8 @@ export class UserProfileComponent implements OnInit {
 
   getUser() {
     this.UserService.fetchData(1).subscribe((UserData) => {
-      
       this.data = UserData;
-      
+
       (<FormGroup>this.UserForm).patchValue(this.data);
       this.rate = Array(this.data.rate);
       this.createdAt = moment(this.data.createdAt).format('"MMM Do YY"');
@@ -119,15 +120,14 @@ export class UserProfileComponent implements OnInit {
     return false;
   }
 
-
   updateUser() {
-    this.UserService
-      .postData(this.id, this.UserForm.value)
-      .subscribe((res: any) => {
+    this.UserService.postData(this.id, this.UserForm.value).subscribe(
+      (res: any) => {
         this.passwordInputValue = null;
         this.disableEdit = true;
         this.getUser();
-      });
+      }
+    );
   }
 
   updateGender(e) {
@@ -153,6 +153,5 @@ export class UserProfileComponent implements OnInit {
       confirmNewPassword: [""],
       photo: [""],
     });
-
   }
 }

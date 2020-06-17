@@ -16,8 +16,8 @@ input:read-only {
 #availabilityState {
   display: inline-block;
   border-radius: 50%;
-  width: 15px;
-  height: 15px;
+  width: 16px;
+  height: 16px;
   display: inline-block;
   margin-right: 10px;
   margin-left: 10px;
@@ -28,4 +28,8 @@ input:read-only {
   content: "\2605";
   font-size: 30px;
   font-weight: bold;
+}
+
+#stateButton {
+  color: white;
 }
