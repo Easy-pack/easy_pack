@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { HostListener } from '@angular/core';
-
+import { Router, RouterModule } from "@angular/router";
 @Component({
   selector: 'app-navbar',
   templateUrl: './navbar.component.html',
@@ -8,10 +8,14 @@ import { HostListener } from '@angular/core';
 })
 @HostListener('window:scroll', ['$event'])
 export class NavbarComponent implements OnInit {
+  public isCollapsed = true;
+  constructor(private router: Router) { }
 
-  constructor() { }
-
-  ngOnInit(): void {}
+  ngOnInit(): void {
+    this.router.events.subscribe((event) => {
+      this.isCollapsed = true;
+    });
+  }
 
 
   onWindowScroll(e) {
