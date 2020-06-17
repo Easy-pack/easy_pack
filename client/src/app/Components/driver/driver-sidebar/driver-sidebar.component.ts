@@ -1,6 +1,6 @@
 import { Component, OnInit } from "@angular/core";
 import { Router, RouterModule } from "@angular/router";
-
+import { AuthService } from './../../../services/auth.service';
 declare interface RouteInfo {
   path: string;
   title: string;
@@ -49,12 +49,15 @@ export class DriverSidebarComponent implements OnInit {
   public menuItems: any[];
   public isCollapsed = true;
 
-  constructor(private router: Router) {}
+  constructor(public authService: AuthService,private router: Router) {}
 
   ngOnInit() {
     this.menuItems = ROUTES.filter((menuItem) => menuItem);
     this.router.events.subscribe((event) => {
       this.isCollapsed = true;
     });
+  }
+  logout(){
+    this.authService.logout()
   }
 }
