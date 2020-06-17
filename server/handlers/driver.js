@@ -147,6 +147,34 @@ exports.updateDriver = async (req, res, next) => {
 };
 
 
+module.exports.updateVehicle = async (req, res, next) => {
+    try{
+        const {id} = req.params;
+        let vehicle = await db.vehicle.findOne({where : {id : id}});
+
+        if (!vehicle) throw createError(404, `vehicle not found`);
+        const updatedVeh = {
+            type,
+            reg_number,
+            license_plate,
+            color,
+            make,
+            model
+        } = req.body;
+
+        await vehicle.update(updatedVeh)
+
+        res.status(201).json({
+            success: "vehicle updated successfully",
+            vehicle: vehicle
+        });
+    }
+    catch (e) {
+        res.status(e.status).json({error: e.message});
+    }
+}
+
+
 module.exports.getDriverTransactions = async (req, res, next) => {
     try {
         const {id} = req.params;
@@ -160,6 +188,7 @@ module.exports.getDriverTransactions = async (req, res, next) => {
         res.status(e.status).json({error: e.message});
     }
 };
+
 
 module.exports.getDriverVehicles = async (req, res, next) => {
     try {

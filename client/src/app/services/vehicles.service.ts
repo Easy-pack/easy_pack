@@ -30,4 +30,11 @@ export class VehiclesService {
       formVehicle
     );
   }
+
+  updateVehicle(id, formVehicle) {
+    return this.http.put<any>(
+      `http://localhost:8080/driverTransaction/vehicle/${id}`,
+      formVehicle
+    );
+  }
 }

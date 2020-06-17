@@ -55,7 +55,7 @@
                         <span class="mb-0 text-sm">{{car.reg_number}}</span>
                       </td>
                       <td>
-                        <i class="fas fa-edit fa-2x" aria-hidden="true" (click)="open(mymodal, index)"></i>
+                        <i class="fas fa-edit fa-2x" aria-hidden="true" (click)="openedit(myvehicle, index)"></i>
                       </td>
                     </tr>
                 </tbody>
@@ -130,6 +130,70 @@
             
             <div class="text-center">
               <button  class="btn btn-confirm mt-4" type="submit">Confirm</button>
+            </div>
+          </form>
+
+    </div>
+
+  </ng-template>
+
+  <ng-template #myvehicle let-modal>
+    <div class="modal-header">
+      <h4 class="modal-title" id="modal-basic-title">Edit Information Vehicle</h4>
+      <button
+        type="button"
+        class="close"
+        aria-label="Close"
+        (click)="modal.dismiss('Cross click')"
+      >
+        <span aria-hidden="true">×</span>
+      </button>
+    </div>
+    <div class="modal-body">
+
+        <form  [formGroup] ="editVehicle" (ngSubmit)="edit()">
+            <div class="row form-group">
+              <div class="col-7">
+                <h4>Type of Vehicle: </h4>
+              </div>
+              <div class="col-5">
+                <select name="type" class="custom-select mb-3" formControlName = "type" >
+                  <option selected>type</option>
+                  <option value="Bicycle" >Bicycle</option>
+                  <option value="Scooter">Scooter</option>
+                  <option value="Car">Car</option>
+                  <option value="Truck">Truck</option>
+                </select>
+              </div>
+            </div>
+            <div class="form-group">
+                <div class="input-group input-group-alternative mb-3">
+                  <input class="form-control" formControlName = "make" placeholder="Make" type="text" name="make" >
+                </div>
+            </div>
+            <div class="form-group">
+              <div class="input-group input-group-alternative mb-3">
+                <input class="form-control" formControlName = "model" placeholder="Model" type="text" name="model" >
+              </div>
+            </div>
+            <div class="form-group">
+              <div class="input-group input-group-alternative">
+                <input class="form-control" formControlName = "color" placeholder="Color" type="text" name="color" >
+              </div>
+            </div>
+            <div class="form-group">
+              <div class="input-group input-group-alternative">
+                <input class="form-control" formControlName = "license_plate" placeholder="License Plate" type="text" name="license_plate">
+              </div>
+            </div>
+            <div class="form-group">
+                <div class="input-group input-group-alternative">
+                  <input class="form-control" formControlName = "reg_number" placeholder="Register Number" type="text" name="register_Number">
+                </div>
+            </div>
+            
+            <div class="text-center">
+              <button  class="btn btn-confirm mt-4" type="submit" >Confirm</button>
             </div>
           </form>
 
