@@ -16,7 +16,7 @@ import {
 export class VehiclesComponent implements OnInit {
   vehicles;
   closeResult: string;
-
+  vehicleId;
   newVehicle = new FormGroup({
     type: new FormControl(""),
     make: new FormControl(""),
@@ -24,6 +24,17 @@ export class VehiclesComponent implements OnInit {
     color: new FormControl(""),
     license_plate: new FormControl(""),
     reg_number: new FormControl(""),
+  });
+
+  editVehicle= new FormGroup({
+    id:new FormControl(""),
+    type: new FormControl(""),
+    make: new FormControl(""),
+    model: new FormControl(""),
+    color: new FormControl(""),
+    license_plate: new FormControl(""),
+    reg_number: new FormControl(""),
+    driverId: new FormControl(""),
   });
   constructor( public vehiclesService: VehiclesService,private modalService: NgbModal) { }
 
@@ -34,6 +45,7 @@ export class VehiclesComponent implements OnInit {
   getvehicles(){
     this.vehiclesService.fetchDrivervehicles().subscribe(response =>{
       this.vehicles = response;
+      
     });
   }
 
@@ -42,6 +54,25 @@ export class VehiclesComponent implements OnInit {
       .open(content, { ariaLabelledBy: "modal-basic-title" })
       .result.then(
         (result) => {
+          console.log("yehlkek zamzoum")
+          this.closeResult = `Closed with: ${result}`;
+        },
+        (reason) => {
+          this.closeResult = `Dismissed      this.getvehicles()
+          this.close() ${this.getDismissReason(reason)}`;
+        }
+      );
+  }
+
+  openedit(content, index ) {
+    (<FormGroup>this.editVehicle).patchValue(this.vehicles[index])
+    this.vehicleId = this.editVehicle.value.id
+    this.modalService
+      .open(content, { ariaLabelledBy: "modal-basic-title" })
+      .result.then(
+        (result) => {
+           console.log('hi');
+          
           this.closeResult = `Closed with: ${result}`;
         },
         (reason) => {
@@ -83,5 +114,17 @@ export class VehiclesComponent implements OnInit {
       reg_number: new FormControl(""),
     });
   }
+
+  edit(){
+    console.log(this.editVehicle.value)
+    this.vehiclesService
+      .updateVehicle (this.vehicleId, this.editVehicle.value)
+      .subscribe((res:any)=>{
+        console.log("Vehicle edited", res)
+        this.getvehicles()
+      })
+      this.close()
+  }
+
 
 }
