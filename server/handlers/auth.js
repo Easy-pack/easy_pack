@@ -12,7 +12,8 @@ exports.signUpDriver = async (req, res) => {
     for(let key in body){
         profile[key] = body[key];
     }
-    profile.photo = path.join(req.file.destination, req.file.filename);
+    console.log(req.file.destination);
+    profile.photo = path.join('images', req.file.filename);
     console.log(chalk.blue(profile.photo));
     try {
         if (!req.body.password) throw createError(404, `missing password`);
@@ -43,7 +44,7 @@ exports.signUpUser = async (req, res) => {
     for(let key in body){
        profile[key] = body[key];
     }
-    profile.photo = path.join(req.file.destination, req.file.filename);
+    profile.photo = path.join('images', req.file.filename);
     
     try {
         if (!req.body.password) throw createError(404, `missing password`);

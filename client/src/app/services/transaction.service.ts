@@ -22,7 +22,7 @@ export class TransactionService {
     console.log("DATA TO POST", formTransaction);
     return this.http.post<any>(
       `http://localhost:8080/userTransaction`,
-      formTransaction
+      {formTransaction}
     );
   }
 

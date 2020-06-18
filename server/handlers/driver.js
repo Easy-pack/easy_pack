@@ -3,7 +3,6 @@ const db = require('../../database/index');
 const bcrypt = require("bcryptjs");
 const chalk = require('chalk');
 const createError = require('http-errors');
-const driver = require('../../database/models/driver');
 
 
 

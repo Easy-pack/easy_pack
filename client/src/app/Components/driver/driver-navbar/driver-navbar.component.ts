@@ -18,6 +18,7 @@ export class DriverNavbarComponent implements OnInit {
   public notification = 0;
   public nbrNotf = Array(this.notification+1).fill(1);
   public socket;
+  notifications = [];
   private name : string = "Amir Ben Youssef";
   
   constructor(public location: Location,  
@@ -27,14 +28,30 @@ export class DriverNavbarComponent implements OnInit {
               private socketIoService : SocketIoService) {
               }
 
+  getNotification(){
+    this.socketIoService.getNotification().subscribe(response =>{
+      console.log(response)
+      this.notification = response.notifications.length;
+      if(this.notification > 0){
+        alert("new Announcement is on")
+      }
+    })
+  }
+
+  updateNotification(){
+    this.notifications.forEach(element =>{
+      this.socketIoService.updateNotification(element.id).subscribe(response => {})
+    })
+  }
+
   ngOnInit() {
     this.listTitles = ROUTES.filter(listTitle => listTitle);
-    
-    this.socket = this.socketIoService.setupSocketConnection().on('notification', (data)=>{
-      this.notification += 1;
-      console.log (this.notification);
+    this.getNotification();
+      this.socket = this.socketIoService.setupSocketConnection().on('notification', (data)=>{
+        this.getNotification();
     });
   } 
+
 
   getTitle(){
     var titlee = this.location.prepareExternalUrl(this.location.path());
