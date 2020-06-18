@@ -101,12 +101,12 @@ export class DriverProfileComponent implements OnInit {
       this.rate = Array(this.data.rate);
       if (this.data.state === "available") {
         this.stateColor = "green";
-        this.stateButton = "red";
-        this.newState = " not available";
-      } else if (this.data.state === "not available") {
-        this.stateColor = "red";
         this.stateButton = "green";
         this.newState = "available";
+      } else if (this.data.state === "not available") {
+        this.stateColor = "red";
+        this.stateButton = "red";
+        this.newState = "not available";
       }
       this.createdAt = moment(this.data.createdAt).format('"MMM Do YY"');
       console.log(DriverData, "this.date", this.DriverForm.value.birth_date);
@@ -178,17 +178,14 @@ export class DriverProfileComponent implements OnInit {
   changeState() {
     if (this.data.state === "available") {
       this.stateColor = "red";
-      this.data.state = "not available";
-      this.stateButton = "green";
-      this.newState = "available";
+      this.stateButton = "red";
+      this.newState = "not available";
       this.DriverForm.value.state = "not available";
       this.data.state = "not available";
     } else if (this.data.state === "not available") {
-      this.data.state = "available";
       this.stateColor = "green";
-      this.stateButton = "red";
-      console.log(this.data.state);
-      this.newState = "not available";
+      this.stateButton = "green";
+      this.newState = "available";
       this.DriverForm.value.state = "available";
       this.data.state = "available";
     }
