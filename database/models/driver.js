@@ -27,6 +27,8 @@ module.exports = (sql, Sequelize) => {
             defaultValue: "available"
         },
         photo: Sequelize.STRING,
+        city: Sequelize.STRING,
+        zip: Sequelize.STRING
     });
     return driver;
 };

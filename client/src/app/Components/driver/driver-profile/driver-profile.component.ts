@@ -46,9 +46,10 @@ export class DriverProfileComponent implements OnInit {
     email: new FormControl(""),
     phone: new FormControl(""),
     state: new FormControl(""),
+    zip: new FormControl(""),
+    city: new FormControl(""),
     // newPassword: new FormControl(""),
     // confirmNewPassword: new FormControl(""),
-
     photo: new FormControl(""),
   });
 
@@ -227,6 +228,8 @@ export class DriverProfileComponent implements OnInit {
       phone: [""],
       state: [""],
       photo: [""],
+      zip: [""],
+      city: [""]
     });
   }
 }

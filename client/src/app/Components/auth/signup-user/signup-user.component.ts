@@ -20,7 +20,9 @@ export class SignupUserComponent implements OnInit {
     address: new FormControl(''),
     phone: new FormControl(''),
     vat_number: new FormControl(''),
-    cin : new FormControl('')
+    cin : new FormControl(''),
+    zip :  new FormControl(''),
+    city :  new FormControl('')
   });
   uploadForm: FormGroup;
   
