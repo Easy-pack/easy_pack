@@ -8,6 +8,7 @@ import { UserProfileService } from "../../../services/user-profile.service";
 import { SharedData } from "../../../services/sharedData";
 import { ej } from "@syncfusion/ej2/dist/ej2";
 import data = ej.data;
+import { SocketIoService } from "../../../services/socket-io.service";
 
 @Component({
   selector: "app-user-add-transaction",
@@ -34,14 +35,18 @@ export class UserAddTransactionComponent implements OnInit {
   });
   closeResult: string;
   id = localStorage.getItem("id");
+  socket;
   constructor(
     private transactionService: TransactionService,
     private authService: AuthService,
     private modalService: NgbModal,
     private userService: UserProfileService, // private map: MapComponent
     private sharedData: SharedData,
+    private socketIoService: SocketIoService,
     private router: Router
-  ) {}
+  ) {
+    this.socket = socketIoService;
+  }
   yelkekzemzmi(e) {
     console.log("yehelkek", e);
   }
@@ -54,6 +59,11 @@ export class UserAddTransactionComponent implements OnInit {
       this.sharedData.addMapTransactionData.zip_start = data["zip"];
       this.sharedData.transactionData.address_start = `${data["address"]}, ${data["city"]}`;
     });
+    this.socket = this.socketIoService
+      .setupSocketConnection()
+      .on("notification", (data) => {
+        console.log("notification");
+      });
   }
 
   open(content) {
@@ -92,6 +102,7 @@ export class UserAddTransactionComponent implements OnInit {
       this.sharedData.transactionData,
       this.sharedData.addMapTransactionData
     );
+    this.socketIoService.emmitTransaction(this.newTransaction.value);
 
     this.router.navigate(["/user/shippingDetails"]);
   }

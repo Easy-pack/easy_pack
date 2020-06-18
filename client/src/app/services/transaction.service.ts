@@ -27,7 +27,6 @@ export class TransactionService {
   }
 
   acceptTransaction(transactionId){
-    alert('clicked');
     let data ={
       transactionId
     }

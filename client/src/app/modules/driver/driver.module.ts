@@ -12,6 +12,7 @@ import { FormsModule, ReactiveFormsModule } from "@angular/forms";
 import { DriverProfileComponent } from "../../Components/driver/driver-profile/driver-profile.component";
 import { DriverHistoryComponent } from "../../Components/driver/driver-history/driver-history.component";
 import { AnnouncementComponent } from "../../Components/driver/announcement/announcement.component";
+import { VehiclesComponent } from "../../Components/driver/vehicles/vehicles.component";
 @NgModule({
   declarations: [
     DriverComponent,
@@ -21,6 +22,7 @@ import { AnnouncementComponent } from "../../Components/driver/announcement/anno
     DriverProfileComponent,
     DriverHistoryComponent,
     AnnouncementComponent,
+    VehiclesComponent,
   ],
   imports: [
     CommonModule,

@@ -5,18 +5,17 @@ import { HttpClient } from "@angular/common/http";
   providedIn: "root",
 })
 export class DriverProfileService {
-  //id = window.localStorage.getItem("id");
-  id = 1;
+  id = window.localStorage.getItem("id");
+
   constructor(private http: HttpClient) {}
 
   fetchData() {
-    return this.http.get(`http://localhost:8080/driver/${this.id}`);
+    return this.http.get(`http://localhost:8080/driverTransaction/${this.id}`);
   }
 
   postData(id, formDriver) {
-    console.log("DATA TO POST", formDriver);
     return this.http.post<any>(
-      `http://localhost:8080/driver/${this.id}`,
+      `http://localhost:8080/driverTransaction/${id}`,
       formDriver
     );
   }

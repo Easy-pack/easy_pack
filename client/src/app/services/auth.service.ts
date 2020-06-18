@@ -64,7 +64,9 @@ export class AuthService {
 
   logout() {
     localStorage.removeItem('token');
-    this.router.navigate(['auth/login']);
+    localStorage.removeItem('id');
+    localStorage.removeItem('role');
+    this.router.navigate(['/']);
   }
 
 
@@ -77,4 +79,7 @@ export class AuthService {
     }
     return throwError(msg);
   }
+
 }
+
+

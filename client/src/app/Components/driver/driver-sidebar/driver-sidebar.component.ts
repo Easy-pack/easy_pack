@@ -1,6 +1,6 @@
 import { Component, OnInit } from "@angular/core";
 import { Router, RouterModule } from "@angular/router";
-
+import { AuthService } from './../../../services/auth.service';
 declare interface RouteInfo {
   path: string;
   title: string;
@@ -23,15 +23,21 @@ export const ROUTES: RouteInfo[] = [
   {
     path: "history",
     title: "History",
-    icon: "ni-cart text-warning",
+    icon: "ni-books text-warning",
     class: "",
   },
   {
     path: "announcement",
     title: "Announcement",
-    icon: "ni-delivery-fast text-success",
+    icon: "ni-notification-70 text-success",
     class: "",
   },
+  {
+    path: "vehicle",
+    title: "Vehicles",
+    icon: "ni-delivery-fast trans",
+    class: "",
+  }
 ];
 
 @Component({
@@ -43,12 +49,15 @@ export class DriverSidebarComponent implements OnInit {
   public menuItems: any[];
   public isCollapsed = true;
 
-  constructor(private router: Router) {}
+  constructor(public authService: AuthService,private router: Router) {}
 
   ngOnInit() {
     this.menuItems = ROUTES.filter((menuItem) => menuItem);
     this.router.events.subscribe((event) => {
       this.isCollapsed = true;
     });
+  }
+  logout(){
+    this.authService.logout()
   }
 }

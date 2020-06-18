@@ -7,7 +7,7 @@ module.exports = (sql, Sequelize) => {
             allowNull: false,
             unique: true
         },
-        phone: Sequelize.INTEGER,
+        phone: Sequelize.STRING,
         address: Sequelize.STRING,
         city: Sequelize.STRING,
         zip: Sequelize.STRING,

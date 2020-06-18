@@ -5,3 +5,6 @@
 .fa-plus-circle:hover{
     color: rgb(65, 175, 65);
 }
+.gradient{
+    background-image: linear-gradient(120deg, #79da9c 0%, #02aa86 100%);
+}

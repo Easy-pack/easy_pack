@@ -1,0 +1,26 @@
+.fa-bell{
+    color: aliceblue;
+}
+
+.fa-bell:hover{
+    color: yellow;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+.badge{
+    margin-left: -1.3em;
+    line-height:1em;
+    color: rgb(235, 49, 16);
+    background: rgb(236, 207, 40);
+    text-align:center;
+    min-width: 1em;
+}
+
+.badge:hover{
+    background-color: aliceblue;
+}
+
+.nav-item{
+    cursor: pointer;
+}

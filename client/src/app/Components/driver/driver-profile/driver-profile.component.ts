@@ -20,7 +20,7 @@ import { NgbModal, ModalDismissReasons } from "@ng-bootstrap/ng-bootstrap";
   styleUrls: ["./driver-profile.component.css"],
 })
 export class DriverProfileComponent implements OnInit {
-  id: number;
+  id;
   data;
   rate: any;
   submitted: boolean = false;
@@ -54,7 +54,7 @@ export class DriverProfileComponent implements OnInit {
 
   constructor(
     private formBuilder: FormBuilder,
-    private DriverProfileService: DriverProfileService,
+    private driverProfileService: DriverProfileService,
     private modalService: NgbModal
   ) {}
 
@@ -93,7 +93,7 @@ export class DriverProfileComponent implements OnInit {
   }
 
   getDriver() {
-    this.DriverProfileService.fetchData().subscribe((DriverData) => {
+    this.driverProfileService.fetchData().subscribe((DriverData) => {
       this.data = DriverData["driver"];
       console.log("Driver", DriverData["driver"]);
       (<FormGroup>this.DriverForm).patchValue(this.data);
@@ -160,16 +160,15 @@ export class DriverProfileComponent implements OnInit {
         console.log("currentpass", this.currentPassword);
         console.log(this.DriverForm.value, "inputs");
         this.data.state = "not available";
-        this.DriverProfileService.postData(
-          this.id,
-          this.DriverForm.value
-        ).subscribe((res: any) => {
-          this.passwordInputValue = null;
-          this.disableEdit = true;
-          this.getDriver();
-          this.currentPassword = "";
-          this.closeModal();
-        });
+        this.driverProfileService
+          .postData(this.id, this.DriverForm.value)
+          .subscribe((res: any) => {
+            this.passwordInputValue = null;
+            this.disableEdit = true;
+            this.getDriver();
+            this.currentPassword = "";
+            this.closeModal();
+          });
       } else {
         alert("Please check your password and try again");
       }
@@ -193,10 +192,9 @@ export class DriverProfileComponent implements OnInit {
       this.DriverForm.value.state = "available";
       this.data.state = "available";
     }
-    this.DriverProfileService.postData(
-      this.id,
-      this.DriverForm.value
-    ).subscribe((res: any) => {});
+    this.driverProfileService
+      .postData(this.id, this.DriverForm.value)
+      .subscribe((res: any) => {});
     console.log(this.DriverForm.value);
   }
 
@@ -214,7 +212,7 @@ export class DriverProfileComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.id = 2;
+    this.id = window.localStorage.getItem("id");
     this.getDriver();
 
     this.DriverForm = this.formBuilder.group({
@@ -228,8 +226,6 @@ export class DriverProfileComponent implements OnInit {
       email: [""],
       phone: [""],
       state: [""],
-      // newPassword: [""],
-      // confirmNewPassword: [""],
       photo: [""],
     });
   }

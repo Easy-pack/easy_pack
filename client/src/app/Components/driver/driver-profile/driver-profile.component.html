@@ -1,23 +1,20 @@
 <div class="header pb-8 pt-5 pt-lg-8 d-flex align-items-center" style="
-    min-height: 600px;
-    background-image: url(../../../../assets/img/theme/profile-cover.jpg);
+    min-height: 25vh;
+    background-image: url(https://image.freepik.com/free-vector/order-delivery-service-online-background_73174-203.jpg);
     background-size: cover;
     background-position: center top;
   ">
   <!-- Mask -->
-  <span class="mask bg-gradient-danger opacity-8"></span>
+  <span class="mask gradient opacity-8"></span>
   <!-- Header container -->
   <div class="container-fluid d-flex align-items-center">
     <div class="row">
-      <div class="col-lg-7 col-md-10">
+      <div class="col-lg col-md">
         <h1 id="hello" class="display-2 text-white">
           Hello {{ data.first_name }}
         </h1>
         <div id="availabilityState" [style.background-color]="stateColor"></div>
-        <p class="text-white mt-0 mb-5">
-          This is your profile page. You can see the progress you've made with
-          your work and manage your projects or assigned tasks
-        </p>
+
         <a class="btn btn-info" [hidden]="!disableEdit" (click)="allowEdit()">Edit profile</a>
         <a class="btn btn-info" [hidden]="disableEdit" (click)="open(mymodal)">Save Changes</a>
         <a class="btn btn-info" [hidden]="disableEdit" (click)="cancel()">Cancel</a>
@@ -33,7 +30,7 @@
           <div class="col-lg-3 order-lg-2">
             <div class="card-profile-image">
               <a href="javascript:void(0)">
-                <img src="../../../../assets/img/theme/team-4-800x800.jpg" class="rounded-circle" />
+                <img src="{{data.photo}}" class="rounded-circle" />
               </a>
             </div>
           </div>
@@ -45,8 +42,8 @@
           <div class="row">
             <div class="col">
               <div class="card-profile-stats d-flex justify-content-center mt-md-5">
-                <div class="col-lg-7 col-md-10">
-                  <button class="btn btn-primary" id="changePhotoButton" type="button" data-toggle="modal"
+                <div class="h5 mt-4">
+                  <button class="btn btn-photo" id="changePhotoButton" type="button" data-toggle="modal"
                     data-target="#exampleModal" (click)="open(mymodal)">
                     <i class="fa fa-fw fa-camera"></i>
                     <span>Change Photo</span>
@@ -68,15 +65,17 @@
               <i class="ni location_pin mr-2"></i>Driver
             </div>
             <div class="h5 mt-4">
-              <button class="btn btn-primary" id="changePhotoButton" type="button" (click)="open(passwordmodal)">
+
+              <button class="btn btn-pass" id="changePhotoButton" type="button" (click)="open(passwordmodal)">
                 <i class="fa fa-fw fa-camera"></i>
                 <span>Change Password</span>
               </button>
             </div>
 
-            <hr class="my-4" />
-
-            <a href="javascript:void(0)">Vehicules</a>
+            <div>
+              <hr class="my-4" />
+              <a class="veh" href="javascript:void(0)"><strong><i class="fas fa-truck"></i> Vehicles</strong></a>
+            </div>
           </div>
         </div>
       </div>

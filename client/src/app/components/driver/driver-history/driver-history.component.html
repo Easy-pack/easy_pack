@@ -1,4 +1,4 @@
-<div class="header bg-gradient-danger pb-8 pt-5 pt-md-8">
+<div class="header gradient pb-8 pt-5 pt-md-8">
   <div class="container-fluid">
     <div class="header-body">
       <!-- Card stats -->
@@ -13,6 +13,16 @@
       <div class="card shadow">
         <div class="card-header border-0">
           <h3 class="mb-0">History Transactions</h3>
+        </div>
+        <div>
+          <label for="status">Filter</label>
+          <select name="status" (change)="filter($event)">
+            <option value="all">All</option>
+            <option value="Pending">Pending</option>
+            <option value="In Progress">Active</option>
+            <option value="completed">Completed</option>
+            <option value="canceled">Canceled</option>
+          </select>
         </div>
         <div class="table-responsive">
           <table class="table align-items-center table-flush">
@@ -58,6 +68,9 @@
                   </td>
                   <td>
                     <span class="mb-0 text-sm">0$</span>
+                  </td>
+                  <td *ngIf="tr.state === 'In Progress'">
+                    <button (click)="doneTransaction(tr)" >done</button> 
                   </td>
                 </tr>
             </tbody>
