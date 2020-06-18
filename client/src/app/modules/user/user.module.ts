@@ -1,4 +1,4 @@
-import { ReactiveFormsModule } from "@angular/forms";
+import { ReactiveFormsModule, FormsModule } from "@angular/forms";
 import { NgModule } from "@angular/core";
 import { CommonModule } from "@angular/common";
 import { UserRoutingModule } from "./user-routing.module";
@@ -12,6 +12,7 @@ import { UserAddTransactionComponent } from "../../Components/user/user-add-tran
 import { UserHistoryComponent } from "../../Components/user/user-history/user-history.component";
 import { MapComponent } from "../../Components/user/map/map.component";
 import { AgmCoreModule } from "@agm/core";
+import { ShippingComponent } from "../../Components/user/shipping/shipping.component";
 
 @NgModule({
   declarations: [
@@ -22,6 +23,7 @@ import { AgmCoreModule } from "@agm/core";
     UserProfileComponent,
     UserAddTransactionComponent,
     UserHistoryComponent,
+    ShippingComponent,
     MapComponent,
   ],
   imports: [
@@ -29,6 +31,7 @@ import { AgmCoreModule } from "@agm/core";
     UserRoutingModule,
     NgbModule,
     ReactiveFormsModule,
+    FormsModule,
     AgmCoreModule.forRoot({
       apiKey: "AIzaSyAbBRHFCr2ZmQxNUCF52VRKjUb3XEGzGg8",
       libraries: ["places", "geometry"],

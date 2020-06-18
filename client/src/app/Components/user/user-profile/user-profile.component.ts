@@ -1,51 +1,51 @@
-import { Component, OnInit } from "@angular/core";
-import { User } from "../../../interfaces/user";
-import { UserProfileService } from "../../../services/user-profile.service";
+import { Component, OnInit } from '@angular/core';
+import { User } from '../../../interfaces/user';
+import { UserProfileService } from '../../../services/user-profile.service';
 
 import {
   FormControl,
   FormGroup,
   FormBuilder,
   Validators,
-} from "@angular/forms";
+} from '@angular/forms';
 
-import * as bcrypt from "bcryptjs";
-import * as moment from "moment";
-import { from } from "rxjs";
-import { NgbModal, ModalDismissReasons } from "@ng-bootstrap/ng-bootstrap";
+import * as bcrypt from 'bcryptjs';
+import * as moment from 'moment';
+import { from } from 'rxjs';
+import { NgbModal, ModalDismissReasons } from '@ng-bootstrap/ng-bootstrap';
 
 @Component({
-  selector: "app-user-profile",
-  templateUrl: "./user-profile.component.html",
-  styleUrls: ["./user-profile.component.css"],
+  selector: 'app-user-profile',
+  templateUrl: './user-profile.component.html',
+  styleUrls: ['./user-profile.component.css']
 })
 export class UserProfileComponent implements OnInit {
   id: number;
   data;
   rate: any;
-  submitted: boolean = false;
-  disableEdit: boolean = true;
-  passwordInputValue: string = "";
+  submitted = false;
+  disableEdit = true;
+  passwordInputValue = '';
   createdAt: string;
   stateColor: string;
   closeResult: string;
 
   UserForm = new FormGroup({
-    first_name: new FormControl(""),
-    last_name: new FormControl(""),
-    password: new FormControl(""),
-    currentPassword: new FormControl(""),
-    birth_date: new FormControl(""),
-    adress: new FormControl(""),
-    city: new FormControl(""),
-    zip: new FormControl(""),
-    gender: new FormControl(""),
-    email: new FormControl(""),
-    phone: new FormControl(""),
-    newPassword: new FormControl(""),
-    confirmNewPassword: new FormControl(""),
+    first_name: new FormControl(''),
+    last_name: new FormControl(''),
+    password: new FormControl(''),
+    currentPassword: new FormControl(''),
+    birth_date: new FormControl(''),
+    adress: new FormControl(''),
+    city: new FormControl(''),
+    zip: new FormControl(''),
+    gender: new FormControl(''),
+    email: new FormControl(''),
+    phone: new FormControl(''),
+    newPassword: new FormControl(''),
+    confirmNewPassword: new FormControl(''),
 
-    photo: new FormControl(""),
+    photo: new FormControl(''),
   });
 
   constructor(
@@ -55,7 +55,7 @@ export class UserProfileComponent implements OnInit {
   ) {}
   open(content) {
     this.modalService
-      .open(content, { ariaLabelledBy: "modal-basic-title" })
+      .open(content, { ariaLabelledBy: 'modal-basic-title' })
       .result.then(
         (result) => {
           this.closeResult = `Closed with: ${result}`;
@@ -68,9 +68,9 @@ export class UserProfileComponent implements OnInit {
 
   private getDismissReason(reason: any): string {
     if (reason === ModalDismissReasons.ESC) {
-      return "by pressing ESC";
+      return 'by pressing ESC';
     } else if (reason === ModalDismissReasons.BACKDROP_CLICK) {
-      return "by clicking on a backdrop";
+      return 'by clicking on a backdrop';
     } else {
       return `with: ${reason}`;
     }
@@ -85,6 +85,7 @@ export class UserProfileComponent implements OnInit {
 
   getUser() {
     this.UserService.fetchData(1).subscribe((UserData) => {
+
       this.data = UserData;
 
       (<FormGroup>this.UserForm).patchValue(this.data);
@@ -105,29 +106,30 @@ export class UserProfileComponent implements OnInit {
         this.UserForm.value.newPassword ===
         this.UserForm.value.confirmNewPassword
       ) {
-        alert("correct new password ");
-        let hashNewPassword = bcrypt.hashSync(
+        alert('correct new password ');
+        const hashNewPassword = bcrypt.hashSync(
           this.UserForm.value.newPassword,
           10
         );
         this.UserForm.value.password = hashNewPassword;
         return true;
       } else {
-        alert("not matching password");
+        alert('not matching password');
         return false;
       }
     }
     return false;
   }
 
+
   updateUser() {
-    this.UserService.postData(this.id, this.UserForm.value).subscribe(
-      (res: any) => {
+    this.UserService
+      .postData(this.id, this.UserForm.value)
+      .subscribe((res: any) => {
         this.passwordInputValue = null;
         this.disableEdit = true;
         this.getUser();
-      }
-    );
+      });
   }
 
   updateGender(e) {
@@ -140,18 +142,19 @@ export class UserProfileComponent implements OnInit {
     this.getUser();
 
     this.UserForm = this.formBuilder.group({
-      first_name: ["", [Validators.required]],
-      last_name: [""],
-      password: [""],
-      currentPassword: [""],
-      birth_date: [""],
-      adress: [""],
-      gender: [""],
-      email: [""],
-      phone: [""],
-      newPassword: [""],
-      confirmNewPassword: [""],
-      photo: [""],
+      first_name: ['', [Validators.required]],
+      last_name: [''],
+      password: [''],
+      currentPassword: [''],
+      birth_date: [''],
+      adress: [''],
+      gender: [''],
+      email: [''],
+      phone: [''],
+      newPassword: [''],
+      confirmNewPassword: [''],
+      photo: [''],
     });
+
   }
 }

@@ -7,32 +7,34 @@
             <label>Departure:</label>
             <div class="input-group input-group-alternative">
               <input class="form-control" placeholder="Address" type="text" name="adress_start"
-                value="ali douagi El menzah">
+                [(ngModel)]="sharedData.addMapTransactionData.address_start">
             </div>
           </div>
         </div>
         <div class="row">
           <div class="col">
             <div class="input-group mb-3">
-              <select class="custom-select" id="inputGroupSelect02">
+              <select class="custom-select" [(ngModel)]="sharedData.addMapTransactionData.city_start">
                 <option selected>Choose...</option>
-                <option value="1">Ariana</option>
-                <option value="2">Béja</option>
-                <option value="3">Bizerte</option>
-                <option value="3">Gabes</option>
-                <option value="3">Gafsa</option>
-                <option value="3">Jendouba</option>
-                <option value="3">Kairouan</option>
-                <option value="3">Kasserine</option>
-                <option value="3">Kebili</option>
-                <option value="3" selected="selected">Tunis</option>
+                <option value="Ariana">Ariana</option>
+                <option value="Béja">Béja</option>
+                <option value="Bizerte">Bizerte</option>
+                <option value="Gabes">Gabes</option>
+                <option value="Gafsa">Gafsa</option>
+                <option value="Jendouba">Jendouba</option>
+                <option value="Kairouan">Kairouan</option>
+                <option value="Kasserine">Kasserine</option>
+                <option value="Kebili">Kebili</option>
+                <option value="Nabeul">Nabeul</option>
+                <option value="Tunis" selected="selected">Tunis</option>
               </select>
             </div>
 
           </div>
           <div class="col">
             <div class="input-group input-group-alternative">
-              <input class="form-control" placeholder="Zip Code" type="text" name="zip_start" value="1002">
+              <input class="form-control" placeholder="Zip Code" type="text" name="zip_start" value="1002"
+                [(ngModel)]="ZipDeparture">
             </div>
           </div>
         </div>
@@ -45,25 +47,26 @@
           <div class="col">
             <label>Destination:</label>
             <div class="input-group input-group-alternative">
-              <input class="form-control" placeholder="Address" type="text" name="adress_start">
+              <input class="form-control" placeholder="Address" type="text" name="adress_start"
+                [(ngModel)]="sharedData.addMapTransactionData.address_destination">
             </div>
           </div>
         </div>
         <div class="row">
           <div class="col">
             <div class="input-group mb-3">
-              <select class="custom-select" id="inputGroupSelect02">
+              <select class="custom-select" [(ngModel)]="sharedData.addMapTransactionData.city_destination">
                 <option selected>Choose...</option>
-                <option value="1">Ariana</option>
-                <option value="2">Béja</option>
-                <option value="3">Bizerte</option>
-                <option value="3">Gabes</option>
-                <option value="3">Gafsa</option>
-                <option value="3">Jendouba</option>
-                <option value="3">Kairouan</option>
-                <option value="3">Kasserine</option>
-                <option value="3">Kebili</option>
-                <option value="3">Tunis</option>
+                <option value="Ariana">Ariana</option>
+                <option value="Béja">Béja</option>
+                <option value="Bizerte">Bizerte</option>
+                <option value="Gabes">Gabes</option>
+                <option value="Gafsa">Gafsa</option>
+                <option value="Jendouba">Jendouba</option>
+                <option value="Kairouan">Kairouan</option>
+                <option value="Kasserine">Kasserine</option>
+                <option value="Kebili">Kebili</option>
+                <option value="Tunis">Tunis</option>
               </select>
               <!-- <div class="input-group-append">
               <label class="input-group-text" for="inputGroupSelect02">Options</label>
@@ -71,7 +74,7 @@
             </div>
 
           </div>
-          <!-- <button class="btn btn-lg btn-outline-primary" (click)="updateMap()">Update Addresses</button> -->
+          <button class="btn btn-lg btn-outline-primary" (click)="updateMap()">Update Addresses</button>
           <div class="col">
             <div class="input-group input-group-alternative">
               <input class="form-control" placeholder="Zip Code" type="text" name="zip_start">
@@ -89,15 +92,15 @@
 
     <agm-map [latitude]="location.latitude" [longitude]="location.longitude" [mapTypeId]="location.mapType"
       [zoom]="location.zoom" (mapClick)="addMarker($event.coords.lat, $event.coords.lng)">
-      <agm-marker *ngFor="let marker of location.markers ;let i = index" [latitude]="marker.lat"
-        [longitude]="marker.lng" (markerClick)="selectMarker($event)" [markerDraggable]="true" marker
-        (dragEnd)="markerDragEnd($event.coords, $event,i)" title="from" animation="DROP" openInfoWindow="true"
+      <agm-marker *ngFor="let marker of location.markers, let i = index" [latitude]="marker.lat"
+        [longitude]="marker.lng" (markerClick)="selectMarker($event)" [markerDraggable]="true"
+        (dragEnd)="markerDragEnd($event.coords, $event, i )" title="from" animation="DROP" openInfoWindow="true"
         [iconUrl]="
     {
     url:marker.iconUrl,
     scaledSize: {
-    width: 40,
-    height: 70
+    width: 20,
+    height: 40
     }
     }">
         <agm-info-window [isOpen]="true">{{marker.adress}}</agm-info-window>

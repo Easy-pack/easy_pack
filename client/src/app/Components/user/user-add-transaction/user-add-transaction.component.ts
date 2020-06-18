@@ -1,10 +1,13 @@
 import { AuthService } from "./../../../services/auth.service";
 import { Component, OnInit } from "@angular/core";
-import { FormBuilder, FormGroup, FormControl } from "@angular/forms";
+import { FormGroup, FormControl } from "@angular/forms";
 import { Router } from "@angular/router";
 import { TransactionService } from "../../../services/transaction.service";
 import { NgbModal, ModalDismissReasons } from "@ng-bootstrap/ng-bootstrap";
-//import { MapComponent } from "../map/map.component";
+import { UserProfileService } from "../../../services/user-profile.service";
+import { SharedData } from "../../../services/sharedData";
+import { ej } from "@syncfusion/ej2/dist/ej2";
+import data = ej.data;
 
 @Component({
   selector: "app-user-add-transaction",
@@ -29,29 +32,29 @@ export class UserAddTransactionComponent implements OnInit {
     request_date: new FormControl(""),
     request_time: new FormControl(""),
   });
-
   closeResult: string;
-  departure_latitude: number = 36.7899655;
-  departure_longitude: number = 10.1714251;
-
-  destination_longitude: number = 36.8099113426508;
-  destination_latitude: number = 10.074214044819838;
-  loc = {
-    longitude: this.departure_longitude,
-    latitude: this.departure_latitude,
-    update_longitude: 37.07007538620692,
-    update_latitude: 10.112363560719228,
-  };
-  //myMap = "<app-map [location]=loc></app-map>";
+  id = localStorage.getItem("id");
   constructor(
     private transactionService: TransactionService,
     private authService: AuthService,
-    private modalService: NgbModal //private map: MapComponent
+    private modalService: NgbModal,
+    private userService: UserProfileService, // private map: MapComponent
+    private sharedData: SharedData,
+    private router: Router
   ) {}
   yelkekzemzmi(e) {
     console.log("yehelkek", e);
   }
-  ngOnInit(): void {}
+  ngOnInit(): void {
+    // tslint:disable-next-line:no-shadowed-variable
+    this.userService.fetchData(this.id).subscribe((data) => {
+      console.log(data);
+      this.sharedData.addMapTransactionData.address_start = data["address"];
+      this.sharedData.addMapTransactionData.city_start = data["city"];
+      this.sharedData.addMapTransactionData.zip_start = data["zip"];
+      this.sharedData.transactionData.address_start = `${data["address"]}, ${data["city"]}`;
+    });
+  }
 
   open(content) {
     this.modalService.open(content, { size: "lg" }).result.then(
@@ -73,12 +76,23 @@ export class UserAddTransactionComponent implements OnInit {
       return `with: ${reason}`;
     }
   }
-
+  bindData(value) {
+    this.sharedData.addMapTransactionData = value;
+    console.log("binding done", this.sharedData.addMapTransactionData);
+  }
   onSubmit() {
-    const transaction = this.newTransaction.value;
-    transaction.userId = this.authService.getId();
-    this.transactionService.postTransaction(transaction).subscribe((res) => {
-      console.log("Transaction added");
-    });
+    this.sharedData.transactionData.address_start = `${this.sharedData.addMapTransactionData.address_start}, ${this.sharedData.addMapTransactionData.city_start}`;
+    this.sharedData.transactionData.address_destination = `${this.sharedData.addMapTransactionData.address_destination}, ${this.sharedData.addMapTransactionData.city_destination}`;
+    this.sharedData.transactionData.package_comments = this.newTransaction.value.package_comments;
+    this.sharedData.transactionData.package_dimension = this.newTransaction.value.package_dimension;
+    this.sharedData.transactionData.package_weight = this.newTransaction.value.package_weight;
+    this.sharedData.transactionData.request_date = this.newTransaction.value.request_date;
+    this.sharedData.transactionData.request_time = this.newTransaction.value.request_time;
+    console.log(
+      this.sharedData.transactionData,
+      this.sharedData.addMapTransactionData
+    );
+
+    this.router.navigate(["/user/shippingDetails"]);
   }
 }
