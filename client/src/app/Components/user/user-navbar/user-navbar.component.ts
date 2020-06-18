@@ -4,6 +4,8 @@ import { ROUTES } from '../user-sidebar/user-sidebar.component';
 import { Location, LocationStrategy, PathLocationStrategy } from '@angular/common';
 import { Router } from '@angular/router';
 import { SocketIoService } from '../../../services/socket-io.service';
+import { tick } from '@angular/core/testing';
+
 import {UserProfileService} from "../../../services/user-profile.service"
 
 @Component({
@@ -17,22 +19,37 @@ export class UserNavbarComponent implements OnInit {
   public focus;
   public listTitles: any[];
   public location: Location;
-  public notification = 0;
   public socket;
-  constructor(location: Location,  
+  public notifications = [];
+  public notification = 0;
+
+  constructor( location: Location,  
               private element: ElementRef, 
               private router: Router, 
               public authService: AuthService,
               private socketIoService : SocketIoService,
               public userProfileService : UserProfileService) {
-    this.location = location;
+      this.location = location;
+  }
+
+  getNotification(){
+    this.socketIoService.getNotification().subscribe(response =>{
+      this.notifications = response.notifications;
+      if(this.notifications.length > 0){
+        alert('driver accepted your announcement')
+        alert(this.notifications.length)
+      }
+    });
+    
   }
 
   ngOnInit() {
+    this.getNotification();
     this.listTitles = ROUTES.filter(listTitle => listTitle);
     
     this.socket = this.socketIoService.setupSocketConnection().on('notification', (data)=>{
       this.notification += 1;
+      this.getNotification();
       console.log (this.notification);
     });
     this.getname()
@@ -59,7 +76,7 @@ export class UserNavbarComponent implements OnInit {
   }
 
   getname(){
-    const id = window.localStorage.getItem('id')
+    let id = localStorage.getItem('id');
     this.userProfileService.fetchData(id).subscribe(res => {
       console.log(res)
       this.name = res["user"].first_name
