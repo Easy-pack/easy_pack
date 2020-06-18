@@ -1,12 +1,9 @@
-<div
-  class="header pb-8 pt-5 pt-lg-8 d-flex align-items-center"
-  style="
+<div class="header pb-8 pt-5 pt-lg-8 d-flex align-items-center" style="
     min-height: 300px;
     background-image: url(https://image.freepik.com/free-vector/order-delivery-service-online-background_73174-203.jpg);
     background-size: cover;
     background-position: center top;
-  "
->
+  ">
   <!-- Mask -->
   <span class="mask gradient opacity-8"></span>
   <!-- Header container -->
@@ -18,12 +15,9 @@
         </h1>
         <div id="availabilityState" [style.background-color]="stateColor"></div>
 
-        <a class="btn btn-edit-save" [hidden]="!disableEdit" (click)="allowEdit()"
-          ><strong>Edit profile</strong> </a
-        >
-        <a class="btn btn-edit-save" [hidden]="disableEdit" (click)="open(mymodal)"
-          ><strong>Save Changes</strong></a
-        >
+        <a class="btn btn-edit-save" [hidden]="!disableEdit" (click)="allowEdit()">Edit profile</a>
+        <a class="btn btn-edit-save" [hidden]="disableEdit" (click)="open(mymodal)">Save Changes</a>
+        <a class="btn btn-edit-save" [hidden]="disableEdit" (click)="cancel()">Cancel</a>
       </div>
     </div>
   </div>
@@ -36,10 +30,7 @@
           <div class="col-lg-3 order-lg-2">
             <div class="card-profile-image">
               <a href="javascript:void(0)">
-                <img
-                  src="http://localhost:8080/{{data.photo}}"
-                  class="rounded-circle"
-                />
+                <img src="http://localhost:8080/{{data.photo}}" class="rounded-circle" />
               </a>
             </div>
           </div>
@@ -50,18 +41,10 @@
         <div class="card-body pt-0 pt-md-4">
           <div class="row">
             <div class="col">
-              <div
-                class="card-profile-stats d-flex justify-content-center mt-md-5 "
-              >
+              <div class="card-profile-stats d-flex justify-content-center mt-md-5 ">
                 <div class=" h5 mt-4">
-                  <button
-                    class="btn btn-photo"
-                    id="changePhotoButton"
-                    type="button"
-                    data-toggle="modal"
-                    data-target="#exampleModal"
-                    (click)="open(mymodal)"
-                  >
+                  <button class="btn btn-photo" id="changePhotoButton" type="button" data-toggle="modal"
+                    data-target="#exampleModal" (click)="open(mymodal)">
                     <i class="fa fa-fw fa-camera"></i>
                     <span>Change Photo</span>
                   </button>
@@ -82,13 +65,8 @@
               <i class="ni location_pin mr-2"></i>User
             </div>
             <div class="h5 mt-4">
-              <button
-                class="btn btn-pass"
-                id="changePhotoButton"
-                type="button"
-                (click)="openDialog()"
-              >
-              <i class="fas fa-unlock-alt"></i>
+              <button class="btn btn-pass" id="changePhotoButton" type="button" (click)="open(passwordmodal)">
+                <i class="fas fa-unlock-alt"></i>
                 <span>Change Password</span>
               </button>
             </div>
@@ -105,92 +83,49 @@
               <h3 class="mb-0">My account</h3>
             </div>
             <div class="col-4 text-right">
-              <a
-                href="#!"
-                class="btn btn-sm btn-primary"
-                [style.background-color]="stateColor"
-                >{{ data.state }}</a
-              >
+              <a href="#!" class="btn btn-sm btn-primary" [style.background-color]="stateColor">{{ data.state }}</a>
             </div>
           </div>
         </div>
         <div class="card-body">
           <!-------------form -------------------->
-          <form
-            class="formGroup"
-            [formGroup]="UserForm"
-            (ngSubmit)="updateUser()"
-            novalidate=""
-            id="ngForm"
-          >
+          <form class="formGroup" [formGroup]="UserForm" (ngSubmit)="updateUser()" novalidate="" id="ngForm">
             <h6 class="heading-small text-muted mb-4">User information</h6>
             <div class="pl-lg-4">
               <div class="row">
                 <div class="col-lg-6">
                   <div class="form-group">
-                    <label class="form-control-label" for="input-first-name"
-                      >First name</label
-                    >
-                    <input
-                      type="text"
-                      id="input-first-name"
-                      class="form-control form-control-alternative"
-                      placeholder="First name"
-                      formControlName="first_name"
-                      value="{{ data.first_name }}"
-                      [readonly]="disableEdit"
-                    />
+                    <label class="form-control-label" for="input-first-name">First name</label>
+                    <input type="text" id="input-first-name" class="form-control form-control-alternative"
+                      placeholder="First name" formControlName="first_name" value="{{ data.first_name }}"
+                      [readonly]="disableEdit" />
                   </div>
                 </div>
                 <div class="col-lg-6">
                   <div class="form-group">
-                    <label class="form-control-label" for="input-last-name"
-                      >Last name</label
-                    >
-                    <input
-                      type="text"
-                      id="input-last-name"
-                      class="form-control form-control-alternative"
-                      placeholder="Last name"
-                      formControlName="last_name"
-                      [readonly]="disableEdit"
-                    />
+                    <label class="form-control-label" for="input-last-name">Last name</label>
+                    <input type="text" id="input-last-name" class="form-control form-control-alternative"
+                      placeholder="Last name" formControlName="last_name" [readonly]="disableEdit" />
                   </div>
                 </div>
               </div>
               <div class="row">
                 <div class="col-lg-12">
                   <div class="form-group">
-                    <label class="form-control-label" for="input-email"
-                      >Email address</label
-                    >
-                    <input
-                      type="email"
-                      id="input-email"
-                      class="form-control form-control-alternative"
-                      placeholder="jesse@example.com"
-                      formControlName="email"
-                      value="{{ data.email }}"
-                      [readonly]="disableEdit"
-                    />
+                    <label class="form-control-label" for="input-email">Email address</label>
+                    <input type="email" id="input-email" class="form-control form-control-alternative"
+                      placeholder="jesse@example.com" formControlName="email" value="{{ data.email }}"
+                      [readonly]="disableEdit" />
                   </div>
                 </div>
               </div>
               <div class="row">
                 <div class="col-lg-12">
                   <div class="form-group">
-                    <label class="form-control-label" for="input-date"
-                      >Birth Date</label
-                    >
-                    <input
-                      type="date"
-                      id="input-date"
-                      class="form-control form-control-alternative"
-                      placeholder="jesse@example.com"
-                      formControlName="birth_date"
-                      value="{{ data.birth_date }}"
-                      [readonly]="disableEdit"
-                    />
+                    <label class="form-control-label" for="input-date">Birth Date</label>
+                    <input type="date" id="input-date" class="form-control form-control-alternative"
+                      placeholder="jesse@example.com" formControlName="birth_date" value="{{ data.birth_date }}"
+                      [readonly]="disableEdit" />
                   </div>
                 </div>
               </div>
@@ -202,78 +137,22 @@
               <div class="row">
                 <div class="col-md-12">
                   <div class="form-group">
-                    <label class="form-control-label" for="input-address"
-                      >Address</label
-                    >
-                    <input
-                      id="input-address"
-                      class="form-control form-control-alternative"
-                      formControlName="adress"
-                      placeholder="Home Address"
-                      type="text"
-                      value="{{ data.adress }}"
-                      [readonly]="disableEdit"
-                    />
+                    <label class="form-control-label" for="input-address">Address</label>
+                    <input id="input-address" class="form-control form-control-alternative" formControlName="adress"
+                      placeholder="Home Address" type="text" value="{{ data.adress }}" [readonly]="disableEdit" />
                   </div>
                 </div>
               </div>
               <div class="row">
                 <div class="col-md-12">
                   <div class="form-group">
-                    <label class="form-control-label" for="input-phone"
-                      >Phone</label
-                    >
-                    <input
-                      id="input-phone"
-                      class="form-control form-control-alternative"
-                      formControlName="phone"
-                      placeholder="Phone Number"
-                      type="text"
-                      value="{{ data.phone }}"
-                      [readonly]="disableEdit"
-                    />
+                    <label class="form-control-label" for="input-phone">Phone</label>
+                    <input id="input-phone" class="form-control form-control-alternative" formControlName="phone"
+                      placeholder="Phone Number" type="text" value="{{ data.phone }}" [readonly]="disableEdit" />
                   </div>
                 </div>
               </div>
-              <div class="row">
-                <div class="col-md-12">
-                  <label>Gender</label>
-                  <div class="custom-controls-stacked px-2">
-                    <div class="custom-control custom-radio">
-                      <input
-                        (change)="updateGender($event)"
-                        type="radio"
-                        class="custom-control-input"
-                        id="notifications-blog"
-                        checked=""
-                        formControlName="gender"
-                        value="male"
-                      />
-                      <label
-                        class="custom-control-label"
-                        for="notifications-blog"
-                        >Male</label
-                      >
-                    </div>
-                    <div class="custom-control custom-radio">
-                      <input
-                        type="radio"
-                        class="custom-control-input"
-                        id="notifications-news"
-                        (change)="updateGender($event)"
-                        checked=""
-                        formControlName="gender"
-                        value="female"
-                      />
-                      <label
-                        class="custom-control-label"
-                        for="notifications-news"
-                        >Female</label
-                      >
-                    </div>
-                  </div>
-                </div>
-              </div>
+
               <div class="row"></div>
             </div>
             <hr class="my-4" />
@@ -287,37 +166,51 @@
 
 <!------------------------------------------------------------------------------------------------------------->
 <!-- <h1>Angular 8 Bootstrap Modal Popup Example</h1>
-
-<button class="btn btn-lg btn-outline-primary" (click)="open(mymodal)">Open My Modal</button> -->
-
+<!-------------Change password--------------->
 <ng-template #mymodal let-modal>
   <div class="modal-header">
-    <h4 class="modal-title" id="modal-basic-title">Accept Changes</h4>
-    <button
-      type="button"
-      class="close"
-      aria-label="Close"
-      (click)="modal.dismiss('Cross click')"
-    >
+    <h4 class="modal-title" id="modal-basic-title">Confirm Profile Edit</h4>
+    <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
       <span aria-hidden="true">×</span>
     </button>
   </div>
   <div class="modal-body">
-    Are you sure to change your informations?
+
+    <label class="form-control-label" for="input-current-password">Password</label>
+    <input type="password" id="input-current-password" class="form-control form-control-alternative"
+      placeholder="Your password" [(ngModel)]="currentPassword" />
+
   </div>
   <div class="modal-footer">
-    <button
-      type="button"
-      class="btn btn-outline-dark"
-      (click)="updateUser(); modal.close('Save click')"
-    >Yes
+    <button type="button" class="btn btn-outline-dark" (click)="updateUser();">
+      Ok
     </button>
-    <button
-    type="button"
-    class="btn btn-outline-dark"
-    aria-label="Close"
-    (click)="modal.dismiss('Cross click')"
-  >No
-  </button>
+  </div>
+</ng-template>
+
+<ng-template #passwordmodal let-modal>
+  <div class="modal-header">
+    <h4 class="modal-title" id="modal-basic-title">Change Password</h4>
+    <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
+      <span aria-hidden="true">×</span>
+    </button>
+  </div>
+  <div class="modal-body">
+
+    <label class="form-control-label" for="input-current-password">Current Password</label>
+    <input type="password" id="input-current-password1" class="form-control form-control-alternative"
+      placeholder="Your password" [(ngModel)]="currentPassword" /><br>
+    <label class="form-control-label" for="input-current-password">New Password</label>
+    <input type="password" id="input-current-password2" class="form-control form-control-alternative"
+      placeholder="Your password" [(ngModel)]="newPassword" /><br>
+    <label class="form-control-label" for="input-current-password">Confirm New Password</label>
+    <input type="password" id="input-current-password3" class="form-control form-control-alternative"
+      placeholder="Your password" [(ngModel)]="confirmNewPassword" />
+
+  </div>
+  <div class="modal-footer">
+    <button type="button" class="btn btn-outline-dark" (click)="updatePassword();">
+      Ok
+    </button>
   </div>
 </ng-template>
