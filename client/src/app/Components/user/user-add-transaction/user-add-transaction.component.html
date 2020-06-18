@@ -1,94 +1,107 @@
-
-
 <div class="header gradient py-7 py-lg-8">
-    <div class="container">
-      <div class="header-body text-center mb-7">
+  <div class="container">
+    <div class="header-body text-center mb-7">
 
-      </div>
-    </div>
-    <div class="separator separator-bottom separator-skew zindex-100">
-      <svg x="0" y="0" viewBox="0 0 2560 100" preserveAspectRatio="none" version="1.1" xmlns="http://www.w3.org/2000/svg">
-        <polygon class="fill-default" points="2560 0 2560 100 0 100"></polygon>
-      </svg>
     </div>
   </div>
-  <!-- Page content -->
-  <div class="container mt--9 pb-5">
-    <!-- Table -->
-    <div class="row justify-content-center">
-      <div class="col-lg-6 col-md-8">
-        <div class="card bg-secondary shadow border-0">
-          <div class="card-body px-lg-5 py-lg-5">
-            <div class="text-center text-muted mb-4">
-              <h1>Send Package</h1>
-            </div>
-            <form  [formGroup] ="newTransaction" (ngSubmit)="onSubmit()">
-              <div class="row form-group">
-                <div class="col-7">
-                  <h4>Package Dimensions: </h4>
-                </div>
-                <div class="col-5">
-                  <select name="size" class="custom-select mb-3" formControlName = "package_dimension">
-                    <option selected>Size</option>
-                    <option value="S (35x25x3 cm)" >S (35x25x3 cm)</option>
-                    <option value="M (50x50x35 cm)">M (50x50x35 cm)</option>
-                    <option value="L (80x50x35 cm)">L (80x50x35 cm)</option>
-                    <option value="XL (120x60x60 cm)">XL (120x60x60 cm)</option>
-                  </select>
-                </div>
-              </div>
-              <div class="row form-group">
-                <div class="col-7">
-                  <h4>Package Weight in kg: </h4>
-                </div>
-                <div class="col-5">
-                  <select name="size" class="custom-select mb-3" formControlName = "package_weight">
-                    <option selected>Weight</option>
-                    <option value="1" >Under 1kg</option>
-                    <option value="2">1-2 kg</option>
-                    <option value="5">2-5 kg</option>
-                    <option value="10">5-10 kg</option>
-                    <option value="15">10-15 kg</option>
-                    <option value="20">15+ kg</option>
-
-                  </select>
-                </div>
-              </div>
-              <div class="form-group">
-                <div class="input-group input-group-alternative mb-3">
-                  <input class="form-control" formControlName = "package_comments" placeholder="Comments concerning the Package" type="text" name="comments">
-                </div>
-              </div>
-              <div class="form-group">
-                <label>From:</label>
-                <div class="input-group input-group-alternative">
-                  <input class="form-control" formControlName = "address_start" placeholder="Address" type="text" name="start">
-                </div>
-              </div>
-              <div class="form-group">
-                <label>to:</label>
-                <div class="input-group input-group-alternative">
-                  <input class="form-control" formControlName = "address_destination" placeholder="Address" type="text" name="destination">
-                </div>
-              </div>
-              <div class="form-group">
-                <label>Date of picking:</label>
-                <div class="input-group input-group-alternative">
-                  <input class="form-control" formControlName = "request_date" type="date" id="date" name="date">
-                </div>
-              </div>
-              <div class="form-group ">
-                <label>Time of picking:</label>
-                <div class="input-group input-group-alternative">
-                  <input class="form-control" formControlName = "request_time" placeholder="Time of picking" type="time" id="time" name="time">
-                </div>
-              </div>
-              <div class="text-center">
-                <button  class="btn btn-confirm mt-4" type="submit">Confirm</button>
-              </div>
-            </form>
+  <div class="separator separator-bottom separator-skew zindex-100">
+    <svg x="0" y="0" viewBox="0 0 2560 100" preserveAspectRatio="none" version="1.1" xmlns="http://www.w3.org/2000/svg">
+      <polygon class="fill-default" points="2560 0 2560 100 0 100"></polygon>
+    </svg>
+  </div>
+</div>
+<!-- Page content -->
+<div class="container mt--9 pb-5">
+  <!-- Table -->
+  <div class="row justify-content-center">
+    <div class="col-lg-6 col-md-8">
+      <div class="card bg-secondary shadow border-0">
+        <div class="card-body px-lg-5 py-lg-5">
+          <div class="text-center text-muted mb-4">
+            <h1>Send Package</h1>
           </div>
+          <form [formGroup]="newTransaction" (ngSubmit)="onSubmit()">
+            <div class="row form-group">
+              <div class="col-7">
+                <h4>Package Dimensions: </h4>
+              </div>
+              <div class="col-5">
+                <select name="size" class="custom-select mb-3" formControlName="package_dimension">
+                  <option selected>Size</option>
+                  <option value="s">S (35x25x3 cm)</option>
+                  <option value="m">M (50x50x35 cm)</option>
+                  <option value="l">L (80x50x35 cm)</option>
+                  <option value="xl">XL (120x60x60 cm)</option>
+                </select>
+              </div>
+            </div>
+            <div class="row form-group">
+              <div class="col-7">
+                <h4>Package Weight in kg: </h4>
+              </div>
+              <div class="col-5">
+                <select name="size" class="custom-select mb-3" formControlName="package_weight">
+                  <option selected>Weight</option>
+                  <option value="1">Under 1kg</option>
+                  <option value="2">1-2 kg</option>
+                  <option value="5">2-5 kg</option>
+                  <option value="10">5-10 kg</option>
+                  <option value="15">10-15 kg</option>
+                  <option value="20">15+ kg</option>
+
+                </select>
+              </div>
+            </div>
+            <div class="form-group">
+              <div class="input-group input-group-alternative mb-3">
+                <input class="form-control" formControlName="package_comments"
+                  placeholder="Comments concerning the Package" type="text" name="comments">
+              </div>
+            </div>
+
+            <button (click)="open(mymodal)" type="button">Shipping Information</button>
+            <div class="form-group">
+              <label>Date of picking:</label>
+              <div class="input-group input-group-alternative">
+                <input class="form-control" formControlName="request_date" type="date" id="date" name="date">
+              </div>
+            </div>
+            <div class="form-group ">
+              <label>Time of picking:</label>
+              <div class="input-group input-group-alternative">
+                <input class="form-control" formControlName="request_time" placeholder="Time of picking" type="time"
+                  id="time" name="time">
+              </div>
+            </div>
+            <div class="text-center">
+              <button class="btn btn-confirm mt-4" type="submit">Confirm</button>
+            </div>
+          </form>
         </div>
       </div>
     </div>
   </div>
+</div>
+<!------------------------------------------------------------------------------------------------------------->
+<!-- <h1>Angular 8 Bootstrap Modal Popup Example</h1>
+
+<button class="btn btn-lg btn-outline-primary" (click)="open(mymodal)">Open My Modal</button> -->
+
+
+<ng-template #mymodal let-modal>
+  <div class="modal-header">
+    <h4 class="modal-title" id="modal-basic-title">Delivery Address :</h4>
+    <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
+      <span aria-hidden="true">×</span>
+    </button>
+  </div>
+  <div class="modal-body">
+    <app-map></app-map>
+  </div>
+  <div class="modal-footer">
+    <button type="button" class="btn btn-outline-dark" (click)=" modal.close('Save click')">
+      Ok
+    </button>
+  </div>
+
+</ng-template>

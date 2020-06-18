@@ -9,6 +9,7 @@ const path = require('path');
 
 app.use(express.static('public'));
 
+app.use(express.static('public'))
 app.use(cors());
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({
@@ -26,7 +27,9 @@ app.use('/notification', routes.notification);
 
 const port = process.env.PORT || 8080;
 
-database.sql.sync({force : false});
+database.sql.sync({
+    force: false
+});
 
 const server = app.listen(port, () => {
     console.log(`listening on port ${port}`);
@@ -36,20 +39,19 @@ const server = app.listen(port, () => {
 
 const io = require('socket.io').listen(server);
 
-io.on('connection', (socket) =>{
+io.on('connection', (socket) => {
     console.log(chalk.blueBright('new connection'))
-    socket.on('newTransaction', (data) =>{
+    socket.on('newTransaction', (data) => {
         console.log(chalk.blue('socket is here'));
         console.log(data);
         socket.broadcast.emit('notification', data);
     });
 
-    socket.on('acceptDelivrary', (data)=>{
+    socket.on('acceptDelivrary', (data) => {
         socket.broadcast.emit('userNotification', data)
     })
 
-    socket.on('doneTransaction', (data)=>{
+    socket.on('doneTransaction', (data) => {
         socket.broadcast.emit('userNotification', data);
     });
 });
-

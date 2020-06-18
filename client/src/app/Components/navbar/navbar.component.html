@@ -1,54 +1,53 @@
-
-
 <header class="site-navbar py-3  site-navbar-target " role="banner" id="site-navbar">
 
-<nav class="navbar navbar-toggleable-md navbar-expand-lg navbar-dark bg-transparent sticky-top" (scroll)="onWindowScroll($event);" role="navigation">
-  
-  <img class="navbar-brand mb-0 logo" src="../../../assets/images/logo/logo easypack blanc.png" alt="">
-  <button class="navbar-toggler" type="button" (click)="isCollapsed=!isCollapsed"
-    aria-controls="sidenav-collapse-main">
-    <span class="navbar-toggler-icon"></span>
-  </button>
-  <div class="navbar-collapse-header d-md-none">
-    <div class="row">
-      <div class="col-6 collapse-brand">
-        <a  routerLinkActive="active" [routerLink]="['/dashboard']">
-          <img src="./assets/img/brand/blue.png">
-        </a>
-      </div>
-      <div class="col-6 collapse-close">
-        <button type="button" class="navbar-toggler" (click)="isCollapsed=!isCollapsed">
-          <span></span>
-          <span></span>
-        </button>
+  <nav class="navbar navbar-toggleable-md navbar-expand-lg navbar-dark bg-transparent sticky-top"
+    (scroll)="onWindowScroll($event);" role="navigation">
+
+    <img class="navbar-brand mb-0 logo" src="../../../assets/images/logo/logo easypack blanc.png" alt="">
+    <button class="navbar-toggler" type="button" (click)="isCollapsed=!isCollapsed"
+      aria-controls="sidenav-collapse-main">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="navbar-collapse-header d-md-none">
+      <div class="row">
+        <div class="col-6 collapse-brand">
+          <a routerLinkActive="active" [routerLink]="['/dashboard']">
+            <img src="./assets/img/brand/blue.png">
+          </a>
+        </div>
+        <div class="col-6 collapse-close">
+          <button type="button" class="navbar-toggler" (click)="isCollapsed=!isCollapsed">
+            <span></span>
+            <span></span>
+          </button>
+        </div>
       </div>
     </div>
-  </div>
-  <div class="collapse navbar-collapse  mx-auto  d-lg-block" [ngbCollapse]="isCollapsed" id="sidenav-collapse-main">
+    <div class="collapse navbar-collapse  mx-auto  d-lg-block" [ngbCollapse]="isCollapsed" id="sidenav-collapse-main">
 
-    <ul class="navbar-nav mr-auto">
-      <li class="nav-item">
-        <a class="nav-link" href="#section-home">Home</a>
-      </li>
-      <li class="nav-item">
-        <a class="nav-link" href="#section-about">About Us</a>
-      </li>
-      <li class="nav-item">
-        <a class="nav-link" href="#section-how-it-works">How It Works</a>
-      </li>
-      <li class="nav-item">
-        <a class="nav-link" href="#section-our-team">Our Team</a>
-      </li>
+      <ul class="navbar-nav mr-auto">
+        <li class="nav-item">
+          <a class="nav-link" href="#section-home">Home</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="#section-about">About Us</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="#section-how-it-works">How It Works</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="#section-our-team">Our Team</a>
+        </li>
 
-    </ul>
-    <ul class="navbar-nav">
-      <li routerLink = "/login" class="nav-item d-flex justify-content-end loginbtn ">
-        <a class="nav-link "  >Login</a>
-      </li>
-    </ul>
+      </ul>
+      <ul class="navbar-nav">
+        <li routerLink="/login" class="nav-item d-flex justify-content-end loginbtn ">
+          <a class="nav-link ">Login</a>
+        </li>
+      </ul>
 
 
-  </div>
+    </div>
 
-</nav>
+  </nav>
 </header>

@@ -10,9 +10,9 @@ import { DriverBoardComponent } from "../../Components/driver/driver-board/drive
 import { NgbModule } from "@ng-bootstrap/ng-bootstrap";
 import { FormsModule, ReactiveFormsModule } from "@angular/forms";
 import { DriverProfileComponent } from "../../Components/driver/driver-profile/driver-profile.component";
-import {DriverHistoryComponent} from "../../Components/driver/driver-history/driver-history.component";
-import {AnnouncementComponent} from "../../Components/driver/announcement/announcement.component"
-import { VehiclesComponent } from '../../Components/driver/vehicles/vehicles.component';
+import { DriverHistoryComponent } from "../../Components/driver/driver-history/driver-history.component";
+import { AnnouncementComponent } from "../../Components/driver/announcement/announcement.component";
+import { VehiclesComponent } from "../../Components/driver/vehicles/vehicles.component";
 @NgModule({
   declarations: [
     DriverComponent,
@@ -22,7 +22,7 @@ import { VehiclesComponent } from '../../Components/driver/vehicles/vehicles.com
     DriverProfileComponent,
     DriverHistoryComponent,
     AnnouncementComponent,
-    VehiclesComponent
+    VehiclesComponent,
   ],
   imports: [
     CommonModule,

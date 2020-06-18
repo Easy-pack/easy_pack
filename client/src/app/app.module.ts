@@ -6,7 +6,6 @@ import { HttpClientModule } from "@angular/common/http";
 import { BrowserModule } from "@angular/platform-browser";
 import { NgbModule } from "@ng-bootstrap/ng-bootstrap";
 
-
 import { AppComponent } from "./app.component";
 import { AppRoutingModule } from "./app.routing";
 import { SignUpDriverComponent } from "./Components/auth/sign-up-driver/sign-up-driver.component";
@@ -21,9 +20,8 @@ import { LoginComponent } from "./Components/auth/login/login-user.component";
 import { SignupUserComponent } from "./Components/auth/signup-user/signup-user.component";
 import { HomeComponent } from "./Components/home/home.component";
 import { SocketIoService } from "./services/socket-io.service";
- 
-import { from } from "rxjs";
 
+import { from } from "rxjs";
 
 @NgModule({
   imports: [
@@ -48,7 +46,6 @@ import { from } from "rxjs";
     FooterComponent,
     LoginComponent,
     SignupUserComponent,
-
   ],
   providers: [SocketIoService],
   bootstrap: [AppComponent],

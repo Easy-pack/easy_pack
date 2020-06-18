@@ -42,15 +42,11 @@
                                 <div class="form-group mb-3">
                                     <input type="text" placeholder="Vat Number" formControlName = "vat_number" class="form-control rounded-pill border-0 shadow-sm px-4"  name="cin" required>
                                 </div>
-                                <div class="form-group form-check mb-3">
-                                    <div class="row">
-                                        <div class="col-md-6 gender">
-                                            <label for='uploadImg'>Upload image</label>
-                                        </div>
-                                        <div class="col-md">
-                                            <input type="file" name="image" (change)="onChange($event)"/>
-                                        </div>
-                                    </div>
+                                <div class="form-group mb-3">
+                                            <label for="uploadImg" class="custom-file-upload">
+                                                <i class="fa fa-cloud-upload"></i> Upload image :
+                                            </label>
+                                            <input type="file" id="uploadImg" class=" form-control rounded-pill border-0 shadow-sm px-4" name="image" (change)="onChange($event)"/>
                                 </div>
                               </div>
                                 <button type="submit" class="btn btn-register btn-block text-uppercase mb-2 rounded-pill shadow-sm">Register</button>

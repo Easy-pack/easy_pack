@@ -1,5 +1,5 @@
-import { Component, OnInit } from '@angular/core';
-import { VehiclesService } from '../../../services/vehicles.service';
+import { Component, OnInit } from "@angular/core";
+import { VehiclesService } from "../../../services/vehicles.service";
 import { NgbModal, ModalDismissReasons } from "@ng-bootstrap/ng-bootstrap";
 import {
   FormControl,
@@ -9,9 +9,9 @@ import {
 } from "@angular/forms";
 
 @Component({
-  selector: 'app-vehicles',
-  templateUrl: './vehicles.component.html',
-  styleUrls: ['./vehicles.component.css']
+  selector: "app-vehicles",
+  templateUrl: "./vehicles.component.html",
+  styleUrls: ["./vehicles.component.css"],
 })
 export class VehiclesComponent implements OnInit {
   vehicles;
@@ -26,8 +26,8 @@ export class VehiclesComponent implements OnInit {
     reg_number: new FormControl(""),
   });
 
-  editVehicle= new FormGroup({
-    id:new FormControl(""),
+  editVehicle = new FormGroup({
+    id: new FormControl(""),
     type: new FormControl(""),
     make: new FormControl(""),
     model: new FormControl(""),
@@ -36,16 +36,18 @@ export class VehiclesComponent implements OnInit {
     reg_number: new FormControl(""),
     driverId: new FormControl(""),
   });
-  constructor( public vehiclesService: VehiclesService,private modalService: NgbModal) { }
+  constructor(
+    public vehiclesService: VehiclesService,
+    private modalService: NgbModal
+  ) {}
 
   ngOnInit(): void {
-    this.getvehicles()
+    this.getvehicles();
   }
 
-  getvehicles(){
-    this.vehiclesService.fetchDrivervehicles().subscribe(response =>{
+  getvehicles() {
+    this.vehiclesService.fetchDrivervehicles().subscribe((response) => {
       this.vehicles = response;
-      
     });
   }
 
@@ -54,7 +56,7 @@ export class VehiclesComponent implements OnInit {
       .open(content, { ariaLabelledBy: "modal-basic-title" })
       .result.then(
         (result) => {
-          console.log("yehlkek zamzoum")
+          console.log("yehlkek zamzoum");
           this.closeResult = `Closed with: ${result}`;
         },
         (reason) => {
@@ -64,15 +66,15 @@ export class VehiclesComponent implements OnInit {
       );
   }
 
-  openedit(content, index ) {
-    (<FormGroup>this.editVehicle).patchValue(this.vehicles[index])
-    this.vehicleId = this.editVehicle.value.id
+  openedit(content, index) {
+    (<FormGroup>this.editVehicle).patchValue(this.vehicles[index]);
+    this.vehicleId = this.editVehicle.value.id;
     this.modalService
       .open(content, { ariaLabelledBy: "modal-basic-title" })
       .result.then(
         (result) => {
-           console.log('hi');
-          
+          console.log("hi");
+
           this.closeResult = `Closed with: ${result}`;
         },
         (reason) => {
@@ -92,11 +94,11 @@ export class VehiclesComponent implements OnInit {
     }
   }
 
-  close(){
-    this.modalService.dismissAll()
+  close() {
+    this.modalService.dismissAll();
   }
 
-  onSubmit(){
+  onSubmit() {
     const Veh = this.newVehicle.value;
     Veh.driverId = window.localStorage.getItem('id')
     this.vehiclesService.addVehicle(Veh).subscribe(res =>{
@@ -104,7 +106,7 @@ export class VehiclesComponent implements OnInit {
       this.getvehicles()
     })
 
-    this.close()
+    this.close();
     this.newVehicle = new FormGroup({
       type: new FormControl(""),
       make: new FormControl(""),
@@ -115,16 +117,14 @@ export class VehiclesComponent implements OnInit {
     });
   }
 
-  edit(){
-    console.log(this.editVehicle.value)
+  edit() {
+    console.log(this.editVehicle.value);
     this.vehiclesService
-      .updateVehicle (this.vehicleId, this.editVehicle.value)
-      .subscribe((res:any)=>{
-        console.log("Vehicle edited", res)
-        this.getvehicles()
-      })
-      this.close()
+      .updateVehicle(this.vehicleId, this.editVehicle.value)
+      .subscribe((res: any) => {
+        console.log("Vehicle edited", res);
+        this.getvehicles();
+      });
+    this.close();
   }
-
-
 }
