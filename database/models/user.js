@@ -7,14 +7,18 @@ module.exports = (sql, Sequelize) => {
             allowNull: false,
             unique: true
         },
-        phone: Sequelize.INTEGER,
+        phone: Sequelize.STRING,
         address: Sequelize.STRING,
+        city: Sequelize.STRING,
+        zip: Sequelize.STRING,
+        longitude: Sequelize.FLOAT,
+        latitude: Sequelize.FLOAT,
         cin: {
             type: Sequelize.STRING,
             allowNull: false,
             unique: true
         },
-        password : Sequelize.STRING,
+        password: Sequelize.STRING,
         photo: Sequelize.STRING,
         vat_number: Sequelize.STRING
     });

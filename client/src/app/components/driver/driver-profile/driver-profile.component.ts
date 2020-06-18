@@ -1,7 +1,6 @@
 import { Component, OnInit } from "@angular/core";
 import { DriverInterface } from "../../../interfaces/driver-interface";
 import { DriverProfileService } from "../../../services/driver-profile.service";
-import { HttpClient } from "@angular/common/http";
 
 import {
   FormControl,
@@ -13,8 +12,7 @@ import {
 import * as bcrypt from "bcryptjs";
 import * as moment from "moment";
 import { from } from "rxjs";
-import { MatDialog, MatDialogConfig } from "@angular/material/dialog";
-import { DialogPasswordConfirmationComponent } from "../dialog-password-confirmation/dialog-password-confirmation.component";
+import { NgbModal, ModalDismissReasons } from "@ng-bootstrap/ng-bootstrap";
 
 @Component({
   selector: "app-driver-profile",
@@ -22,16 +20,22 @@ import { DialogPasswordConfirmationComponent } from "../dialog-password-confirma
   styleUrls: ["./driver-profile.component.css"],
 })
 export class DriverProfileComponent implements OnInit {
-  id: number;
-  data: DriverInterface;
+  id;
+  data;
   rate: any;
   submitted: boolean = false;
   disableEdit: boolean = true;
   passwordInputValue: string = "";
   createdAt: string;
   stateColor: string;
+  closeResult: string;
+  currentPassword: string;
+  newPassword: string;
+  confirmNewPassword: string;
+  stateButton: string;
+  newState: string;
 
-  driverForm = new FormGroup({
+  DriverForm = new FormGroup({
     first_name: new FormControl(""),
     last_name: new FormControl(""),
     password: new FormControl(""),
@@ -41,68 +45,83 @@ export class DriverProfileComponent implements OnInit {
     gender: new FormControl(""),
     email: new FormControl(""),
     phone: new FormControl(""),
-    newPassword: new FormControl(""),
-    confirmNewPassword: new FormControl(""),
     state: new FormControl(""),
+    // newPassword: new FormControl(""),
+    // confirmNewPassword: new FormControl(""),
+
     photo: new FormControl(""),
   });
 
   constructor(
-    private http: HttpClient,
     private formBuilder: FormBuilder,
-    private driverService: DriverProfileService,
-    private matDialog: MatDialog
+    private driverProfileService: DriverProfileService,
+    private modalService: NgbModal
   ) {}
 
-  openDialog() {
-    const dialogConfig = new MatDialogConfig();
-    this.matDialog.open(DialogPasswordConfirmationComponent, dialogConfig);
+  open(content) {
+    this.currentPassword = "";
+    this.newPassword = "";
+    this.confirmNewPassword = "";
+    this.modalService
+      .open(content, { ariaLabelledBy: "modal-basic-title" })
+      .result.then(
+        (result) => {
+          this.closeResult = `Closed with: ${result}`;
+        },
+        (reason) => {
+          this.closeResult = `Dismissed ${this.getDismissReason(reason)}`;
+        }
+      );
+  }
+
+  private getDismissReason(reason: any): string {
+    if (reason === ModalDismissReasons.ESC) {
+      return "by pressing ESC";
+    } else if (reason === ModalDismissReasons.BACKDROP_CLICK) {
+      return "by clicking on a backdrop";
+    } else {
+      return `with: ${reason}`;
+    }
   }
 
   get verifyPassword() {
-    return this.driverForm.controls;
+    return this.DriverForm.controls;
   }
+
   allowEdit() {
     this.disableEdit = false;
   }
 
   getDriver() {
-    this.driverService.fetchData(this.id).subscribe((driverData) => {
-      console.log("fetchedDATA2", driverData);
-      this.data = driverData["driver"];
-      console.log("this.DATAIN", this.data);
-      (<FormGroup>this.driverForm).patchValue(this.data);
-      //this.driverForm.setValue({ value: this.data });
+    this.driverProfileService.fetchData().subscribe((DriverData) => {
+      this.data = DriverData["driver"];
+      console.log("Driver", DriverData["driver"]);
+      (<FormGroup>this.DriverForm).patchValue(this.data);
+
       this.rate = Array(this.data.rate);
       if (this.data.state === "available") {
         this.stateColor = "green";
-      } else {
+        this.stateButton = "red";
+        this.newState = " not available";
+      } else if (this.data.state === "not available") {
         this.stateColor = "red";
+        this.stateButton = "green";
+        this.newState = "available";
       }
       this.createdAt = moment(this.data.createdAt).format('"MMM Do YY"');
-      console.log("this.driverForm.valueUpdated ", this.driverForm.value);
+      console.log(DriverData, "this.date", this.DriverForm.value.birth_date);
     });
   }
-
   checkNewPassword() {
-    if (
-      !this.driverForm.value.newPassword &&
-      !this.driverForm.value.confirmNewPassword
-    ) {
-      //alert(' empty passwords values');
+    if (this.newPassword == undefined && this.confirmNewPassword == undefined) {
+      console.log("empty passwords");
       return true;
     } else {
-      if (
-        this.driverForm.value.newPassword ===
-        this.driverForm.value.confirmNewPassword
-      ) {
+      if (this.newPassword === this.confirmNewPassword) {
         alert("correct new password ");
-        let hashNewPassword = bcrypt.hashSync(
-          this.driverForm.value.newPassword,
-          10
-        );
-        this.driverForm.value.password = hashNewPassword;
-        return true;
+        let hashNewPassword = bcrypt.hashSync(this.newPassword, 10);
+        this.DriverForm.value.password = hashNewPassword;
+        this.updateDriver();
       } else {
         alert("not matching password");
         return false;
@@ -111,68 +130,93 @@ export class DriverProfileComponent implements OnInit {
     return false;
   }
 
-  changeState() {
-    if (this.data.state === "available") {
-      this.stateColor = "red";
-      this.data.state = "absent";
-    } else if (this.data.state === "absent") {
-      this.data.state = "available";
-      this.stateColor = "green";
-      console.log(this.data.state);
+  updatePassword() {
+    if (this.currentPassword == undefined) {
+      console.log("Please enter your password");
+      alert("Please enter your password");
+    } else {
+      let comparePasswords = bcrypt.compareSync(
+        this.currentPassword,
+        this.data.password
+      );
+      if (comparePasswords) {
+        console.log("correct current password");
+        this.checkNewPassword();
+      }
     }
   }
 
   updateDriver() {
     // this.submitted = true;
-    // if (this.driverForm.value.currentPassword == null) {
-    //   alert("Please enter your password");
-    // } else {
-    //   let comparePasswords = bcrypt.compareSync(
-    //     this.driverForm.value.currentPassword,
-    //     this.data.password
-    //   );
-    //   if (comparePasswords) {
-    //     if (this.checkNewPassword()) {
-    //       formDriver.id = 1;
-    //       formDriver.state = this.data.state;
-    //       console.log("state", formDriver.state);
-    // e.preventDefault();
-    console.log(this.driverForm.value, "inputs");
-    this.driverService
-      .postData(this.id, this.driverForm.value)
-      .subscribe((res: any) => {
-        console.log("res", res);
-        // console.log("formDriver", this.id, this.data);
-        // document.getElementById("fullName").innerHTML =
-        //   this.driverForm.value.first_name +
-        //   " " +
-        //   this.driverForm.value.last_name;
-        this.passwordInputValue = null;
-        this.disableEdit = true;
-
-        console.log("state2", this.driverForm.value.state);
-        this.allowEdit();
-        this.getDriver();
-      });
+    if (this.currentPassword == undefined) {
+      console.log("Please enter your password");
+      alert("Please enter your password");
+    } else {
+      let comparePasswords = bcrypt.compareSync(
+        this.currentPassword,
+        this.data.password
+      );
+      if (comparePasswords) {
+        console.log("currentpass", this.currentPassword);
+        console.log(this.DriverForm.value, "inputs");
+        this.data.state = "not available";
+        this.driverProfileService
+          .postData(this.id, this.DriverForm.value)
+          .subscribe((res: any) => {
+            this.passwordInputValue = null;
+            this.disableEdit = true;
+            this.getDriver();
+            this.currentPassword = "";
+            this.closeModal();
+          });
+      } else {
+        alert("Please check your password and try again");
+      }
+    }
   }
-  //   } else {
-  //     alert("Please check your password and try again");
-  //   //   }
-  //   }
-  // }
 
+  changeState() {
+    if (this.data.state === "available") {
+      this.stateColor = "red";
+      this.data.state = "not available";
+      this.stateButton = "green";
+      this.newState = "available";
+      this.DriverForm.value.state = "not available";
+      this.data.state = "not available";
+    } else if (this.data.state === "not available") {
+      this.data.state = "available";
+      this.stateColor = "green";
+      this.stateButton = "red";
+      console.log(this.data.state);
+      this.newState = "not available";
+      this.DriverForm.value.state = "available";
+      this.data.state = "available";
+    }
+    this.driverProfileService
+      .postData(this.id, this.DriverForm.value)
+      .subscribe((res: any) => {});
+    console.log(this.DriverForm.value);
+  }
+
+  closeModal() {
+    this.modalService.dismissAll();
+  }
   updateGender(e) {
     console.log(e.target.value);
     this.data.gender = e.target.value;
   }
+  cancel() {
+    (<FormGroup>this.DriverForm).patchValue(this.data);
+    this.passwordInputValue = null;
+    this.disableEdit = true;
+  }
 
   ngOnInit(): void {
-    this.id = 1;
-    console.log("driverID", this.id);
+    this.id = window.localStorage.getItem("id");
     this.getDriver();
 
-    this.driverForm = this.formBuilder.group({
-      first_name: ["NNN", [Validators.required]],
+    this.DriverForm = this.formBuilder.group({
+      first_name: ["", [Validators.required]],
       last_name: [""],
       password: [""],
       currentPassword: [""],
@@ -181,13 +225,8 @@ export class DriverProfileComponent implements OnInit {
       gender: [""],
       email: [""],
       phone: [""],
-      newPassword: [""],
-      confirmNewPassword: [""],
       state: [""],
       photo: [""],
     });
-    this.driverForm.valueChanges.subscribe((newVal) =>
-      console.log("newval", newVal)
-    );
   }
 }

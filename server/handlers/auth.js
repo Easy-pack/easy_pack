@@ -2,92 +2,138 @@ const bcrypt = require('bcryptjs');
 const db = require('../../database');
 const jwt = require('jsonwebtoken');
 const chalk = require('chalk');
+const createError = require('http-errors')
+const path = require('path');
 
 exports.signUpDriver = async (req, res) => {
+    console.log(chalk.blue('request coming'))
     let body = req.body;
     let profile = {};
-    for(let key in body){
+    for (let key in body) {
         profile[key] = body[key];
     }
-    profile.photo = req.file.destination;
-
+    console.log(req.file.destination);
+    profile.photo = path.join('images', req.file.filename);
+    console.log(chalk.blue(profile.photo));
     try {
+        if (!req.body.password) throw createError(404, `missing password`);
         const {
             email
         } = profile;
-        const driverEmail = await db.driver.findOne({where: {email}});
-        const userEmail = await db.user.findOne({where: {email}});
+        const driverEmail = await db.driver.findOne({
+            where: {
+                email
+            }
+        });
+        const userEmail = await db.user.findOne({
+            where: {
+                email
+            }
+        });
 
         if (userEmail || driverEmail) {
             console.log(chalk.red('I am here'))
-            return res.status(409).json("user exist")
+            throw createError(403, `email '${email}' already exist`)
         }
         const hashedPassword = await bcrypt.hash(profile.password, 10);
         profile.password = hashedPassword
-        await db.driver.create(profile);
-        res.status(201).json({success: 'User created successfully'});
-        
+        const driver = await db.driver.create(profile);
+        if (!driver) throw createError(400, `driver not created`)
+        else res.status(201).json({
+            success: 'driver created successfully'
+        });
+
     } catch (e) {
-        res.status(404).json({error: e});
+        res.status(e.status).json({
+            error: e.message
+        });
     }
 };
 
 exports.signUpUser = async (req, res) => {
     let body = req.body;
     let profile = {};
-    console.log(chalk.greenBright('continues'));
-    for(let key in body){
+    for (let key in body) {
         profile[key] = body[key];
-        console.log(key + ' ' +body[key]+'\n');
     }
-    profile.photo = req.file.destination;
-    
+    profile.photo = path.join('images', req.file.filename);
+
     try {
+        if (!req.body.password) throw createError(404, `missing password`);
+        if (!req.body.email) throw createError(404, `missing email`);
+        console.log('email')
         const {
             email
         } = profile;
-        const driverEmail = await db.driver.findOne({where: {email}});
-        const userEmail = await db.user.findOne({where: {email}});
-
+        const driverEmail = await db.driver.findOne({
+            where: {
+                email
+            }
+        });
+        const userEmail = await db.user.findOne({
+            where: {
+                email
+            }
+        });
         if (userEmail || driverEmail) {
-            return res.status(409).json("user exist")
+            throw createError(403, `email '${email}' already exist`)
         }
+
         const hashedPassword = await bcrypt.hash(req.body.password, 10);
-        
-        profile.password = hashedPassword
-        
-        await db.user.create(profile);
-        res.status(201).json({
+
+        profile.password = hashedPassword;
+
+        const user = await db.user.create(profile);
+
+        if (!user) throw createError(400, `user not created`)
+        else res.status(201).json({
             success: 'User created successfully'
         });
+
     } catch (e) {
-        res.status(409).json({
+        if (e && e.status && e.message)
+            res.status(e.status).json({
+                error: e.message
+            });
+        res.status(500).json({
             error: e
         });
+
     }
 };
 
 exports.login = async (req, res) => {
 
     try {
-        let role ="user";
+        if (!req.body.password) throw createError(404, `missing password`);
+        if (!req.body.email) throw createError(404, `missing email`);
+
+        let role = "user";
         const {
             email,
             password
         } = req.body;
-        let user = await db.user.findOne({where: {email}});
-        
+        let user = await db.user.findOne({
+            where: {
+                email
+            }
+        });
+
         if (!user) {
-            user = await db.driver.findOne({where: {email}});
-            (!user)? res.status(409).json({message: 'user not found'}) : role = "driver"
+            user = await db.driver.findOne({
+                where: {
+                    email
+                }
+            });
+            if (!user) throw createError(404, `User not registered`);
+            else role = "driver"
         }
 
-        if(user) {
+        if (user) {
             let validPassword = await bcrypt.compare(password, user.password);
             if (!validPassword) {
-                res.status(409).json({message: 'Wrong password'});
-            }
-            else {
+                throw createError(401, `wrong Password`);
+            } else {
                 let token = jwt.sign({
                     id: user.id,
                     role: role
@@ -101,8 +147,8 @@ exports.login = async (req, res) => {
             }
         }
     } catch (e) {
-        res.status(409).json({
-            message: 'error'
-        })
+        res.status(e.status).json({
+            error: e.message
+        });
     }
 };
