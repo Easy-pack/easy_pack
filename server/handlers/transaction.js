@@ -24,8 +24,8 @@ module.exports.postTransaction = async (req, res, next) => {
             userId
         } = req.body;
 
-        for (let key in trans) {
-            console.log(chalk.blue(key + ' ' + trans[key]));
+        for (let key in req.body) {
+            console.log(chalk.blue(key + ' ' + req.body[key]));
         }
         const transaction = await db.transaction.create(trans);
 

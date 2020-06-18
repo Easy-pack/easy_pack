@@ -9,10 +9,19 @@ export class SharedData {
     package_weight: "",
     package_comments: "",
     address_start: "",
+    city_start: "",
+    zip_start: 1000,
+    longitude_start: 0,
+    latitude_start: 0,
     address_destination: "",
+    city_destination: "",
+    zip_destination: 1000,
+    longitude_destination: 0,
+    latitude_destination: 0,
     request_date: "",
     request_time: "",
-    price: "0$",
+    price: "12",
+    userId: "",
   };
   // data between add-transaction-component and map-component
   addMapTransactionData = {
