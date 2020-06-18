@@ -68,7 +68,8 @@ export class AnnouncementComponent implements OnInit {
       this.driver = this.driver.driver;
       if(this.driver.state === "available"){
         this.transactionService.acceptTransaction(idTransaction).subscribe(response => {
-         
+          response.role = "driver";
+         this.socketIoService.acceptTransaction(response).subscribe(response =>{})
         })
       } else{
         alert('You are already delivrering');

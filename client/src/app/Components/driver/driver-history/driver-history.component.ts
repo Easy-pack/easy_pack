@@ -35,11 +35,11 @@ export class DriverHistoryComponent implements OnInit {
   doneTransaction(transaction){
     let data = {
       driverId : transaction.driverId,
-      transactionId : transaction.id
+      transactionId : transaction.id,
+      userId : transaction.userId
     }
 
     this.historyTransactionService.doneTransaction(data).subscribe(response =>{
-
     })
 
     this.socketIoService.doneTransaction(data);
