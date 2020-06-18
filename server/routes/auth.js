@@ -3,11 +3,11 @@ const handler = require('../handlers');
 const multer = require('multer');
 const chalk = require('chalk');
 const path = require('path');
-const PATH = 'public/image/';
+const PATH = 'server/public/images/'
 
 let storage = multer.diskStorage({
     destination: function (req, file, cb) {
-        cb(null, path.join(PATH));
+        cb(null, PATH);
     },
     filename: function (req, file, cb) {
         cb(null, `${Date.now()}${file.originalname}`);

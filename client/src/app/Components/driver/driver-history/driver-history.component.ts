@@ -39,6 +39,7 @@ export class DriverHistoryComponent implements OnInit {
     let data = {
       driverId: transaction.driverId,
       transactionId: transaction.id,
+      userId: transaction.userId,
     };
 
     this.historyTransactionService

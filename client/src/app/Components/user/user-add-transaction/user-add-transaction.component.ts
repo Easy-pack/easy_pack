@@ -102,7 +102,13 @@ export class UserAddTransactionComponent implements OnInit {
       this.sharedData.transactionData,
       this.sharedData.addMapTransactionData
     );
-    this.socketIoService.emmitTransaction(this.newTransaction.value);
+
+    const transaction = this.newTransaction.value;
+    transaction.userId = this.authService.getId();
+    transaction.role = this.authService.getRole();
+    this.socketIoService
+      .emmitTransaction(transaction)
+      .subscribe((response) => {});
 
     this.router.navigate(["/user/shippingDetails"]);
   }
