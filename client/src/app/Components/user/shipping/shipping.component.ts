@@ -1,7 +1,8 @@
 import { Component, OnInit } from "@angular/core";
 import { FormGroup, FormControl } from "@angular/forms";
 import { SharedData } from "../../../services/sharedData";
-import { HttpClient } from "@angular/common/http";
+
+import { TransactionService } from "../../../services/transaction.service";
 
 @Component({
   selector: "app-shipping",
@@ -9,7 +10,10 @@ import { HttpClient } from "@angular/common/http";
   styleUrls: ["./shipping.component.css"],
 })
 export class ShippingComponent implements OnInit {
-  constructor(private transactionDetails: SharedData) {}
+  constructor(
+    private transactionDetails: SharedData,
+    private transactionService: TransactionService
+  ) {}
   get details() {
     console.log(this.transactionDetails.addMapTransactionData);
     return this.transactionDetails.transactionData;
@@ -26,7 +30,18 @@ export class ShippingComponent implements OnInit {
   });
   transaction = this.details;
   onSubmit() {
+    const id = window.localStorage.getItem("id");
+    this.transactionDetails.transactionData.address_start = this.transactionDetails.addMapTransactionData.address_start;
+    this.transactionDetails.transactionData.latitude_start = this.transactionDetails.addMapTransactionData.latitude_start;
+    this.transactionDetails.transactionData.longitude_start = this.transactionDetails.addMapTransactionData.longitude_start;
+    this.transactionDetails.transactionData.address_destination = this.transactionDetails.addMapTransactionData.address_destination;
+    this.transactionDetails.transactionData.latitude_destination = this.transactionDetails.addMapTransactionData.latitude_destination;
+    this.transactionDetails.transactionData.longitude_destination = this.transactionDetails.addMapTransactionData.longitude_destination;
+    this.transactionDetails.transactionData.userId = id;
     console.log("transaction confirmed", this.transactionDetails);
+    this.transactionService
+      .postTransaction(this.transactionDetails.transactionData)
+      .subscribe((data) => {});
   }
   ngOnInit(): void {
     (<FormGroup>this.newTransaction).patchValue(this.transaction);
