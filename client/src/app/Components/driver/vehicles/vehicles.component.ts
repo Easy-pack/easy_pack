@@ -98,7 +98,7 @@ export class VehiclesComponent implements OnInit {
 
   onSubmit(){
     const Veh = this.newVehicle.value;
-    Veh.userId = window.localStorage.getItem('id')
+    Veh.driverId = window.localStorage.getItem('id')
     this.vehiclesService.addVehicle(Veh).subscribe(res =>{
       console.log("vehicle added")
       this.getvehicles()
