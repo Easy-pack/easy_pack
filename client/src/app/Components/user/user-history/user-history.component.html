@@ -15,17 +15,19 @@
     <div class="col">
       <div class="card shadow">
         <div class="card-header border-0">
-          <h3 class="mb-0">Transactions</h3>
-        </div>
-        <div>
-          <label for="status">Filter</label>
-          <select name="status" (change)="filter($event)">
-            <option value="all">All</option>
-            <option value="Pending">Pending</option>
-            <option value="In Progress">Active</option>
-            <option value="completed">Completed</option>
-            <option value="canceled">Canceled</option>
-          </select>
+          <div class="row">
+            <h3 class="mb-0 col-10">History Transactions</h3>
+            <div class="col-2">
+              <label  for="status">Filter :</label>
+              <select class="select" name="status" (change)="filter($event)">
+                <option value="all">All</option>
+                <option value="Pending">Pending</option>
+                <option value="In Progress">Active</option>
+                <option value="completed">Completed</option>
+                <option value="canceled">Canceled</option>
+              </select>
+            </div>
+          </div>
         </div>
         <div class="table-responsive">
           <table class="table align-items-center table-flush">
