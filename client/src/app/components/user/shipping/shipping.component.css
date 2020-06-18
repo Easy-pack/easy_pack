@@ -1,0 +1,17 @@
+.btn-confirm {
+  background-color: rgb(230, 53, 22);
+  color: white;
+}
+
+.btn-confirm:hover {
+  background-color: white;
+  color: rgb(230, 53, 22);
+  border: 2px solid rgb(230, 53, 22);
+}
+
+/* .myCustomModalClass .modal-dialog {
+  max-width: 965px;
+} */
+.row {
+  margin-bottom: 10px;
+}

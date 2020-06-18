@@ -1,0 +1,116 @@
+<div class=container>
+  <div class="row">
+    <div class="col">
+      <div class=container>
+        <div class="row">
+          <div class="col">
+            <label>Departure:</label>
+            <div class="input-group input-group-alternative">
+              <input class="form-control" placeholder="Address" type="text" name="adress_start"
+                [(ngModel)]="sharedData.addMapTransactionData.address_start">
+            </div>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col">
+            <div class="input-group mb-3">
+              <select class="custom-select" [(ngModel)]="sharedData.addMapTransactionData.city_start">
+                <option selected>Choose...</option>
+                <option value="Ariana">Ariana</option>
+                <option value="Béja">Béja</option>
+                <option value="Bizerte">Bizerte</option>
+                <option value="Gabes">Gabes</option>
+                <option value="Gafsa">Gafsa</option>
+                <option value="Jendouba">Jendouba</option>
+                <option value="Kairouan">Kairouan</option>
+                <option value="Kasserine">Kasserine</option>
+                <option value="Kebili">Kebili</option>
+                <option value="Nabeul">Nabeul</option>
+                <option value="Tunis" selected="selected">Tunis</option>
+              </select>
+            </div>
+
+          </div>
+          <div class="col">
+            <div class="input-group input-group-alternative">
+              <input class="form-control" placeholder="Zip Code" type="text" name="zip_start" value="1002"
+                [(ngModel)]="ZipDeparture">
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+    <div class="col">
+      <div class=container>
+        <div class="row">
+          <div class="col">
+            <label>Destination:</label>
+            <div class="input-group input-group-alternative">
+              <input class="form-control" placeholder="Address" type="text" name="adress_start"
+                [(ngModel)]="sharedData.addMapTransactionData.address_destination">
+            </div>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col">
+            <div class="input-group mb-3">
+              <select class="custom-select" [(ngModel)]="sharedData.addMapTransactionData.city_destination">
+                <option selected>Choose...</option>
+                <option value="Ariana">Ariana</option>
+                <option value="Béja">Béja</option>
+                <option value="Bizerte">Bizerte</option>
+                <option value="Gabes">Gabes</option>
+                <option value="Gafsa">Gafsa</option>
+                <option value="Jendouba">Jendouba</option>
+                <option value="Kairouan">Kairouan</option>
+                <option value="Kasserine">Kasserine</option>
+                <option value="Kebili">Kebili</option>
+                <option value="Tunis">Tunis</option>
+              </select>
+              <!-- <div class="input-group-append">
+              <label class="input-group-text" for="inputGroupSelect02">Options</label>
+            </div> -->
+            </div>
+
+          </div>
+          <button class="btn btn-lg btn-outline-primary" (click)="updateMap()">Update Addresses</button>
+          <div class="col">
+            <div class="input-group input-group-alternative">
+              <input class="form-control" placeholder="Zip Code" type="text" name="zip_start">
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<div class=container>
+  <div class="row">
+
+
+
+    <agm-map [latitude]="location.latitude" [longitude]="location.longitude" [mapTypeId]="location.mapType"
+      [zoom]="location.zoom" (mapClick)="addMarker($event.coords.lat, $event.coords.lng)">
+      <agm-marker *ngFor="let marker of location.markers, let i = index" [latitude]="marker.lat"
+        [longitude]="marker.lng" (markerClick)="selectMarker($event)" [markerDraggable]="true"
+        (dragEnd)="markerDragEnd($event.coords, $event, i )" title="from" animation="DROP" openInfoWindow="true"
+        [iconUrl]="
+    {
+    url:marker.iconUrl,
+    scaledSize: {
+    width: 20,
+    height: 40
+    }
+    }">
+        <agm-info-window [isOpen]="true">{{marker.adress}}</agm-info-window>
+      </agm-marker>
+    </agm-map>
+    <div>
+      <p>
+        <!-- Selected Marker is: Longitude {{ selectedMarker.lat }} Latitude
+    {{ selectedMarker.lng }} -->
+      </p>
+    </div>
+  </div>
+</div>
