@@ -23,9 +23,8 @@ module.exports.postTransaction = async (req, res, next) => {
             latitude_destination,
             userId
         } = req.body;
-
-        for (let key in trans) {
-            console.log(chalk.blue(key + ' ' + trans[key]));
+        for(let key in trans){
+            console.log(key + ' ' + chalk.blue(trans[key]));
         }
         const transaction = await db.transaction.create(trans);
 
