@@ -28,7 +28,7 @@ app.use('/notification', routes.notification);
 const port = process.env.PORT || 8080;
 
 database.sql.sync({
-    force: false
+    force: true
 });
 
 const server = app.listen(port, () => {
