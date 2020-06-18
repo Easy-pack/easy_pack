@@ -39,20 +39,22 @@
                                     </div>
                                 </div>
                                 <div class="form-group mb-3">
-                                    <input type="text" placeholder="Adress" formControlName = "address" class="form-control rounded-pill border-0 shadow-sm px-4"  name="address" required>
+                                    <input type="text" placeholder="Adress" formControlName = "adress" class="form-control rounded-pill border-0 shadow-sm px-4"  name="address" required>
+                                </div>
+                                <div class="form-group mb-3">
+                                    <input type="text" placeholder="city" formControlName = "city" class="form-control rounded-pill border-0 shadow-sm px-4"  name="city" required>
+                                </div>
+                                <div class="form-group mb-3">
+                                    <input type="text" placeholder="zip" formControlName = "zip" class="form-control rounded-pill border-0 shadow-sm px-4"  name="zip" required>
                                 </div>
                                 <div class="form-group mb-3">
                                     <input type="text" placeholder="National Identity Number" formControlName = "cin" class="form-control rounded-pill border-0 shadow-sm px-4"  name="cin" required>
                                 </div>
-                                <div class="form-group form-check mb-3">
-                                    <div class="row">
-                                        <div class="col-md-6 gender">
-                                            <label for='uploadImg'>Upload image</label>
-                                        </div>
-                                        <div class="col-md">
-                                            <input type="file" name="image" (change)="onChange($event)"/>
-                                        </div>
-                                    </div>
+                                <div class="form-group mb-3">
+                                    <label for="uploadImg" class="custom-file-upload">
+                                        <i class="fa fa-cloud-upload"></i> Upload image :
+                                    </label>
+                                    <input type="file" id="uploadImg" class=" form-control rounded-pill border-0 shadow-sm px-4" name="image" (change)="onChange($event)"/>
                                 </div>
                                 <div class="form-group form-check mb-3">
                                     <div class="row">
@@ -62,13 +64,13 @@
                                         <div class="col-md" id="gender">
                                             <div class="row">
                                                 <div class="col-md">
-                                                    <input type="radio"  class="form-check-input" name="gender" id="male" value="male"  required>
+                                                    <input type="radio" formControlName = "gender" class="form-check-input" name="gender" id="male" value="male"  required>
                                                     <label class="form-check-label" for="male">Male</label>
                                                 </div>
                                             </div>
                                             <div class="row">
                                                 <div class="col-md">
-                                                    <input type="radio" class="form-check-input" id="female" name="gender" value="female" >
+                                                    <input type="radio" formControlName = "gender" class="form-check-input" id="female" name="gender" value="female" >
                                                     <label class="form-check-label" for="female">Female</label>
                                                 </div>
                                             </div>

@@ -100,11 +100,11 @@ export class VehiclesComponent implements OnInit {
 
   onSubmit() {
     const Veh = this.newVehicle.value;
-    Veh.driverId = window.localStorage.getItem("id");
-    this.vehiclesService.addVehicle(Veh).subscribe((res) => {
-      console.log("vehicle added");
-      this.getvehicles();
-    });
+    Veh.driverId = window.localStorage.getItem('id')
+    this.vehiclesService.addVehicle(Veh).subscribe(res =>{
+      console.log("vehicle added")
+      this.getvehicles()
+    })
 
     this.close();
     this.newVehicle = new FormGroup({
