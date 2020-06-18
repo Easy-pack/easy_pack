@@ -5,7 +5,7 @@ import { HttpClient } from "@angular/common/http";
   providedIn: "root",
 })
 export class DriverProfileService {
-  id = window.localStorage.getItem('id');
+  id = window.localStorage.getItem("id");
 
   constructor(private http: HttpClient) {}
 

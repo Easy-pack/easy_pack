@@ -25,11 +25,7 @@ export class SignUpDriverComponent implements OnInit {
     cin: new FormControl(""),
   });
 
-  
-  constructor(
-    private router: Router,
-    private authService: AuthService
-  ) {}
+  constructor(private router: Router, private authService: AuthService) {}
 
   onChange(event) {
     if (event.target.files && event.target.files.length > 0) {
@@ -45,6 +41,7 @@ export class SignUpDriverComponent implements OnInit {
     for (let key in driver) {
       formData.append(key, driver[key]);
     }
+    console.log(formData);
     this.authService.registerDriver(formData).subscribe((res: any) => {
       this.router.navigate(["/login"]);
     });

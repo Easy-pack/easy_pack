@@ -5,7 +5,7 @@ import { UserProfileComponent } from "../../Components/user/user-profile/user-pr
 import { UserBoardComponent } from "../../Components/user/user-board/user-board.component";
 import { UserHistoryComponent } from "../../Components/user/user-history/user-history.component";
 import { UserAddTransactionComponent } from "../../Components/user/user-add-transaction/user-add-transaction.component";
-
+import { ShippingComponent } from "../../Components/user/shipping/shipping.component";
 const routes: Routes = [
   {
     path: "",
@@ -15,6 +15,7 @@ const routes: Routes = [
       { path: "board", component: UserBoardComponent },
       { path: "history", component: UserHistoryComponent },
       { path: "addTransaction", component: UserAddTransactionComponent },
+      { path: "shippingDetails", component: ShippingComponent },
       { path: "", redirectTo: "board", pathMatch: "full" },
       { path: "**", redirectTo: "board" },
     ],

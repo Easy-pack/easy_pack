@@ -21,7 +21,7 @@ module.exports.acceptTransaction = async (req, res, next) => {
         });
 
         const driver = await db.driver.findOne({
-            where :{
+            where: {
                 id
             }
         })
@@ -37,47 +37,52 @@ module.exports.acceptTransaction = async (req, res, next) => {
         });
 
         await driver.update({
-            state : 'not available'
+            state: 'not available'
         })
 
         res.status(202).json(transaction)
 
     } catch (e) {
-        res.status(e.status).json({error: e.message});
+        res.status(e.status).json({
+            error: e.message
+        });
     }
 }
 
-module.exports.doneTransaction = async (req, res, next)=>{
-    const {driverId, transactionId} = req.body;
-    try{
+module.exports.doneTransaction = async (req, res, next) => {
+    const {
+        driverId,
+        transactionId
+    } = req.body;
+    try {
         const driver = await db.driver.findOne({
-            where : {
-                id : driverId
+            where: {
+                id: driverId
             }
         })
 
         const transaction = await db.transaction.findOne({
-            where : {
-                id : transactionId
+            where: {
+                id: transactionId
             }
         })
 
         await driver.update({
-            state : 'available'
+            state: 'available'
         });
 
         await transaction.update({
-          state : 'completed',
-          //end_time : ''
-          // date update
+            state: 'completed',
+            //end_time : ''
+            // date update
         })
 
         res.status(202).json({
-            message : 'transaction done'
+            message: 'transaction done'
         })
-    } catch(error){
+    } catch (error) {
         res.status(500).json({
-            error : 'error : '+ error
+            error: 'error : ' + error
         })
     }
 }
@@ -103,7 +108,9 @@ exports.getDriver = async (req, res, next) => {
             });
         }
     } catch (e) {
-        res.status(e.status).json({error: e.message});
+        res.status(e.status).json({
+            error: e.message
+        });
     }
 };
 
@@ -131,7 +138,7 @@ exports.updateDriver = async (req, res, next) => {
             photo: req.body.photo,
             phone: req.body.phone,
             // rate: req.body.rate,
-            // state:eq.body.state
+            state: req.body.state
 
         });
 
@@ -141,15 +148,23 @@ exports.updateDriver = async (req, res, next) => {
         });
     } catch (e) {
         //console.log(e)
-        res.status(e.status).json({error: e.message});
+        res.status(e.status).json({
+            error: e.message
+        });
     }
 };
 
 
 module.exports.updateVehicle = async (req, res, next) => {
-    try{
-        const {id} = req.params;
-        let vehicle = await db.vehicle.findOne({where : {id : id}});
+    try {
+        const {
+            id
+        } = req.params;
+        let vehicle = await db.vehicle.findOne({
+            where: {
+                id: id
+            }
+        });
 
         if (!vehicle) throw createError(404, `vehicle not found`);
         const updatedVeh = {
@@ -167,49 +182,68 @@ module.exports.updateVehicle = async (req, res, next) => {
             success: "vehicle updated successfully",
             vehicle: vehicle
         });
-    }
-    catch (e) {
-        res.status(e.status).json({error: e.message});
+    } catch (e) {
+        res.status(e.status).json({
+            error: e.message
+        });
     }
 }
 
 
 module.exports.getDriverTransactions = async (req, res, next) => {
     try {
-        const {id} = req.params;
-        const transactions = await db.transaction.findAll({where : {driverId : id} });
+        const {
+            id
+        } = req.params;
+        const transactions = await db.transaction.findAll({
+            where: {
+                driverId: id
+            }
+        });
 
         if (!transactions) throw createError(404, `transaction not found`);
-        
+
         res.status(200).json(transactions)
-    }
-    catch (e) {
-        res.status(e.status).json({error: e.message});
+    } catch (e) {
+        res.status(e.status).json({
+            error: e.message
+        });
     }
 };
 
 
 module.exports.getDriverVehicles = async (req, res, next) => {
     try {
-        const {id} = req.params;
-        const vehicles = await db.vehicle.findAll({where : {driverId : id} });
+        const {
+            id
+        } = req.params;
+
+        const vehicles = await db.vehicle.findAll({
+            where: {
+                driverId: id
+            }
+        });
 
         if (!vehicles) throw createError(404, `vehicles not found`);
 
         res.status(200).json(vehicles)
-    }
-    catch (e) {
-        res.status(e.status).json({error: e.message});
+    } catch (e) {
+        res.status(e.status).json({
+            error: e.message
+        });
     }
 }
 
 
 
 
-module.exports.addVehicle = async (req,res,next)=>{
-    try{
-        const {id} = req.params;
+module.exports.addVehicle = async (req, res, next) => {
+    try {
+        const {
+            id
+        } = req.params;
         console.log(id)
+
         const vehicles = {
             type,
             reg_number,
@@ -219,18 +253,19 @@ module.exports.addVehicle = async (req,res,next)=>{
             model
         } = req.body;
 
-        for(let key in vehicles){
-            console.log(chalk.blue(key + ' '+ vehicles[key]));
+        for (let key in vehicles) {
+            console.log(chalk.blue(key + ' ' + vehicles[key]));
         }
         vehicles.driverId = id
 
         const vehicle = await db.vehicle.create(vehicles);
-
-        if(!vehicle) throw createError(404, `vehicle not created`);
+        console.log(chalk.blue(vehicle))
+        if (!vehicle) throw createError(404, `vehicle not created`);
 
         res.status(201).json(vehicle);
-    }
-    catch (e) {
-        res.status(e.status).json({error: e.message});
+    } catch (e) {
+        res.status(e.status).json({
+            error: e.message
+        });
     }
 };

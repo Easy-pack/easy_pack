@@ -1,0 +1,85 @@
+<div class="header bg-gradient-danger py-7 py-lg-8">
+  <div class="container">
+    <div class="header-body text-center mb-7">
+
+    </div>
+  </div>
+  <div class="separator separator-bottom separator-skew zindex-100">
+    <svg x="0" y="0" viewBox="0 0 2560 100" preserveAspectRatio="none" version="1.1" xmlns="http://www.w3.org/2000/svg">
+      <polygon class="fill-default" points="2560 0 2560 100 0 100"></polygon>
+    </svg>
+  </div>
+</div>
+<div class="container mt--9 pb-5">
+  <!-- Table -->
+  <div class="row justify-content-center">
+    <div class="col-lg-8 col-md-8">
+      <div class="card bg-secondary shadow border-0">
+        <div class="card-body px-lg-5 py-lg-7">
+<form [formGroup]="newTransaction" (ngSubmit)="onSubmit()">
+  <div class="form-group">
+    <label>pick up address: </label>
+    <div class="input-group input-group-alternative">
+      <input class="form-control" formControlName="address_start" type="text" name="start">
+    </div>
+  </div>
+  <div class="form-group">
+    <label>destination: </label>
+    <div class="input-group input-group-alternative">
+      <input class="form-control" formControlName="address_destination" type="text" name="destination">
+    </div>
+  </div>
+  <div class="row form-group">
+    <div class="col-7">
+      <label>Package Dimensions: </label>
+    </div>
+    <div class="col-5">
+      <input name="size" class="form-control" formControlName="package_dimension">
+    </div>
+  </div>
+  <div class="row form-group">
+    <div class="col-7">
+      <label>Package Weight in kg: </label>
+    </div>
+    <div class="col-5">
+      <input name="size" class="form-control" formControlName="package_weight">
+    </div>
+  </div>
+  <div class="form-group">
+    <label>Package Comment</label>
+    <div class="input-group input-group-alternative">
+      <input class="form-control" formControlName="package_comments" type="text" name="comment">
+    </div>
+  </div>
+  <div class="form-group">
+    <label>Date of picking: </label>
+    <div class="input-group input-group-alternative">
+      <input class="form-control" formControlName="request_date" type="text" id="date" name="date">
+    </div>
+  </div>
+  <div class="form-group ">
+    <label>Time of picking: </label>
+    <div class="input-group input-group-alternative">
+      <input class="form-control" formControlName="request_time" type="text" id="time" name="time">
+    </div>
+  </div>
+
+  <div class="row form-group">
+    <div class="col-7">
+      <label>Price: </label>
+    </div>
+    <div class="col-5">
+      <input name="price" class="form-control" formControlName="price">
+    </div>
+  </div>
+
+  <div class="text-center">
+    <button class="btn btn-confirm mt-4" type="submit">Confirm</button>
+  </div>
+</form>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+

@@ -3,7 +3,7 @@ module.exports = (sql, Sequelize) => {
         first_name: Sequelize.STRING,
         last_name: Sequelize.STRING,
         password: Sequelize.STRING,
-        birth_date: Sequelize.DATE,
+        birth_date: Sequelize.DATEONLY,
         adress: Sequelize.STRING,
         gender: Sequelize.STRING,
         state: Sequelize.STRING,
@@ -19,11 +19,11 @@ module.exports = (sql, Sequelize) => {
             unique: true
         },
         rate: {
-            type : Sequelize.FLOAT,
+            type: Sequelize.FLOAT,
             defaultValue: 5.0
         },
-        state:{
-            type :  Sequelize.STRING,
+        state: {
+            type: Sequelize.STRING,
             defaultValue: "available"
         },
         photo: Sequelize.STRING,
