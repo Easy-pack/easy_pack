@@ -3,5 +3,6 @@ module.exports = {
     ...require('./transaction'),
     ...require('./driver'),
     ...require('./user'),
-    ...require('./notification')
+    ...require('./notification'),
+    ...require('./dashboardDriver')
 };

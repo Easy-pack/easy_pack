@@ -18,5 +18,5 @@ router.route('/vehicle/:id')
     .post(handler.addVehicle)
     .put(handler.updateVehicle)
 
-
+router.get('/board/:id', handler.ridesAndEarnings)
 module.exports = router;
