@@ -3,6 +3,9 @@ module.exports = (sql, Sequelize) => {
         type: Sequelize.STRING,
         reg_number: Sequelize.STRING,
         license_plate: Sequelize.STRING,
+        color: Sequelize.STRING,
+        make: Sequelize.STRING,
+        model: Sequelize.STRING
     });
     return vehicle;
 };

@@ -6,6 +6,7 @@ import { Router } from '@angular/router';
 import { SocketIoService } from '../../../services/socket-io.service';
 import { tick } from '@angular/core/testing';
 
+import {UserProfileService} from "../../../services/user-profile.service"
 
 @Component({
   selector: 'app-user-navbar',
@@ -17,13 +18,17 @@ export class UserNavbarComponent implements OnInit {
   private name : string = "Amir Ben Youssef"
   public focus;
   public listTitles: any[];
+  public location: Location;
+  public socket;
   public notifications = [];
+  public notification = 0;
 
-  constructor(public location: Location,  
+  constructor( location: Location,  
               private element: ElementRef, 
               private router: Router, 
               public authService: AuthService,
-              private socketIoService : SocketIoService) {
+              private socketIoService : SocketIoService,
+              public userProfileService : UserProfileService) {
       this.location = location;
   }
 
@@ -41,10 +46,16 @@ export class UserNavbarComponent implements OnInit {
   ngOnInit() {
     this.getNotification();
     this.listTitles = ROUTES.filter(listTitle => listTitle);
-      this.socketIoService.setupSocketConnection().on('userNotification', (data)=>{
-        this.getNotification();
-      })
+    
+    this.socket = this.socketIoService.setupSocketConnection().on('notification', (data)=>{
+      this.notification += 1;
+      this.getNotification();
+      console.log (this.notification);
+    });
+    this.getname()
   }
+
+
   getTitle(){
     var titlee = this.location.prepareExternalUrl(this.location.path());
     if(titlee.charAt(0) === '#'){
@@ -59,7 +70,20 @@ export class UserNavbarComponent implements OnInit {
     return 'Dashboard';
   }
 
+
   logout(){
     this.authService.logout()
+  }
+
+  getname(){
+    let id = localStorage.getItem('id');
+    this.userProfileService.fetchData(id).subscribe(res => {
+      console.log(res)
+      this.name = res["user"].first_name
+    })
+  }
+
+  deletNotf(){
+    this.notification = 0;
   }
 }

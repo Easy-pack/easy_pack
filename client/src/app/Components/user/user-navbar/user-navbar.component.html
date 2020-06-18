@@ -8,6 +8,28 @@
         <li class="nav-item" ngbDropdown placement="bottom-right">
           <a class="nav-link pr-0" role="button" ngbDropdownToggle>
             <div class="media align-items-center">
+              <li *ngIf="notification === 0; else elseBlock"><i class="far fa-bell fa-2x ml-auto mr-1"></i></li>
+              <ng-template #elseBlock><li><i class="far fa-bell fa-2x ml-auto mr-1"></i><span class="badge badge-pill ">{{notification}}</span></li></ng-template>
+            </div>
+          </a>
+          <div class="dropdown-menu-arrow dropdown-menu-right" ngbDropdownMenu>
+            <div class=" dropdown-header noti-title">
+              <h6 class="text-overflow m-0">Notification ( {{notification}} )</h6>
+            </div>
+            <div *ngFor ="let nbr of nbrNotf">
+              <div *ngIf="notification !== 0">
+                <a routerLinkActive="active" [routerLink]="['/driver/announcement']" class="dropdown-item" (click)="deletNotf()">
+                  <i class="fas fa-cube"></i>
+                  <span>You have a new delivery available</span>
+                </a>
+              </div>
+              <div class="dropdown-divider"></div>
+            </div>
+          </div>
+        </li>
+        <li class="nav-item" ngbDropdown placement="bottom-right">      
+          <a class="nav-link pr-0" role="button" ngbDropdownToggle>
+            <div class="media align-items-center">
               <span class="avatar avatar-sm rounded-circle">
                 <img alt="Image placeholder" src="../../../../assets/img/theme/team-4-800x800.jpg">
               </span>
