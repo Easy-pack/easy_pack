@@ -40,7 +40,7 @@ export class DriverNavbarComponent implements OnInit {
       console.log(response)
       this.notification = response.notifications.length;
       if(this.notification > 0){
-        alert("new Announcement is on")
+        
       }
     })
   }

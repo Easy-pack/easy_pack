@@ -47,7 +47,10 @@ module.exports.getUserTransactions = async (req, res, next) => {
         const transactions = await db.transaction.findAll({
             where: {
                 userId: id
-            }
+            },
+            include: [
+                db.driver
+            ]
         });
 
         if (!transactions) throw createError(404, `transactions not found`)
@@ -66,8 +69,10 @@ module.exports.getAllTransactions = async (req, res, next) => {
         const transactions = await db.transaction.findAll({
             where: {
                 driverId: null
-            }
+            },
+
         });
+        console.log(transactions)
         if (!transactions) throw createError(404, `transactions not found`);
         res.status(200).json(transactions)
     } catch (e) {
