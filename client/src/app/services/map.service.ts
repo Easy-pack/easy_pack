@@ -6,24 +6,24 @@ import { Observable } from "rxjs";
   providedIn: "root",
 })
 export class MapService {
-  distanceMatrixKey = "AIzaSyAbBRHFCr2ZmQxNUCF52VRKjUb3XEGzGg8";
-  locationGeocodingKey = "AIzaSyAbBRHFCr2ZmQxNUCF52VRKjUb3XEGzGg8";
+  API_KEY = "AIzaSyD4sdh0NM2UU2aazlnc4wvCVeSRuiwC5C0";
+  
   constructor(private http: HttpClient) {}
   getDistance(departure, destination): Observable<any> {
     return this.http.get<any>(
-      `https://maps.googleapis.com/maps/api/distancematrix/json?units=metric&origins=${departure}&destinations=${destination}&key=${this.distanceMatrixKey}`
+      `https://maps.googleapis.com/maps/api/distancematrix/json?units=metric&origins=${departure}&destinations=${destination}&key=${this.API_KEY}`
     );
   }
   getLocation(street, city, zip): Observable<any> {
     street = street.replace(" ", "+");
     city = city.replace(" ", "+");
     return this.http.get(
-      `https://maps.googleapis.com/maps/api/geocode/json?address=${street},${city}+${zip}&key=${this.locationGeocodingKey}`
+      `https://maps.googleapis.com/maps/api/geocode/json?address=${street},${city}+${zip}&key=${this.API_KEY}`
     );
   }
   getLocationByCoords(latitude, longitude): Observable<any> {
     return this.http.get(
-      `https://maps.googleapis.com/maps/api/geocode/json?address=${latitude},${longitude}&key=${this.locationGeocodingKey}`
+      `https://maps.googleapis.com/maps/api/geocode/json?address=${latitude},${longitude}&key=${this.API_KEY}`
     );
   }
 }
