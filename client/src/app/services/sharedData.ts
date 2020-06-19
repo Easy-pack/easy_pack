@@ -20,7 +20,7 @@ export class SharedData {
     latitude_destination: 0,
     request_date: "",
     request_time: "",
-    price: "12",
+    price: 0,
     userId: "",
   };
   // data between add-transaction-component and map-component

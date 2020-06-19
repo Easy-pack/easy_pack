@@ -7,25 +7,28 @@ const createError = require('http-errors');
 
 
 module.exports.acceptTransaction = async (req, res, next) => {
+    console.log('hi')
     try {
         const {
             id
         } = req.params;
+        console.log(id)
         const transId = req.body.transactionId;
         //const vehicle_Id = req.body.vehicle_Id;
-
+        console.log(transId)
         const transaction = await db.transaction.findOne({
             where: {
                 id: transId
             }
         });
+        console.log(transaction)
 
         const driver = await db.driver.findOne({
             where: {
                 id
             }
         })
-
+        console.log(driver)
         if (!transaction) throw createError(404, `transaction not found`);
 
         await transaction.update({

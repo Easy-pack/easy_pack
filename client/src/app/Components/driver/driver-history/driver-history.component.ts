@@ -50,7 +50,9 @@ export class DriverHistoryComponent implements OnInit {
     this.historyTransactionService
       .doneTransaction(data)
       .subscribe((response) => {
-        this.socketIoService.doneTransaction(transaction);
+        this.socketIoService.doneTransaction(transaction).subscribe(response =>{
+          this.socketIoService.doneDelivrary(transaction);
+        })
       });
     this.fetch();
   }
