@@ -33,6 +33,7 @@ export class AnnouncementComponent implements OnInit {
 
   getAnnouncement(){
     this.historyTransactionService.fetchAllTrasactions().subscribe(response =>{
+      console.log(response)
       this.transactions = response;
     });
   }
