@@ -33,7 +33,7 @@ import { ShippingComponent } from "../../Components/user/shipping/shipping.compo
     ReactiveFormsModule,
     FormsModule,
     AgmCoreModule.forRoot({
-      apiKey: "AIzaSyAbBRHFCr2ZmQxNUCF52VRKjUb3XEGzGg8",
+      apiKey: "AIzaSyD4sdh0NM2UU2aazlnc4wvCVeSRuiwC5C0",
       libraries: ["places", "geometry"],
       /* apiKey is required, unless you are a premium customer, in which case you can use clientId */
     }),

@@ -13,6 +13,8 @@ import { DriverProfileComponent } from "../../Components/driver/driver-profile/d
 import { DriverHistoryComponent } from "../../Components/driver/driver-history/driver-history.component";
 import { AnnouncementComponent } from "../../Components/driver/announcement/announcement.component";
 import { VehiclesComponent } from "../../Components/driver/vehicles/vehicles.component";
+import { AgmCoreModule } from '@agm/core';
+import { MapComponent} from '../../Components/driver/driverMap/map.component';
 @NgModule({
   declarations: [
     DriverComponent,
@@ -23,6 +25,7 @@ import { VehiclesComponent } from "../../Components/driver/vehicles/vehicles.com
     DriverHistoryComponent,
     AnnouncementComponent,
     VehiclesComponent,
+    MapComponent
   ],
   imports: [
     CommonModule,
@@ -31,6 +34,9 @@ import { VehiclesComponent } from "../../Components/driver/vehicles/vehicles.com
     FormsModule,
     ReactiveFormsModule,
     MatDialogModule,
+    AgmCoreModule.forRoot({
+      apiKey: 'AIzaSyD4sdh0NM2UU2aazlnc4wvCVeSRuiwC5C0', libraries: ['geocoding']
+    })
   ],
 })
 export class DriverModule {}

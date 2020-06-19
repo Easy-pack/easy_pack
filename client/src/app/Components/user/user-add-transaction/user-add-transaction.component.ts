@@ -9,6 +9,8 @@ import { SharedData } from "../../../services/sharedData";
 import { ej } from "@syncfusion/ej2/dist/ej2";
 import data = ej.data;
 import { SocketIoService } from "../../../services/socket-io.service";
+import {MapService} from '../../../services/map.service';
+import {CalculatePriceService} from '../../../services/calculate-price.service';
 
 @Component({
   selector: "app-user-add-transaction",
@@ -34,6 +36,7 @@ export class UserAddTransactionComponent implements OnInit {
     request_time: new FormControl(""),
   });
   closeResult: string;
+  distance: number;
   id = localStorage.getItem("id");
   socket;
   constructor(
@@ -43,7 +46,9 @@ export class UserAddTransactionComponent implements OnInit {
     private userService: UserProfileService, // private map: MapComponent
     private sharedData: SharedData,
     private socketIoService: SocketIoService,
-    private router: Router
+    private router: Router,
+    private mapService: MapService,
+    private priceService: CalculatePriceService
   ) {
     this.socket = socketIoService;
   }
@@ -91,6 +96,7 @@ export class UserAddTransactionComponent implements OnInit {
     console.log("binding done", this.sharedData.addMapTransactionData);
   }
   onSubmit() {
+    
     this.sharedData.transactionData.address_start = `${this.sharedData.addMapTransactionData.address_start}, ${this.sharedData.addMapTransactionData.city_start}`;
     this.sharedData.transactionData.address_destination = `${this.sharedData.addMapTransactionData.address_destination}, ${this.sharedData.addMapTransactionData.city_destination}`;
     this.sharedData.transactionData.package_comments = this.newTransaction.value.package_comments;
@@ -98,10 +104,92 @@ export class UserAddTransactionComponent implements OnInit {
     this.sharedData.transactionData.package_weight = this.newTransaction.value.package_weight;
     this.sharedData.transactionData.request_date = this.newTransaction.value.request_date;
     this.sharedData.transactionData.request_time = this.newTransaction.value.request_time;
-    console.log(
-      this.sharedData.transactionData,
-      this.sharedData.addMapTransactionData
-    );
+    this.sharedData.transactionData.city_start = this.sharedData.addMapTransactionData.city_start;
+    this.sharedData.transactionData.city_destination = this.sharedData.addMapTransactionData.city_destination;
+
+    this.priceService.getTransactionDistance().subscribe(data => {
+      console.log('za3ma wa9teh', typeof (data['rows'][0]['elements'][0]['distance']['value']));
+      this.distance = (data['rows'][0]['elements'][0]['distance']['value']) / 1000;
+      console.log(this.distance);
+      const dimension = this.sharedData.transactionData.package_dimension;
+      const weight = this.sharedData.transactionData.package_weight;
+      let price = 0;
+      if (this.distance < 10) {
+        if (dimension === 'xl') {
+          console.log('<10', typeof(weight), weight);
+          if (weight === '1') {
+            console.log('<10');
+            price = 30;
+          } else {
+            price = 25;
+          }
+        } else if (dimension === 'l') {
+          if (weight === '1') {
+            price = 20;
+          } else {
+            price = 15;
+          }
+        } else if (dimension === 'm') {
+          if (weight === '3') {
+            price = 13;
+          } else {
+            price = 10;
+          }
+        } else if (dimension === 's') {
+          if (weight === '4') {
+            price = 7;
+          } else {
+            price = 3;
+          }
+        }
+      } else if (this.distance >= 10 && this.distance < 40) {
+        if (dimension === 'xl') {
+          if (weight === '1') {
+            price = 45;
+          } else {
+            price = 40;
+          }
+        } else if (dimension === 'l') {
+          if (weight === '1') {
+            price = 40;
+          } else {
+            price = 35;
+          }
+        } else if (dimension === 'm') {
+          if (weight === '3') {
+            price = 30;
+          } else {
+            price = 25;
+          }
+        } else if (dimension === 's') {
+          if (weight === '4') {
+            price = 15;
+          } else {
+            price = 10;
+          }
+        }
+      } else if (this.distance >= 40) {
+        if (dimension === 'xl') {
+          if (weight === '1') {
+            price = this.distance * 1.5 + 20;
+          } else {
+            price = this.distance * 1.5 + 10;
+          }
+        } else if (dimension === 'l') {
+          price = this.distance * 1.25 + 10;
+        } else if (dimension === 'm') {
+          price = this.distance;
+        } else if (dimension === 's') {
+          if (weight === '4') {
+            price = this.distance / 3;
+          } else {
+            price = this.distance / 4;
+          }
+        }
+      }
+      this.sharedData.transactionData.price = price;
+      console.log('fel shared', this.sharedData.transactionData.price, ' hedhi fel fonction', price);
+    });
 
     const transaction = this.newTransaction.value;
     transaction.userId = this.authService.getId();
@@ -110,6 +198,8 @@ export class UserAddTransactionComponent implements OnInit {
       .emmitTransaction(transaction)
       .subscribe((response) => {});
 
-    this.router.navigate(["/user/shippingDetails"]);
+      setTimeout(() => {
+        this.router.navigate(['/user/shippingDetails']);
+      } , 1800 );
   }
 }
