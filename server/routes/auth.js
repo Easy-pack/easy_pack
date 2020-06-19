@@ -6,16 +6,16 @@ const path = require('path');
 const PATH = 'public/images/'
 
 let storage = multer.diskStorage({
-    destination: function (req, file, cb) {
+    destination : function(req, file, cb){
         cb(null, PATH);
     },
-    filename: function (req, file, cb) {
+    filename : function(req, file, cb){
         cb(null, `${Date.now()}${file.originalname}`);
     }
 })
 
 let upload = multer({
-    storage: storage
+    storage : storage
 });
 
 router.post('/signup/driver', upload.single('avatar'), handler.signUpDriver);

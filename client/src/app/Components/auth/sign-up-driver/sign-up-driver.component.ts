@@ -20,9 +20,12 @@ export class SignUpDriverComponent implements OnInit {
     password: new FormControl(""),
     email: new FormControl(""),
     birth_date: new FormControl(""),
-    address: new FormControl(""),
+    adress: new FormControl(""),
     phone: new FormControl(""),
     cin: new FormControl(""),
+    zip :  new FormControl(''),
+    city :  new FormControl(''),
+    gender : new FormControl('')
   });
 
   constructor(private router: Router, private authService: AuthService) {}
