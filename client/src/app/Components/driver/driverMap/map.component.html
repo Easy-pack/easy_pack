@@ -1,0 +1,19 @@
+<div class=container>
+  <div class="row">
+    <agm-map [latitude]="location.latitude" [longitude]="location.longitude" [mapTypeId]="location.mapType"
+      [zoom]="location.zoom">
+      <agm-marker *ngFor="let marker of location.markers, let i = index" [latitude]="marker.lat"
+        [longitude]="marker.lng" [markerDraggable]="false" animation="BOUNCE" openInfoWindow="true"
+        [iconUrl]="
+    {
+    url:marker.iconUrl,
+    scaledSize: {
+    width: 20,
+    height: 40
+    }
+    }">
+        <agm-info-window [isOpen]="true">{{marker.adress}}</agm-info-window>
+      </agm-marker>
+    </agm-map>
+  </div>
+</div>

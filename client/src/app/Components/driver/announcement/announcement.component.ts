@@ -70,12 +70,12 @@ export class AnnouncementComponent implements OnInit {
       if(this.driver.state === "available"){
         this.transactionService.acceptTransaction(idTransaction).subscribe(response => {
           response.role = "driver";
+          this.getAnnouncement()
          this.socketIoService.acceptTransaction(response).subscribe(response =>{})
         })
-      } else{
-        alert('You are already delivrering');
-      }
+      } 
     })
+    
     
   }
 }
