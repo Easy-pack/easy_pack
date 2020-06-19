@@ -36,8 +36,6 @@ export class UserNavbarComponent implements OnInit {
     this.socketIoService.getNotification().subscribe(response =>{
       this.notifications = response.notifications;
       if(this.notifications.length > 0){
-        alert('driver accepted your announcement')
-        alert(this.notifications.length)
       }
     });
     
@@ -79,7 +77,7 @@ export class UserNavbarComponent implements OnInit {
     let id = localStorage.getItem('id');
     this.userProfileService.fetchData(id).subscribe(res => {
       console.log(res)
-      this.name = res["user"].first_name
+      this.name = res['first_name']
     })
   }
 

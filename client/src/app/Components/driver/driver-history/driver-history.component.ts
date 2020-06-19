@@ -30,7 +30,11 @@ export class DriverHistoryComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
+    this.fetch();
+  }
+  fetch(){
     this.historyTransactionService.fetchDriverData().subscribe((response) => {
+      console.log(response)
       this.history = response;
     });
   }
@@ -46,6 +50,7 @@ export class DriverHistoryComponent implements OnInit {
       .doneTransaction(data)
       .subscribe((response) => {});
 
+    this.fetch();
     this.socketIoService.doneTransaction(data);
   }
 }

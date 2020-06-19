@@ -23,7 +23,6 @@ export class UserHistoryComponent implements OnInit {
   ngOnInit(): void {
     this.getTransactions();
     this.socketIoService.setupSocketConnection().on('userNotification', (data)=>{
-      alert('new fetch');
       this.getTransactions();
     })
   }
