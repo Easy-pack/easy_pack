@@ -31,6 +31,7 @@ export class DriverHistoryComponent implements OnInit {
 
   ngOnInit(): void {
     this.fetch();
+    this.socket = this.socketIoService.setupSocketConnection().on('doneNotification', (data)=>{})
   }
   fetch(){
     this.historyTransactionService.fetchDriverData().subscribe((response) => {
@@ -50,10 +51,11 @@ export class DriverHistoryComponent implements OnInit {
     this.historyTransactionService
       .doneTransaction(data)
       .subscribe((response) => {
+        this.fetch();
         this.socketIoService.doneTransaction(transaction).subscribe(response =>{
           this.socketIoService.doneDelivrary(transaction);
         })
       });
-    this.fetch();
+    
   }
 }

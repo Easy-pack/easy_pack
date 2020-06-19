@@ -12,7 +12,7 @@
     <div class="col">
       <div class="card shadow">
         <div class="card-header border-0">
-          <h3 class="mb-0">Announcement</h3>
+          <h3 class="mb-0"><i class="ni ni-notification-70 text-success">  </i>        Announcement  </h3>
         </div>
         <div class="table-responsive">
           <table class="table align-items-center table-flush">
@@ -76,9 +76,9 @@
 </div>
 
 
-<ng-template #mymodal let-modal>
+<ng-template #mymodal let-modal >
   <div class="modal-header">
-    <h4 class="modal-title" id="modal-basic-title">Transaction Summary</h4>
+    <h1 class="modal-title" id="modal-basic-title"><i class="ni ni-notification-70 text-success">  </i>     Transaction Summary</h1>
     <button
       type="button"
       class="close"
@@ -89,18 +89,21 @@
     </button>
   </div>
   <div class="modal-body">
-    <ul >
-      <li> <strong>Picking address :  </strong>{{transaction.address_start}}</li>
-      <li> <strong>Picking city :  </strong>{{transaction.city_start}}</li>
-      <li> <strong>Shipping address :  </strong>{{transaction.address_destination}}</li>
-      <li> <strong>Picking city :  </strong>{{transaction.city_destination}}</li>
-      <li> <strong>Picking Date :  </strong>{{transaction.request_date | date}}</li>
-      <li> <strong>Picking time :  </strong>{{transaction.request_time}}</li>
-      <li> <strong>Package size :  </strong>{{transaction.package_dimension}}</li>
-      <li> <strong>Package weight :  </strong>{{transaction.package_weight}}</li>
-      <li> <strong>Package comments :  </strong>{{transaction.package_comments}}</li>
-    </ul>
+    <hr class="my-4" />
     <app-map [transaction]="transaction"></app-map>
+    <hr class="my-4" />
+    <ul >
+      <li> <strong>Picking address :  </strong>  {{transaction.address_start}}</li>
+      <li> <strong>Picking city :  </strong>  {{transaction.city_start}}</li>
+      <li> <strong>Shipping address :  </strong>  {{transaction.address_destination}}</li>
+      <li> <strong>Picking city :  </strong>  {{transaction.city_destination}}</li>
+      <li> <strong>Picking Date :  </strong>  {{transaction.request_date | date}}</li>
+      <li> <strong>Picking time :  </strong>  {{transaction.request_time}}</li>
+      <li> <strong>Package size :  </strong>  {{transaction.package_dimension}}</li>
+      <li> <strong>Package weight :  </strong>  {{transaction.package_weight}}</li>
+      <li> <strong>Package comments :  </strong>  {{transaction.package_comments}}</li>
+    </ul>
+
   </div>
   <div class="modal-footer">
     <button

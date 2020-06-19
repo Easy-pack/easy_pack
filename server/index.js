@@ -13,7 +13,7 @@ app.use(express.static('public'))
 app.use(cors());
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({
-    extended: false
+    extended: true
 }));
 
 
@@ -28,7 +28,7 @@ app.use('/notification', routes.notification);
 const port = process.env.PORT || 8080;
 
 database.sql.sync({
-    force: true
+    force: false
 });
 
 const server = app.listen(port, () => {

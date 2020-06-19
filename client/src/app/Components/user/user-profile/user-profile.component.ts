@@ -104,12 +104,12 @@ export class UserProfileComponent implements OnInit {
       return true;
     } else {
       if (this.newPassword === this.confirmNewPassword) {
-        alert("correct new password ");
+       
         let hashNewPassword = bcrypt.hashSync(this.newPassword, 10);
         this.UserForm.value.password = hashNewPassword;
         this.updateUser();
       } else {
-        alert("not matching password");
+     
         return false;
       }
     }
@@ -119,7 +119,7 @@ export class UserProfileComponent implements OnInit {
   updatePassword() {
     if (this.currentPassword == undefined) {
       console.log("Please enter your password");
-      alert("Please enter your password");
+     
     } else {
       let comparePasswords = bcrypt.compareSync(
         this.currentPassword,
@@ -135,7 +135,7 @@ export class UserProfileComponent implements OnInit {
   updateUser() {
     if (this.currentPassword == undefined) {
       console.log("Please enter your password");
-      alert("Please enter your password");
+    
     } else {
       let comparePasswords = bcrypt.compareSync(
         this.currentPassword,
@@ -155,7 +155,7 @@ export class UserProfileComponent implements OnInit {
           }
         );
       } else {
-        alert("Please check your password and try again");
+        
       }
     }
   }

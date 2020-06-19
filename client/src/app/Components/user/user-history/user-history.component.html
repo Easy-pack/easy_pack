@@ -16,7 +16,7 @@
       <div class="card shadow">
         <div class="card-header border-0">
           <div class="row">
-            <h3 class="mb-0 col-10">History Transactions</h3>
+            <h3 class="mb-0 col-10"><i class="ni ni-books text-warning">  </i>     History Transactions</h3>
             <div class="col-2">
               <label  for="status">Filter :</label>
               <select class="select" name="status" (change)="filter($event)">
@@ -93,7 +93,7 @@
 
 
 <!-- Modal -->
-<ng-template #driverContact let-modal>
+<ng-template #driverContact let-modal >
   <div class="modal-header">
     <h4 class="modal-title" id="modal-basic-title">Driver contact information</h4>
     <button
@@ -107,13 +107,13 @@
   </div>
   <div class="modal-body">
     <div class="card" style="width: 100%;">
-      <img src="http://localhost:8080/{{contactInfo.photo}}" class="card-img-top" alt="driver photo">
+      <img src="http://localhost:8080/{{contactInfo.photo}}" class="card-img-top rounded-circle" alt="driver photo">
       <div class="card-body">
-        <p class="card-text"><strong>First name</strong>{{contactInfo.first_name}}</p>
-        <p class="card-text"><strong>Last name</strong>{{contactInfo.last_name}}</p>
-        <p class="card-text"><strong>Email</strong>{{contactInfo.email}}</p>
-        <p class="card-text"><strong>Phone</strong>{{contactInfo.phone}}</p>
-        <p class="card-text"><strong>Adress</strong>{{contactInfo.adress}}</p>
+        <p class="card-text"><strong>First name : </strong> {{contactInfo.first_name}}</p>
+        <p class="card-text"><strong>Last name : </strong> {{contactInfo.last_name}}</p>
+        <p class="card-text"><strong>Email : </strong> {{contactInfo.email}}</p>
+        <p class="card-text"><strong>Phone : </strong> {{contactInfo.phone}}</p>
+        <p class="card-text"><strong>Adress : </strong> {{contactInfo.adress}}</p>
       </div>
     </div>
   </div>

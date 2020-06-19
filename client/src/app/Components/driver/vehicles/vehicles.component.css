@@ -5,7 +5,9 @@
 .fa-edit{
     color: #02aa86;
 }
-
+.trans{
+    color: indigo;
+}
 .fa-edit:hover{
     color: #115042;
     cursor: pointer;

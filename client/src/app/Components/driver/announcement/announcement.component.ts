@@ -26,7 +26,7 @@ export class AnnouncementComponent implements OnInit {
     private driverProfileService : DriverProfileService) { }
 
   ngOnInit(): void {
-    this.socket = this.socketIoService.setupSocketConnection().on('notification', (data)=>{
+    this.socket = this.socketIoService.setupSocketConnection().on('acceptNotification', (data)=>{
       this.getAnnouncement();
     });
     this.getAnnouncement()
@@ -75,7 +75,7 @@ export class AnnouncementComponent implements OnInit {
         })
         this.driver.role = "driver";
         this.socketIoService.acceptTransaction(this.transaction).subscribe(response =>{
-          this.socketIoService.acceptTransaction(this.transaction);
+          this.socketIoService.acceptDelivrary(this.transaction);
         })
       } else{
         

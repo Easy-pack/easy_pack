@@ -36,9 +36,10 @@ export class UserNavbarComponent implements OnInit {
 
   getNotification(){
     this.socketIoService.getNotification().subscribe(response =>{
+      
       this.notifications = response.notifications;
       this.notification = response.notifications.length;
-      alert(this.notification);
+      
     });
   }
 
@@ -47,12 +48,10 @@ export class UserNavbarComponent implements OnInit {
     this.listTitles = ROUTES.filter(listTitle => listTitle);
     
     this.acceptanceSocket = this.socketIoService.setupSocketConnection().on('delivaryAccepted', (data)=>{
-      alert('Driver accepted your announcement')
       this.getNotification()
       ;
     });
     this.doneSocket = this.socketIoService.setupSocketConnection().on('delivaryDelivrared', (data)=>{
-      alert('Delivary have been done')
       this.getNotification();
     });
     this.getname()
@@ -87,7 +86,6 @@ export class UserNavbarComponent implements OnInit {
   }
 
   deletNotf(){
-    alert('exectued');
     this.notification = 0;
   }
 
