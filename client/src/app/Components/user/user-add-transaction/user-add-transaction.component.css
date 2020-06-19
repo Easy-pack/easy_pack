@@ -9,6 +9,18 @@
   border: 2px solid rgba(239, 71, 111, 1);
 }
 
+.btn-confirm-map{
+  background-color: #02aa86;
+  color: white;
+  font-weight: 900;
+}
+
+.btn-confirm-map:hover{
+  background-color: transparent;
+  color: #02aa86;
+  border: 2px solid #02aa86;
+  font-weight: 900;
+}
 
 .button-ship{
   background-image: linear-gradient(120deg, #02aa86 45%, #79da9c 100%);

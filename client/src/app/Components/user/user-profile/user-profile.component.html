@@ -117,16 +117,6 @@
                   </div>
                 </div>
               </div>
-              <div class="row">
-                <div class="col-lg-12">
-                  <div class="form-group">
-                    <label class="form-control-label" for="input-date">Birth Date</label>
-                    <input type="date" id="input-date" class="form-control form-control-alternative"
-                      placeholder="jesse@example.com" formControlName="birth_date" value="{{ data.birth_date }}"
-                      [readonly]="disableEdit" />
-                  </div>
-                </div>
-              </div>
             </div>
             <hr class="my-4" />
             <!-- Address -->
@@ -190,8 +180,8 @@
 
   </div>
   <div class="modal-footer">
-    <button type="button" class="btn btn-outline-dark" (click)="updateUser();">
-      Ok
+    <button type="button" class="btn btn-confirm-pass" (click)="updateUser();">
+      Confirm
     </button>
   </div>
 </ng-template>
@@ -217,8 +207,8 @@
 
   </div>
   <div class="modal-footer">
-    <button type="button" class="btn btn-outline-dark" (click)="updatePassword();">
-      Ok
+    <button type="button" class="btn btn-confirm-pass" (click)="updatePassword();">
+      Confirm
     </button>
   </div>
 </ng-template>

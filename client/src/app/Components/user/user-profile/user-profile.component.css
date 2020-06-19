@@ -31,6 +31,19 @@ input:read-only {
   color: white;
 }
 
+.btn-confirm-pass{
+  background-color: #02aa86;
+  color: white;
+  font-weight: 900;
+}
+
+.btn-confirm-pass:hover{
+  background-color: transparent;
+  color: #02aa86;
+  border: 2px solid #02aa86;
+  font-weight: 900;
+}
+
 .veh {
   text-decoration: none;
   color: rgba(239, 71, 111, 1) !important;
