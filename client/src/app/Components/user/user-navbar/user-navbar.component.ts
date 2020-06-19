@@ -23,7 +23,8 @@ export class UserNavbarComponent implements OnInit {
   public doneSocket;
   public notifications = [];
   public notification = 0;
-
+  public nbrNotf = Array(this.notification+1).fill(1);
+  
   constructor( location: Location,  
               private element: ElementRef, 
               private router: Router, 
@@ -37,8 +38,8 @@ export class UserNavbarComponent implements OnInit {
     this.socketIoService.getNotification().subscribe(response =>{
       this.notifications = response.notifications;
       this.notification = response.notifications.length;
+      alert(this.notification);
     });
-    
   }
 
   ngOnInit() {
@@ -47,7 +48,8 @@ export class UserNavbarComponent implements OnInit {
     
     this.acceptanceSocket = this.socketIoService.setupSocketConnection().on('delivaryAccepted', (data)=>{
       alert('Driver accepted your announcement')
-      this.getNotification();
+      this.getNotification()
+      ;
     });
     this.doneSocket = this.socketIoService.setupSocketConnection().on('delivaryDelivrared', (data)=>{
       alert('Delivary have been done')
@@ -79,7 +81,8 @@ export class UserNavbarComponent implements OnInit {
   getname(){
     let id = localStorage.getItem('id');
     this.userProfileService.fetchData(id).subscribe(res => {
-      this.name = res["user"].first_name
+      console.log(res)
+      this.name = res['first_name']
     })
   }
 

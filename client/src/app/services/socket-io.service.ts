@@ -28,11 +28,14 @@ export class SocketIoService {
   }
 
   acceptTransaction(data){
+    data.driverId = localStorage.getItem('id');
+    data.role = "driver";
     this.socket.emit('acceptDelivrary', data);
     return this.http.post<any>(`http://localhost:8080/notification/post`, data)
   }
 
   doneTransaction(data){
+    data.role = "driver";
     this.socket.emit('doneTransaction', data);
     return this.http.post<any>(`http://localhost:8080/notification/post`, data)
   }
@@ -42,6 +45,7 @@ export class SocketIoService {
       id : this.authService.getId(),
       role : this.authService.getRole()
     }
+    console.log('data ', data);
     return this.http.post<any>(`http://localhost:8080/notification/get`, data)
   }
 

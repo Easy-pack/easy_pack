@@ -53,7 +53,6 @@ export class UserAddTransactionComponent implements OnInit {
   ngOnInit(): void {
     // tslint:disable-next-line:no-shadowed-variable
     this.userService.fetchData(this.id).subscribe((data) => {
-      console.log(data);
       this.sharedData.addMapTransactionData.address_start = data["address"];
       this.sharedData.addMapTransactionData.city_start = data["city"];
       this.sharedData.addMapTransactionData.zip_start = data["zip"];

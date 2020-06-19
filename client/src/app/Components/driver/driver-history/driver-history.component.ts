@@ -29,28 +29,29 @@ export class DriverHistoryComponent implements OnInit {
     private socketIoService: SocketIoService
   ) {}
 
-  festchHistory(){
+  ngOnInit(): void {
+    this.fetch();
+  }
+  fetch(){
     this.historyTransactionService.fetchDriverData().subscribe((response) => {
+      console.log(response)
       this.history = response;
     });
   }
 
-  ngOnInit(): void {
-    this.festchHistory();
-  }
 
   doneTransaction(transaction) {
     let data = {
       driverId: transaction.driverId,
       transactionId: transaction.id,
       userId: transaction.userId,
+      role : 'driver'
     };
-
     this.historyTransactionService
       .doneTransaction(data)
-      .subscribe((response) => {});
-
-    this.socketIoService.doneTransaction(data);
-    this.festchHistory();
+      .subscribe((response) => {
+        this.socketIoService.doneTransaction(transaction);
+      });
+    this.fetch();
   }
 }

@@ -82,9 +82,7 @@
             <div class="col-8">
               <h3 class="mb-0">My account</h3>
             </div>
-            <div class="col-4 text-right">
-              <a href="#!" class="btn btn-sm btn-primary" [style.background-color]="stateColor">{{ data.state }}</a>
-            </div>
+
           </div>
         </div>
         <div class="card-body">
@@ -119,16 +117,6 @@
                   </div>
                 </div>
               </div>
-              <div class="row">
-                <div class="col-lg-12">
-                  <div class="form-group">
-                    <label class="form-control-label" for="input-date">Birth Date</label>
-                    <input type="date" id="input-date" class="form-control form-control-alternative"
-                      placeholder="jesse@example.com" formControlName="birth_date" value="{{ data.birth_date }}"
-                      [readonly]="disableEdit" />
-                  </div>
-                </div>
-              </div>
             </div>
             <hr class="my-4" />
             <!-- Address -->
@@ -138,8 +126,18 @@
                 <div class="col-md-12">
                   <div class="form-group">
                     <label class="form-control-label" for="input-address">Address</label>
-                    <input id="input-address" class="form-control form-control-alternative" formControlName="adress"
-                      placeholder="Home Address" type="text" value="{{ data.adress }}" [readonly]="disableEdit" />
+                    <input id="input-address" class="form-control form-control-alternative" formControlName="address"
+                      placeholder="Home Address" type="text" value="{{ data.address }}" [readonly]="disableEdit" />
+                  </div>
+                  <div class="form-group">
+                    <label class="form-control-label" for="input-address">City</label>
+                    <input id="input-city" class="form-control form-control-alternative" formControlName="city"
+                      placeholder="City" type="text" value="{{ data.city }}" [readonly]="disableEdit" />
+                  </div>
+                  <div class="form-group">
+                    <label class="form-control-label" for="input-address">Zip code</label>
+                    <input id="input-zip" class="form-control form-control-alternative" formControlName="zip"
+                      placeholder="Zip code" type="text" value="{{ data.zip }}" [readonly]="disableEdit" />
                   </div>
                 </div>
               </div>
@@ -182,8 +180,8 @@
 
   </div>
   <div class="modal-footer">
-    <button type="button" class="btn btn-outline-dark" (click)="updateUser();">
-      Ok
+    <button type="button" class="btn btn-confirm-pass" (click)="updateUser();">
+      Confirm
     </button>
   </div>
 </ng-template>
@@ -209,8 +207,8 @@
 
   </div>
   <div class="modal-footer">
-    <button type="button" class="btn btn-outline-dark" (click)="updatePassword();">
-      Ok
+    <button type="button" class="btn btn-confirm-pass" (click)="updatePassword();">
+      Confirm
     </button>
   </div>
 </ng-template>
