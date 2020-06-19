@@ -4,6 +4,7 @@ import { HistoryTransactionService } from '../../../services/history-transaction
 import { NgbModal, ModalDismissReasons } from "@ng-bootstrap/ng-bootstrap";
 import { SocketIoService } from '../../../services/socket-io.service';
 import { DriverProfileService } from "../../../services/driver-profile.service";
+
  
 @Component({
   selector: 'app-announcement',
@@ -52,6 +53,7 @@ export class AnnouncementComponent implements OnInit {
         }
       );
   }
+
   private getDismissReason(reason: any): string {
     if (reason === ModalDismissReasons.ESC) {
       return "by pressing ESC";
@@ -68,12 +70,16 @@ export class AnnouncementComponent implements OnInit {
       this.driver = response;
       this.driver = this.driver.driver;
       if(this.driver.state === "available"){
-        this.transactionService.acceptTransaction(idTransaction).subscribe(response => {
-          response.role = "driver";
+        this.transactionService.acceptTransaction(idTransaction).subscribe(res => {
           this.getAnnouncement()
-         this.socketIoService.acceptTransaction(this.transaction).subscribe(response =>{})
         })
-      } 
+        this.driver.role = "driver";
+        this.socketIoService.acceptTransaction(this.transaction).subscribe(response =>{
+          this.socketIoService.acceptDelivrary(this.transaction);
+        })
+      } else{
+        
+      }
     })
     
     

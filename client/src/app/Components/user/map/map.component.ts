@@ -27,7 +27,8 @@ export class MapComponent implements OnInit {
         this.sharedData.addMapTransactionData.zip_start
       )
       .subscribe((data) => {
-        console.log("jeya mel database", data);
+        console.log('hedhi mel shared', this.sharedData.addMapTransactionData)
+        console.log("jeya mel req", data);
         this.sharedData.addMapTransactionData.latitude_start =
           data["results"][0]["geometry"]["location"]["lat"];
         this.sharedData.addMapTransactionData.longitude_start =

@@ -40,18 +40,22 @@ export class DriverHistoryComponent implements OnInit {
     });
   }
 
+
   doneTransaction(transaction) {
     let data = {
       driverId: transaction.driverId,
       transactionId: transaction.id,
       userId: transaction.userId,
+      role : 'driver'
     };
-
     this.historyTransactionService
       .doneTransaction(data)
-      .subscribe((response) => {});
-
-    this.fetch();
-    this.socketIoService.doneTransaction(data);
+      .subscribe((response) => {
+        this.fetch();
+        this.socketIoService.doneTransaction(transaction).subscribe(response =>{
+          this.socketIoService.doneDelivrary(transaction);
+        })
+      });
+    
   }
 }

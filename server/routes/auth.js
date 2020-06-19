@@ -3,7 +3,7 @@ const handler = require('../handlers');
 const multer = require('multer');
 const chalk = require('chalk');
 const path = require('path');
-const PATH = 'public/images/';
+const PATH = 'public/images/'
 
 let storage = multer.diskStorage({
     destination : function(req, file, cb){

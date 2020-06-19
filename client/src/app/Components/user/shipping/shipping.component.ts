@@ -1,6 +1,7 @@
 import { Component, OnInit } from "@angular/core";
 import { FormGroup, FormControl } from "@angular/forms";
 import { SharedData } from "../../../services/sharedData";
+import { SocketIoService } from '../../../services/socket-io.service';
 import { Router } from "@angular/router";
 
 import { TransactionService } from "../../../services/transaction.service";
@@ -11,13 +12,17 @@ import { TransactionService } from "../../../services/transaction.service";
   styleUrls: ["./shipping.component.css"],
 })
 export class ShippingComponent implements OnInit {
+  public socket;
+
   constructor(
     private transactionDetails: SharedData,
     private transactionService: TransactionService,
+    private socketIoService : SocketIoService,
     private router: Router
   ) {}
   get details() {
     console.log(this.transactionDetails.addMapTransactionData);
+    
     return this.transactionDetails.transactionData;
   }
   newTransaction = new FormGroup({
@@ -30,6 +35,7 @@ export class ShippingComponent implements OnInit {
     request_time: new FormControl(""),
     price: new FormControl(""),
   });
+
   transaction = this.details;
   onSubmit() {
     const id = window.localStorage.getItem("id");
@@ -43,10 +49,16 @@ export class ShippingComponent implements OnInit {
     console.log("transaction confirmed", this.transactionDetails);
     this.transactionService
       .postTransaction(this.transactionDetails.transactionData)
-      .subscribe((data) => {});
-      this.router.navigate(["/user/history"]);
+      .subscribe((data) => {
+        this.socketIoService
+        .emmitTransaction(this.transactionDetails.transactionData)
+        .subscribe((response) => {});
+        this.router.navigate(["/user/history"]);
+      });
+      
   }
   ngOnInit(): void {
     (<FormGroup>this.newTransaction).patchValue(this.transaction);
+    this.socket = this.socketIoService.setupSocketConnection().on('userNotification', (data) =>{})
   }
 }

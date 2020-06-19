@@ -58,17 +58,11 @@ export class UserAddTransactionComponent implements OnInit {
   ngOnInit(): void {
     // tslint:disable-next-line:no-shadowed-variable
     this.userService.fetchData(this.id).subscribe((data) => {
-      console.log(data);
       this.sharedData.addMapTransactionData.address_start = data["address"];
       this.sharedData.addMapTransactionData.city_start = data["city"];
       this.sharedData.addMapTransactionData.zip_start = data["zip"];
       this.sharedData.transactionData.address_start = `${data["address"]}, ${data["city"]}`;
     });
-    this.socket = this.socketIoService
-      .setupSocketConnection()
-      .on("notification", (data) => {
-        console.log("notification");
-      });
   }
 
   open(content) {
@@ -91,10 +85,12 @@ export class UserAddTransactionComponent implements OnInit {
       return `with: ${reason}`;
     }
   }
+
   bindData(value) {
     this.sharedData.addMapTransactionData = value;
     console.log("binding done", this.sharedData.addMapTransactionData);
   }
+
   onSubmit() {
     
     this.sharedData.transactionData.address_start = `${this.sharedData.addMapTransactionData.address_start}, ${this.sharedData.addMapTransactionData.city_start}`;
@@ -194,9 +190,7 @@ export class UserAddTransactionComponent implements OnInit {
     const transaction = this.newTransaction.value;
     transaction.userId = this.authService.getId();
     transaction.role = this.authService.getRole();
-    this.socketIoService
-      .emmitTransaction(transaction)
-      .subscribe((response) => {});
+    
 
       setTimeout(() => {
         this.router.navigate(['/user/shippingDetails']);

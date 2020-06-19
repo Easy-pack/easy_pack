@@ -19,10 +19,12 @@ export class UserNavbarComponent implements OnInit {
   public focus;
   public listTitles: any[];
   public location: Location;
-  public socket;
+  public acceptanceSocket;
+  public doneSocket;
   public notifications = [];
   public notification = 0;
-
+  public nbrNotf = Array(this.notification+1).fill(1);
+  
   constructor( location: Location,  
               private element: ElementRef, 
               private router: Router, 
@@ -34,21 +36,23 @@ export class UserNavbarComponent implements OnInit {
 
   getNotification(){
     this.socketIoService.getNotification().subscribe(response =>{
+      
       this.notifications = response.notifications;
-      if(this.notifications.length > 0){
-      }
+      this.notification = response.notifications.length;
+      
     });
-    
   }
 
   ngOnInit() {
     this.getNotification();
     this.listTitles = ROUTES.filter(listTitle => listTitle);
     
-    this.socket = this.socketIoService.setupSocketConnection().on('notification', (data)=>{
-      this.notification += 1;
+    this.acceptanceSocket = this.socketIoService.setupSocketConnection().on('delivaryAccepted', (data)=>{
+      this.getNotification()
+      ;
+    });
+    this.doneSocket = this.socketIoService.setupSocketConnection().on('delivaryDelivrared', (data)=>{
       this.getNotification();
-      console.log (this.notification);
     });
     this.getname()
   }
@@ -83,5 +87,11 @@ export class UserNavbarComponent implements OnInit {
 
   deletNotf(){
     this.notification = 0;
+  }
+
+  updateNotification(){
+    this.notifications.forEach(element => {
+      this.socketIoService.updateNotification(element).subscribe(response => {});
+    })
   }
 }

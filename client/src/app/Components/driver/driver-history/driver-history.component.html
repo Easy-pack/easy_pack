@@ -13,7 +13,7 @@
       <div class="card shadow">
         <div class="card-header border-0">
           <div class="row">
-            <h3 class="mb-0 col-10">History Transactions</h3>
+            <h3 class="mb-0 col-10"><i class="ni ni-books text-warning">  </i>      History Transactions</h3>
             <div class="col-2">
               <label  for="status">Filter :</label>
               <select class="select" name="status" (change)="filter($event)">
@@ -71,7 +71,7 @@
                   </td>
                   <td *ngIf="tr.state === 'In Progress'">
                     <div class="d-flex align-items-center">
-                      <button class="btn-done" (click)="doneTransaction(tr)" >done</button> 
+                      <button class="btn-done" (click)="doneTransaction(tr)">done</button> 
                     </div>
                   </td>
                 </tr>
