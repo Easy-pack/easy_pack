@@ -8,7 +8,7 @@ import { SocketIoService } from '../../../services/socket-io.service';
   styleUrls: ['./user-history.component.css']
 })
 export class UserHistoryComponent implements OnInit {
-  transactions;
+  public transactions;
   
   constructor(private historyTransactionService : HistoryTransactionService,
               private socketIoService : SocketIoService) { }
@@ -16,14 +16,12 @@ export class UserHistoryComponent implements OnInit {
   getTransactions(){
     this.historyTransactionService.fetchUserData().subscribe((response)=>{
       this.transactions = response;
-      console.log(this.transactions);
     });
   }
   
   ngOnInit(): void {
     this.getTransactions();
     this.socketIoService.setupSocketConnection().on('userNotification', (data)=>{
-      alert('new fetch');
       this.getTransactions();
     })
   }

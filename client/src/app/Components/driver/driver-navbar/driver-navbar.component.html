@@ -7,13 +7,13 @@
       <!-- User -->
       <ul class="navbar-nav align-items-center d-none d-md-flex">
         <li class="nav-item" ngbDropdown placement="bottom-right">
-          <a class="nav-link pr-0" role="button" ngbDropdownToggle>
+          <a class="nav-link pr-0" role="button" ngbDropdownToggle (click)="updateNotification()">
             <div class="media align-items-center">
               <li *ngIf="notification === 0; else elseBlock"><i class="far fa-bell fa-2x ml-auto mr-1"></i></li>
               <ng-template #elseBlock><li><i class="far fa-bell fa-2x ml-auto mr-1"></i><span class="badge badge-pill ">{{notification}}</span></li></ng-template>
             </div>
           </a>
-          <div class="dropdown-menu-arrow dropdown-menu-right" ngbDropdownMenu>
+          <div class="dropdown-menu-arrow dropdown-menu-right" ngbDropdownMenu >
             <div class=" dropdown-header noti-title">
               <h6 class="text-overflow m-0">Notification ( {{notification}} )</h6>
             </div>

@@ -19,7 +19,8 @@ export class UserNavbarComponent implements OnInit {
   public focus;
   public listTitles: any[];
   public location: Location;
-  public socket;
+  public acceptanceSocket;
+  public doneSocket;
   public notifications = [];
   public notification = 0;
 
@@ -35,10 +36,7 @@ export class UserNavbarComponent implements OnInit {
   getNotification(){
     this.socketIoService.getNotification().subscribe(response =>{
       this.notifications = response.notifications;
-      if(this.notifications.length > 0){
-        alert('driver accepted your announcement')
-        alert(this.notifications.length)
-      }
+      this.notification = response.notifications.length;
     });
     
   }
@@ -47,10 +45,13 @@ export class UserNavbarComponent implements OnInit {
     this.getNotification();
     this.listTitles = ROUTES.filter(listTitle => listTitle);
     
-    this.socket = this.socketIoService.setupSocketConnection().on('notification', (data)=>{
-      this.notification += 1;
+    this.acceptanceSocket = this.socketIoService.setupSocketConnection().on('delivaryAccepted', (data)=>{
+      alert('Driver accepted your announcement')
       this.getNotification();
-      console.log (this.notification);
+    });
+    this.doneSocket = this.socketIoService.setupSocketConnection().on('delivaryDelivrared', (data)=>{
+      alert('Delivary have been done')
+      this.getNotification();
     });
     this.getname()
   }
@@ -78,12 +79,18 @@ export class UserNavbarComponent implements OnInit {
   getname(){
     let id = localStorage.getItem('id');
     this.userProfileService.fetchData(id).subscribe(res => {
-      console.log(res)
       this.name = res["user"].first_name
     })
   }
 
   deletNotf(){
+    alert('exectued');
     this.notification = 0;
+  }
+
+  updateNotification(){
+    this.notifications.forEach(element => {
+      this.socketIoService.updateNotification(element).subscribe(response => {});
+    })
   }
 }

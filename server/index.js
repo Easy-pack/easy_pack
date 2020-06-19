@@ -48,10 +48,10 @@ io.on('connection', (socket) => {
     });
 
     socket.on('acceptDelivrary', (data) => {
-        socket.broadcast.emit('userNotification', data)
+        socket.broadcast.emit('delivaryAccepted', data)
     })
 
     socket.on('doneTransaction', (data) => {
-        socket.broadcast.emit('userNotification', data);
+        socket.broadcast.emit('delivaryDelivrared', data);
     });
 });

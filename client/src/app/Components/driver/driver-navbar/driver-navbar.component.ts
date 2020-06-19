@@ -37,17 +37,18 @@ export class DriverNavbarComponent implements OnInit {
 
   getNotification(){
     this.socketIoService.getNotification().subscribe(response =>{
-      console.log(response)
       this.notification = response.notifications.length;
-      if(this.notification > 0){
-        alert("new Announcement is on")
-      }
+      this.notifications = response.notifications;
     })
+  }
+
+  deletNotf(){
+    this.notification = 0;
   }
 
   updateNotification(){
     this.notifications.forEach(element =>{
-      this.socketIoService.updateNotification(element.id).subscribe(response => {})
+      this.socketIoService.updateNotification(element).subscribe(response => {})
     })
   }
 
@@ -77,10 +78,6 @@ export class DriverNavbarComponent implements OnInit {
 
   logout(){
     this.authService.logout()
-  }
-
-  deletNotf(){
-    this.notification = 0;
   }
 
   getname(){
