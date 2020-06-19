@@ -4,5 +4,6 @@ module.exports = {
     ...require('./driver'),
     ...require('./user'),
     ...require('./notification'),
-    ...require('./dashboardDriver')
+    ...require('./dashboardDriver'),
+    ...require('./dashboardUser')
 };
