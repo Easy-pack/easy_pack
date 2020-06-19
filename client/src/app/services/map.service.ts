@@ -14,13 +14,16 @@ export class MapService {
       `${proxyurl}https://maps.googleapis.com/maps/api/distancematrix/json?units=metric&origins=${departure.lat},${departure.lng}&destinations=${destination.lat},${destination.lng}&key=${this.API_KEY}`
     );
   }
+  
   getLocation(street, city, zip): Observable<any> {
     street = street.replace(' ', '+');
     city = city.replace(' ', '+');
+    console.log('getLocation da5let')
     return this.http.get(
       `https://maps.googleapis.com/maps/api/geocode/json?address=${street},${city}+${zip}&key=${this.API_KEY}`
     );
   }
+
   getLocationByCoords(latitude, longitude): Observable<any> {
     return this.http.get(
       `https://maps.googleapis.com/maps/api/geocode/json?address=${latitude},${longitude}&key=${this.API_KEY}`

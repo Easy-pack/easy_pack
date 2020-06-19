@@ -39,6 +39,7 @@
                 <th scope="col">Date</th>
                 <th scope="col">State</th>
                 <th scope="col">Price</th>
+                <th scope="col">Check</th>
               </tr>
             </thead>
             <tbody>
@@ -74,6 +75,11 @@
                   <td>
                     <span class="mb-0 text-sm">{{tr.price}}</span>
                   </td>
+                  <td *ngIf="tr.driverId">
+                    <div class="d-flex align-items-center">
+                      <button class="btn-done" (click)="open(driverContact, tr.driverId)" >Check driver</button> 
+                    </div>
+                  </td>
                 </tr>
             </tbody>
           </table>
@@ -84,3 +90,42 @@
     </div>
   </div>
 </div>
+
+
+<!-- Modal -->
+<ng-template #driverContact let-modal>
+  <div class="modal-header">
+    <h4 class="modal-title" id="modal-basic-title">Driver contact information</h4>
+    <button
+      type="button"
+      class="close"
+      aria-label="Close"
+      (click)="modal.dismiss('Cross click')"
+    >
+      <span aria-hidden="true">×</span>
+    </button>
+  </div>
+  <div class="modal-body">
+    <div class="card" style="width: 100%;">
+      <img src="http://localhost:8080/{{contactInfo.photo}}" class="card-img-top" alt="driver photo">
+      <div class="card-body">
+        <p class="card-text"><strong>First name</strong>{{contactInfo.first_name}}</p>
+        <p class="card-text"><strong>Last name</strong>{{contactInfo.last_name}}</p>
+        <p class="card-text"><strong>Email</strong>{{contactInfo.email}}</p>
+        <p class="card-text"><strong>Phone</strong>{{contactInfo.phone}}</p>
+        <p class="card-text"><strong>Adress</strong>{{contactInfo.adress}}</p>
+      </div>
+    </div>
+  </div>
+  <!--
+  <div class="modal-footer">
+    <button
+      type="button"
+      class="btn btn-outline-success"
+      (click)="confirmDelivrery(); modal.close('Save click')"
+    >
+      Confirm
+    </button>
+  </div>
+  -->
+</ng-template>

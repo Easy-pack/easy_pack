@@ -11,7 +11,7 @@ import { UserProfileComponent } from "../../Components/user/user-profile/user-pr
 import { UserAddTransactionComponent } from "../../Components/user/user-add-transaction/user-add-transaction.component";
 import { UserHistoryComponent } from "../../Components/user/user-history/user-history.component";
 import { MapComponent } from "../../Components/user/map/map.component";
-import { AgmCoreModule } from "@agm/core";
+import { AgmCoreModule, MapsAPILoader } from "@agm/core";
 import { ShippingComponent } from "../../Components/user/shipping/shipping.component";
 
 @NgModule({

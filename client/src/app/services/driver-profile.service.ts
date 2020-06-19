@@ -19,4 +19,8 @@ export class DriverProfileService {
       formDriver
     );
   }
+
+  checkSpecificDriver(id){
+    return this.http.get(`http://localhost:8080/driverTransaction/${id}`);
+  }
 }
