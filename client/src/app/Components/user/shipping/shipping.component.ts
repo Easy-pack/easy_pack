@@ -1,6 +1,7 @@
 import { Component, OnInit } from "@angular/core";
 import { FormGroup, FormControl } from "@angular/forms";
 import { SharedData } from "../../../services/sharedData";
+import { Router } from "@angular/router";
 
 import { TransactionService } from "../../../services/transaction.service";
 
@@ -12,7 +13,8 @@ import { TransactionService } from "../../../services/transaction.service";
 export class ShippingComponent implements OnInit {
   constructor(
     private transactionDetails: SharedData,
-    private transactionService: TransactionService
+    private transactionService: TransactionService,
+    private router: Router
   ) {}
   get details() {
     console.log(this.transactionDetails.addMapTransactionData);
@@ -42,6 +44,7 @@ export class ShippingComponent implements OnInit {
     this.transactionService
       .postTransaction(this.transactionDetails.transactionData)
       .subscribe((data) => {});
+      this.router.navigate(["/user/history"]);
   }
   ngOnInit(): void {
     (<FormGroup>this.newTransaction).patchValue(this.transaction);
