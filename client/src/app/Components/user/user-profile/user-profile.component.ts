@@ -189,6 +189,9 @@ export class UserProfileComponent implements OnInit {
       newPassword: [""],
       confirmNewPassword: [""],
       photo: [""],
+      city: [""],
+      zip: [""],
+
     });
   }
 }

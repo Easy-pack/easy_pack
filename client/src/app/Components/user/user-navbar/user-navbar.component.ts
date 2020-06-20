@@ -15,7 +15,8 @@ import {UserProfileService} from "../../../services/user-profile.service"
 })
 
 export class UserNavbarComponent implements OnInit {
-  private name : string = "Amir Ben Youssef"
+  private name : string;
+  public photo;
   public focus;
   public listTitles: any[];
   public location: Location;
@@ -82,6 +83,7 @@ export class UserNavbarComponent implements OnInit {
     this.userProfileService.fetchData(id).subscribe(res => {
       console.log(res)
       this.name = res['first_name']
+      this.photo = res['photo']
     })
   }
 
