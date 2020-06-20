@@ -22,7 +22,7 @@ export class DriverNavbarComponent implements OnInit {
   notifications = [];
  
   
-   
+  public photo;
   public name : string;
   public location: Location;
 
@@ -84,6 +84,7 @@ export class DriverNavbarComponent implements OnInit {
     this.driverProfileService.fetchData().subscribe(res => {
       console.log(res)
       this.name = res["driver"].first_name
+      this.photo = res["driver"].photo
     })
   }
 }

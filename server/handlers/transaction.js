@@ -33,7 +33,7 @@ module.exports.postTransaction = async (req, res, next) => {
 
         res.status(201).json(transaction);
     } catch (e) {
-        res.status(e.status).json({
+        res.status(400).json({
             error: e.message
         });
     }
